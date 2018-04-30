@@ -15,17 +15,21 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">-->
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+   <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
+    <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
+
+        <!-- NAVBAR -->
+
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'beepieboopie') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -67,9 +71,15 @@
             </div>
         </nav>
 
+
+<!-- Start of main content -->
+
+
+
         <main class="py-4">
             @yield('content')
         </main>
+
     </div>
 </body>
 </html>

@@ -8,76 +8,59 @@
         <title>Laravel</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
+  
+      <!-- Styles -->
+     
+      <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet">
+      <link href="{{ asset('css/main.css')}}" rel="stylesheet">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
     </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
+    <body >
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark  ">
 
+
+            <a class="navbar-brand " href="#">
+                    <img src="{{ URL::asset('images/hu-logo.png') }}" width="30" height="30" class="d-inline-block align-top" alt="HU Logo">
+                    Kennis Instrument Toetsprogramma
+            </a>
+
+            <!-- Opens and closes extendible link list on mobile -->
+            <button class="navbar-toggler"
+             type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+               aria-controls="navbarSupportedContent" 
+               aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+
+<!-- The actual menu -->
+
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            
+            @if (Route::has('login'))
+                    @auth
+                    <li class="nav-item ">
+                        <a class="nav-link " href="{{ url('/home') }}">Home</a>
+                        </li>
+                    @else
+                    <li class="nav-item ">
+                        <a class="nav-link " href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link " href="{{ route('register') }}">Register</a>
+                    </li>
+                    @endauth
+            @endif
+        </ul>
+    </div>
+            </nav>
+       
             <div class="content">
+                    
                 <div class="title m-b-md">
                     Laravel
                 </div>
@@ -90,6 +73,11 @@
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
-        </div>
+        
+
+           <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     </body>
 </html>
