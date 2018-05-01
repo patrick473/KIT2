@@ -1,0 +1,24 @@
+.jumbotron{
+    background-color: rgb(81, 88, 95);
+    color: #fff;
+    padding: 100px 25px;
+
+}
+
+#firstIcon, #secondIcon{
+
+    font-size: 2000%;
+}
+.bg-grey {
+    background-color: #f1f1f1;
+}
+.container-fluid {
+    padding: 60px 50px;
+}
+
+.md-96{
+    font-size: 96px;
+}
+#phonePart{
+    margin-left:-128px;
+}
