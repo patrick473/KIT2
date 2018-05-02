@@ -63,7 +63,7 @@
             </nav>
        <!-- End of navbar start of content -->
 
-            <div class="jumbotron text-center">
+            <div class="jumbotron text-center bg-primary">
                 <h1>Kwaliteit Instrument Toetsprogramma 2.0</h1>
                 <p>De tool om uw Toetsprogramma te evalueren</p>
             </div>
