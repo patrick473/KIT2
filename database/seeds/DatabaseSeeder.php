@@ -45,16 +45,16 @@ class DatabaseSeeder extends Seeder
                 'name' => 'patrick',
                 'email' => 'patrick.kottman@hu.nl',
                 'password' => Hash::make('password'),
-                'schoolid' => $school1->id
+                'schoolId' => $school1->id
             ]);
 
             $user2 = User::create([
                 'name' => 'jan',
                 'email' => 'jan.janssen@cals.nl',
                 'password' => Hash::make('password'),
-                'schoolid' => $school2->id
+                'schoolId' => $school2->id
             ]);
-
+            $this->command->info('Users are alive and well');
 
         }
     }

@@ -10,6 +10,14 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
+     * 
+     * Alternative casting
+     */
+    protected $casts =[ 
+        'schoolId' => 'integer'
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -30,4 +38,5 @@ class User extends Authenticatable
     public function school(){
         return $this->hasOne('School');
     }
+   
 }

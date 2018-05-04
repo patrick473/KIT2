@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Schools extends Migration
+class CreateSurveysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class Schools extends Migration
      */
     public function up()
     {
-        Schema::create('schools', function (Blueprint $table) {
-            
+        Schema::create('surveys', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->enum('level',['mbo','hbo','wo','anders']);
-            $table->string('email_domain');
+            $table->string('title');
+            $table->integer('user_id')->unsigned()->index();
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -30,7 +29,6 @@ class Schools extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schools');
+        Schema::dropIfExists('surveys');
     }
 }
-

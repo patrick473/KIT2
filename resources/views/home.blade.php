@@ -1,23 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are now logged in!
-                </div>
-            </div>
+<ul class="list-group">
+    <li class="list-group-item list-group-item-dark">
+        <h2 class="flow-text">Recent Surveys
+            <a style="float:right;" href="{{ route('new.survey', 'Create new') }}">create new
+            </a>
+        </h2>
+    </li>
+    @forelse ($surveys as $survey)
+      <li class="list-group-item">
+        <div>
+            {{ url('detail.survey', $survey->title, ['id'=>$survey->id])}}
+            <a href="survey/view/{{ $survey->id }}" title="Take Survey" class="secondary-content">take</a>
+            <a href="survey/{{ $survey->id }}" title="Edit Survey" class="secondary-content">edit</a>
+            <a href="survey/answers/{{ $survey->id }}" title="View Survey Answers" class="secondary-content">view answers</a>
         </div>
-    </div>
-</div>
+        </li>
+    @empty
+        <p class="flow-text center-align">Nothing to show</p>
+    @endforelse
+</ul>
+
+
 @endsection

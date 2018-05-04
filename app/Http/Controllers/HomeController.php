@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Survey as Survey;
 class HomeController extends Controller
 {
     /**
@@ -21,8 +21,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function home()
     {
-        return view('home');
+         $surveys = Survey::get();
+         return view('home', compact('surveys'));
+        
     }
+    
 }

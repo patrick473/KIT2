@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Schools extends Migration
+class CreateAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class Schools extends Migration
      */
     public function up()
     {
-        Schema::create('schools', function (Blueprint $table) {
-            
+        Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->enum('level',['mbo','hbo','wo','anders']);
-            $table->string('email_domain');
+            $table->integer('user_id');
+            $table->integer('question_id');
+            $table->integer('survey_id');
+            $table->string('answer');
             $table->timestamps();
         });
     }
@@ -30,7 +30,6 @@ class Schools extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schools');
+        Schema::dropIfExists('answers');
     }
 }
-
