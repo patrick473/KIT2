@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function home()
     {
          $surveys = Survey::get();
-         return view('home', compact('surveys'));
+         return view('home');
         
     }
     
