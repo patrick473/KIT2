@@ -16,9 +16,13 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+ 
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/survey/new', 'SurveyController@new_survey')->name('new.survey');
+Route::get('/survey/user','SurveyController@user_survey')->name('user.survey');
+
+
+
 Route::get('/survey/{survey}', 'SurveyController@detail_survey')->name('detail.survey');
 Route::get('/survey/view/{survey}', 'SurveyController@view_survey')->name('view.survey');
 Route::get('/survey/answers/{survey}', 'SurveyController@view_survey_answers')->name('view.survey.answers');

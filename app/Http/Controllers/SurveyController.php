@@ -24,6 +24,13 @@ class SurveyController extends Controller
   {
     return view('survey.new');
   }
+  # Show own surveys page
+  public function user_survey(){
+
+    $user = Auth::user();
+    $surveys = Survey::where('user_id','=',$user->id)->get();
+    return view('survey.user',compact('surveys'));
+  }
 
    # retrieve detail page and add questions here
    public function detail_survey(Survey $survey) 
