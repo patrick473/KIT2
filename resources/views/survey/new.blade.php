@@ -2,23 +2,43 @@
 
 @section('content')
   <div class="card">
-      <div class="card-content">
-      <span class="card-title"> Add Survey</span>
-      <form method="POST" action="create" id="boolean">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <div class="row">    
-          <div class="input-field col s12">
-            <input name="title" id="title" type="text">
-            <label for="title">Survey Title</label>
-          </div>          
-          <div class="input-field col s12">
-            <textarea name="description" id="description" class="materialize-textarea"></textarea>
-            <label for="description">Description</label>
+      <div class="card-body">
+      <h4 class="card-title"> Add Survey</h4>
+      <form method="POST" action="{{route('create.survey')}}">
+        @csrf
+     
+        <div class="form-group row">
+          <label for="title" class="col-md-2 col-form-label text-md-right">{{ __('Title') }}</label>
+
+          <div class="col-md-6">
+              <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required autofocus>
+
+              @if ($errors->has('title'))
+                  <span class="invalid-feedback">
+                      <strong>{{ $errors->first('title') }}</strong>
+                  </span>
+              @endif
           </div>
-          <div class="input-field col s12">
-          <button class="btn waves-effect waves-light">Submit</button>
-          </div>
+      </div> 
+      <div class="form-group row">
+        <label for="description" class="col-md-2 col-form-label text-md-right">{{ __('Description') }}</label>
+
+        <div class="col-md-6">
+            <input id="description" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" value="{{ old('description') }}" required autofocus>
+
+            @if ($errors->has('description'))
+                <span class="invalid-feedback">
+                    <strong>{{ $errors->first('description') }}</strong>
+                </span>
+            @endif
         </div>
+    </div> 
+         
+
+          <div class="input-field col s12">
+            <button type="button" class="btn btn-primary btn-lg">Submit</button>
+          </div>
+        
         </form>
     </div>
   </div>
