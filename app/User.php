@@ -36,7 +36,9 @@ class User extends Authenticatable
     ];
 
     public function school(){
-        return $this->hasOne('School');
+        return $this->hasOne(School::class);
     }
-   
+    public function surveys() {
+        return $this->hasMany(Survey::class);
+      }
 }

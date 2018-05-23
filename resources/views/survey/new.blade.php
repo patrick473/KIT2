@@ -4,12 +4,13 @@
   <div class="card">
       <div class="card-body">
       <h4 class="card-title"> Add Survey</h4>
-      <form method="POST" action="{{route('create.survey')}}">
-        @csrf
+      {!!Form::open(['route' => 'create.survey'])!!}
+      
+        {!! Form::token()!!}
      
         <div class="form-group row">
-          <label for="title" class="col-md-2 col-form-label text-md-right">{{ __('Title') }}</label>
-
+         
+          {!! Form::label('title', __('Title'), array('class' => 'col-md-2 col-form-label text-md-right'))!!}
           <div class="col-md-6">
               <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required autofocus>
 
@@ -21,8 +22,8 @@
           </div>
       </div> 
       <div class="form-group row">
-        <label for="description" class="col-md-2 col-form-label text-md-right">{{ __('Description') }}</label>
-
+       
+        {!! Form::label('description', __('Description'), array('class' => 'col-md-2 col-form-label text-md-right'))!!}
         <div class="col-md-6">
             <input id="description" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" value="{{ old('description') }}" required autofocus>
 
@@ -36,10 +37,10 @@
          
 
           <div class="input-field col s12">
-            <button type="button" class="btn btn-primary btn-lg">Submit</button>
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
           </div>
         
-        </form>
+        {!! Form::close()!!}
     </div>
   </div>
 @endsection
