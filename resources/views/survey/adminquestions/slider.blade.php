@@ -6,7 +6,7 @@
       <h4>Example:</h4>
       <div class="form-group">
       <label for="exampleText{{$question->id}}">{{$question->title}}</label>
-      <input type="range" min="1" max="10" value="1" class="slider" id="myRange">
+      <input type="range" min="1" max="100" value="1" class="slider" id="myRange">
       </div>
     </div>
   </div>

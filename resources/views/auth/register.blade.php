@@ -40,6 +40,17 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="school" class="col-md-4 col-form-label text-md-right">{{ __('School') }}</label>
+                            <div class="col-md-6">
+                            <select  name="school" class="form-control" id="exampleFormControlSelect2">
+                                <option value="1">Hogeschool Utrecht</option>
+                                <option value="2">Cals College</option>
+                              </select>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
