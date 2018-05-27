@@ -15,8 +15,10 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('survey_id')->unsigned()->index();
-            $table->integer('user_id')->unsigned()->index();
+            $table->unsignedInteger('survey_id');
+            $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade'); 
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
             $table->string('title');
             $table->string('question_type');
             $table->string('option_name')->nullable();

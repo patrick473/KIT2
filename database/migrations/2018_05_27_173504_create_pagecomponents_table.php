@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSurveysTable extends Migration
+class CreatePagecomponentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,15 @@ class CreateSurveysTable extends Migration
      */
     public function up()
     {
-        Schema::create('surveys', function (Blueprint $table) {
+        Schema::create('Pagecomponents', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
-            $table->string('description');
+            $table->unsignedInteger('page_id');
+            $table->foreign('page_id')->references('id')->on('Pages')->onDelete('cascade'); 
+            $table->json('information');
             $table->timestamps();
+            
         });
+       
     }
 
     /**
@@ -30,6 +31,6 @@ class CreateSurveysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('surveys');
+        Schema::dropIfExists('Pagecomponents');
     }
 }
