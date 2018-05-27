@@ -27,7 +27,13 @@
             <span style="padding:10px;">Nothing to show. Add questions below.</span>
           @endforelse
       </ul>
+
+
+      <!-- VVV Temporary Form VVV -->
+      <div class="card question">
+        <div class="card-body">
       <h2 class="text">Add Question</h2>
+      <br>
       <form method="POST" action="{{ $survey->id }}/questions" id="boolean">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="row">
@@ -53,6 +59,8 @@
           </div>
         </div>
         </form>
+        </div>
+      </div>
     </div>
   </div>
 @endsection
