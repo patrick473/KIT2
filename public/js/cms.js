@@ -1,3 +1,3 @@
 $("#addcomponentbutton").on('click',()=>{
-    $('#exampleModal').modal('show');
+    $('#addContent').modal('show');
 })
