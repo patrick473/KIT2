@@ -39,3 +39,7 @@ Route::post('/survey/{survey}/questions', 'QuestionController@store')->name('sto
  
 Route::get('/question/{question}/edit', 'QuestionController@edit')->name('edit.question');
 Route::patch('/question/{question}/update', 'QuestionController@update')->name('update.question');
+
+//TODO: need to make admin section
+
+Route::get('/admin/content','ContentController@editcontentview')->name('view.content');

@@ -57,5 +57,6 @@
             <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
             <!-- Include all compiled plugins (below), or include individual files as needed -->
             <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            @yield('extrascripts')
 </body>
 </html>
