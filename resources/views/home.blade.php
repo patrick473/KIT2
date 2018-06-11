@@ -2,7 +2,31 @@
 
 @section('content')
 
-<p>hier komt allemaal nuttige shit en tutorials te staan.</p>
+<div id="homecontent">
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FCz37YWHBsM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@endsection
+
+
+
+
+@section('extrascripts')
+
+<script src="{{ asset('js/loaddynamichomecontent.js') }}"></script>
 @endsection

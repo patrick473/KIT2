@@ -1,3 +1,63 @@
+
+
+
+
+$('#pageselectbutton').on('click',()=>{
+    let html;
+    var settings = {
+        
+        "url": "http://localhost:8000/api/admin/content/"+1,
+        "method": "GET"
+       
+      }
+      
+      $.ajax(settings).done(function (response) {
+        let contentjson = JSON.parse(response);
+        console.log(contentjson);
+        $.each(contentjson.sections,(i,e)=>{
+            console.log(e.id);
+            
+            switch (e.type) {
+                case 'text':
+                   html = `<div class="textsection form-group" data-index="`+e.id+`" data-type="text" id="section`+e.id+`"> 
+                    <div class="row">
+                    <h4>Text section order: `+e.id+`</h4>
+                    </div>
+                    <div class="row">
+                    <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
+                    <input type="text" id="section`+e.id+`textboxtitle" value="`+e.title+`" class="form-control">
+                    </div>
+                    <br>
+                    <div class="row">
+                    <label for="section`+e.id+`textarea" class="control-label"> content </label>
+                    <textarea  id="section`+e.id+`textarea" rows="4"  class="form-control">`+e.content+`</textarea>
+                    </div>
+                    <hr>
+                    </div>
+                    `
+                    $('#contentcreatorsection').append(html);
+                    
+                    break;
+                 case 'bulletpoints':
+                     html=''
+                    break;
+             }
+        })
+
+      });
+})
+
+
+
+
+
+
+
+
+
+
+
+
 $('#opensectionmodal').on('click',()=>{
     $('#addContent').modal('show');
 })
@@ -53,7 +113,7 @@ $('#submitcontentcreation').on('click',()=>{
             case 'text':
                 let title = $(e).find("input").val();
                 let content = $(e).find("textarea").val();
-                json.sections.push({"id":id,"title":title,"content":content})
+                json.sections.push({"id":id,"type":type,"title":title,"content":content})
                 break;
             case 'bulletpoints':
                 

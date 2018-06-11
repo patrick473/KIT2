@@ -12,7 +12,9 @@
     <option value="3">Contact page</option>
 </select>
 <br>
-<button type="button" class="btn btn-primary btn-lg" id="opensectionmodal">Add Section</button>
+<button type="button" class="btn btn-primary btn-lg" id="pageselectbutton">select page</button>
+<hr>
+<button type="button"  class="btn btn-primary btn-lg" id="opensectionmodal">Add Section</button>
 <hr>
 
 <div id="contentcreatorsection">
@@ -20,7 +22,7 @@
 
   
 </div>
-<button class="btn btn-primary" type="button" id="submitcontentcreation">save content</button>
+<button class="btn btn-primary btn-lg"  type="button" id="submitcontentcreation">save content</button>
 
 
 
