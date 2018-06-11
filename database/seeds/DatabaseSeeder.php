@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use \App\School;
 use \App\User;
+use \App\page;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -55,7 +56,10 @@ class DatabaseSeeder extends Seeder
                 'school_id' => $school2->id
             ]);
             $this->command->info('Users are alive and well');
-
+            $homepage = Page::create([
+                'name' => 'homepage'
+            ]);
+            $this->command->info('pages has been defined');
         }
     }
 

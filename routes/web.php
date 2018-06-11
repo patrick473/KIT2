@@ -43,3 +43,4 @@ Route::patch('/question/{question}/update', 'QuestionController@update')->name('
 //TODO: need to make admin section
 
 Route::get('/admin/content','ContentController@editcontentview')->name('view.content');
+
