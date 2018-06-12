@@ -34,14 +34,27 @@ $('#pageselectbutton').on('click',()=>{
                     </div>
                     <hr>
                     </div>
-                    `
-                    $('#contentcreatorsection').append(html);
+                    `;
+                 
                     
                     break;
                  case 'bulletpoints':
-                     html=''
+                     html=`
+                     <div class="textsection form-group" data-index="`+e.id+`" data-type="text" id="section`+e.id+`"> 
+                    <div class="row">
+                    <h4>Text section order: `+e.id+`</h4>
+                    </div>
+                    <div class="row">
+                     <ul class="list-group">
+                     <li class="list-group-item disabled">Cras justo odio</li>
+                    
+                   </ul>
+                   </div>
+                     <hr>
+                     </div>`;
                     break;
              }
+             $('#contentcreatorsection').append(html);
         })
 
       });
@@ -86,14 +99,27 @@ $('#addsectionbutton').on('click',()=>{
            </div>
            <hr>
            </div>
-           `
-           $('#contentcreatorsection').append(html);
+           `;
+           
            
            break;
         case 'bulletpoints':
-            html=''
+            html=`<div class="bulletsection form-group" data-index="`+ElementID+`" data-type="text" id="section`+ElementID+`"> 
+            <div class="row">
+            <h4>Bulletpoint section order: `+ElementID+`</h4>
+            </div>
+            <div class="row">
+             <ul class="list-group-flush">
+             <li class="list-group-item justify-content-between"> <input type="text" class="form-control" id="exampleInputPassword1" placeholder="New Item">
+             <button class="btn btn-primary btn-sm"  type="button">Add new Item</button></li>
+             
+           </ul>
+           </div>
+             <hr>
+             </div>` ;
            break;
     }
+    $('#contentcreatorsection').append(html);
 
    
     
