@@ -104,7 +104,7 @@ $('#addsectionbutton').on('click',()=>{
            
            break;
         case 'bulletpoints':
-            html=`<div class="bulletsection form-group" data-index="`+ElementID+`" data-type="text" id="section`+ElementID+`"> 
+            html=`<div class="bulletsection form-group" data-index="`+ElementID+`" data-type="bulletpoints" id="section`+ElementID+`"> 
             <div class="row">
             <h4>Bulletpoint section order: `+ElementID+`</h4>
             </div>
@@ -122,7 +122,7 @@ $('#addsectionbutton').on('click',()=>{
             </div>
             <div class="row">
              <ul class="list-group-flush" id="ul`+ElementID+`">
-             <li class="list-group-item justify-content-between"> <input type="text" class="" id="section`+ElementID+`bulval" placeholder="New Item">
+             <li class="list-group-item justify-content-between buttonitem"> <input type="text" class="" id="section`+ElementID+`bulval" placeholder="New Item">
              <button class="btn btn-primary btn-sm"  type="button" onclick="addbulletpoint(`+ElementID+`)">Add new Item</button></li>
              
            </ul>
@@ -144,22 +144,35 @@ $('#submitcontentcreation').on('click',()=>{
     let json = {"sections":[]}
 
     $('#contentcreatorsection').children('div').each((i,e)=>{
-       
+        let title,content,listItems;
         let id = $(e).data("index");
         let type = $(e).data("type");
         switch (type) {
             case 'text':
-                let title = $(e).find("input").val();
-                let content = $(e).find("textarea").val();
-                json.sections.push({"id":id,"type":type,"title":title,"content":content})
+                 title = $(e).find("input").val();
+                 content = $(e).find("textarea").val();
+                json.sections.push({"id":id,"type":type,"title":title,"content":content});
                 break;
             case 'bulletpoints':
-                
+             title = $(e).find("input").val();
+             content = $(e).find("textarea").val();
+             listItems = [];
+              $('#ul'+id+' li').each((i,e)=>{
+                  listContent = $(e).text();
+                  if( !$(e).is(".buttonitem")){
+
+                  
+                  listItems.push($(e).text());
+                  
+                  }
+              });
+            
+            json.sections.push({"id":id,"type":type,"title":title,"content":content,"items":listItems});
                 break;
             
         }
     })
-console.log(json);
+    console.log(json);
     let sendableJson = JSON.stringify(json);
     let url = "http://localhost:8000/api/admin/content/"+$('#pageselector').val();
 
@@ -177,7 +190,7 @@ console.log(json);
 function addbulletpoint(sectionid){
     let newBulletPointValue = $('#section'+sectionid+'bulval').val();
     $('#section'+sectionid+'bulval').val('');
-    $('#ul'+sectionid).append('<li class="list-group-item justify-content-between">'+newBulletPointValue+'</li>')
-    console.log(newBulletPointValue);
-    $()
+    $('#ul'+sectionid).append('<li class="list-group-item justify-content-between class="li'+sectionid+'">'+newBulletPointValue+'</li>')
+    
+
 }
