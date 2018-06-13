@@ -2,21 +2,9 @@
 
 @section('content')
 
-<div id="homecontent">
+<div id="content" data-page="1">
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -28,5 +16,5 @@
 
 @section('extrascripts')
 
-<script src="{{ asset('js/loaddynamichomecontent.js') }}"></script>
+<script src="{{ asset('js/loaddynamiccontent.js') }}"></script>
 @endsection
