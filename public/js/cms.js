@@ -38,20 +38,40 @@ $('#pageselectbutton').on('click',()=>{
                  
                     
                     break;
+
                  case 'bulletpoints':
-                     html=`
-                     <div class="textsection form-group" data-index="`+e.id+`" data-type="text" id="section`+e.id+`"> 
-                    <div class="row">
-                    <h4>Text section order: `+e.id+`</h4>
-                    </div>
-                    <div class="row">
-                     <ul class="list-group">
-                     <li class="list-group-item disabled">Cras justo odio</li>
-                    
-                   </ul>
-                   </div>
-                     <hr>
-                     </div>`;
+
+                 let listItems = e.items;
+                 let listString = '';
+                 listItems.forEach(elem => {
+                     listString += '<li class="list-group-item justify-content-between class="li'+e.id+'">'+elem+'</li>'
+                 });
+                     html=`<div class="bulletsection form-group" data-index="`+e.id+`" data-type="bulletpoints" id="section`+e.id+`"> 
+            <div class="row">
+            <h4>Bulletpoint section order: `+e.id+`</h4>
+            </div>
+            <div class="row">
+            <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
+            <input type="text" id="section`+e.id+`textboxtitle" class="form-control">
+            </div>
+            <br>
+            <div class="row">
+            <label for="section`+e.id+`textarea" class="control-label"> content </label>
+            <textarea  id="section`+e.id+`textarea" rows="4" class="form-control"></textarea>
+            </div>
+            <div class="row">
+            <p>Add items to bulletpoint list:</p>
+            </div>
+            <div class="row">
+             <ul class="list-group-flush" id="ul`+e.id+`">
+             <li class="list-group-item justify-content-between buttonitem"> <input type="text" class="" id="section`+e.id+`bulval" placeholder="New Item">
+             <button class="btn btn-primary btn-sm"  type="button" onclick="addbulletpoint(`+e.id+`)">Add new Item</button></li>
+             `+listString+ `
+             
+           </ul>
+           </div>
+             <hr>
+             </div>`;
                     break;
              }
              $('#contentcreatorsection').append(html);
@@ -104,14 +124,26 @@ $('#addsectionbutton').on('click',()=>{
            
            break;
         case 'bulletpoints':
-            html=`<div class="bulletsection form-group" data-index="`+ElementID+`" data-type="text" id="section`+ElementID+`"> 
+            html=`<div class="bulletsection form-group" data-index="`+ElementID+`" data-type="bulletpoints" id="section`+ElementID+`"> 
             <div class="row">
             <h4>Bulletpoint section order: `+ElementID+`</h4>
             </div>
             <div class="row">
-             <ul class="list-group-flush">
-             <li class="list-group-item justify-content-between"> <input type="text" class="form-control" id="exampleInputPassword1" placeholder="New Item">
-             <button class="btn btn-primary btn-sm"  type="button">Add new Item</button></li>
+            <label for="section`+ElementID+`textboxtitle" class="control-label"> title </label>
+            <input type="text" id="section`+ElementID+`textboxtitle" class="form-control">
+            </div>
+            <br>
+            <div class="row">
+            <label for="section`+ElementID+`textarea" class="control-label"> content </label>
+            <textarea  id="section`+ElementID+`textarea" rows="4" class="form-control"></textarea>
+            </div>
+            <div class="row">
+            <p>Add items to bulletpoint list:</p>
+            </div>
+            <div class="row">
+             <ul class="list-group-flush" id="ul`+ElementID+`">
+             <li class="list-group-item justify-content-between buttonitem"> <input type="text" class="" id="section`+ElementID+`bulval" placeholder="New Item">
+             <button class="btn btn-primary btn-sm"  type="button" onclick="addbulletpoint(`+ElementID+`)">Add new Item</button></li>
              
            </ul>
            </div>
@@ -132,29 +164,42 @@ $('#submitcontentcreation').on('click',()=>{
     let json = {"sections":[]}
 
     $('#contentcreatorsection').children('div').each((i,e)=>{
-       
+        let title,content,listItems;
         let id = $(e).data("index");
         let type = $(e).data("type");
         switch (type) {
             case 'text':
-                let title = $(e).find("input").val();
-                let content = $(e).find("textarea").val();
-                json.sections.push({"id":id,"type":type,"title":title,"content":content})
+                 title = $(e).find("input").val();
+                 content = $(e).find("textarea").val();
+                json.sections.push({"id":id,"type":type,"title":title,"content":content});
                 break;
             case 'bulletpoints':
-                
+             title = $(e).find("input").val();
+             content = $(e).find("textarea").val();
+             listItems = [];
+              $('#ul'+id+' li').each((i,e)=>{
+                  listContent = $(e).text();
+                  if( !$(e).is(".buttonitem")){
+
+                  
+                  listItems.push($(e).text());
+                  
+                  }
+              });
+            
+            json.sections.push({"id":id,"type":type,"title":title,"content":content,"items":listItems});
                 break;
             
         }
     })
-console.log(json);
-    let sendablejson = JSON.stringify(json);
+    console.log(json);
+    let sendableJson = JSON.stringify(json);
     let url = "http://localhost:8000/api/admin/content/"+$('#pageselector').val();
 
     $.ajax({
         type: "POST",
         url: url,
-        data : sendablejson,
+        data : sendableJson,
         contentType:'json',
         processData: false,
         contentType: 'charset=UTF-8' 
@@ -162,3 +207,10 @@ console.log(json);
 })
 
 
+function addbulletpoint(sectionid){
+    let newBulletPointValue = $('#section'+sectionid+'bulval').val();
+    $('#section'+sectionid+'bulval').val('');
+    $('#ul'+sectionid).append('<li class="list-group-item justify-content-between class="li'+sectionid+'">'+newBulletPointValue+'</li>')
+    
+
+}
