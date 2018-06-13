@@ -38,20 +38,40 @@ $('#pageselectbutton').on('click',()=>{
                  
                     
                     break;
+
                  case 'bulletpoints':
-                     html=`
-                     <div class="textsection form-group" data-index="`+e.id+`" data-type="text" id="section`+e.id+`"> 
-                    <div class="row">
-                    <h4>Text section order: `+e.id+`</h4>
-                    </div>
-                    <div class="row">
-                     <ul class="list-group">
-                     <li class="list-group-item disabled">Cras justo odio</li>
-                    
-                   </ul>
-                   </div>
-                     <hr>
-                     </div>`;
+
+                 let listItems = e.items;
+                 let listString = '';
+                 listItems.forEach(elem => {
+                     listString += '<li class="list-group-item justify-content-between class="li'+e.id+'">'+elem+'</li>'
+                 });
+                     html=`<div class="bulletsection form-group" data-index="`+e.id+`" data-type="bulletpoints" id="section`+e.id+`"> 
+            <div class="row">
+            <h4>Bulletpoint section order: `+e.id+`</h4>
+            </div>
+            <div class="row">
+            <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
+            <input type="text" id="section`+e.id+`textboxtitle" class="form-control">
+            </div>
+            <br>
+            <div class="row">
+            <label for="section`+e.id+`textarea" class="control-label"> content </label>
+            <textarea  id="section`+e.id+`textarea" rows="4" class="form-control"></textarea>
+            </div>
+            <div class="row">
+            <p>Add items to bulletpoint list:</p>
+            </div>
+            <div class="row">
+             <ul class="list-group-flush" id="ul`+e.id+`">
+             <li class="list-group-item justify-content-between buttonitem"> <input type="text" class="" id="section`+e.id+`bulval" placeholder="New Item">
+             <button class="btn btn-primary btn-sm"  type="button" onclick="addbulletpoint(`+e.id+`)">Add new Item</button></li>
+             `+listString+ `
+             
+           </ul>
+           </div>
+             <hr>
+             </div>`;
                     break;
              }
              $('#contentcreatorsection').append(html);
