@@ -15,58 +15,38 @@ $(document).ready(() => {
       switch (e.type) {
         case "text":
           html =
-            `<div id="` +
-            e.title +
-            `" class="container-fluid">
+            `<div id="` +e.title +`" class="container-fluid">
                     <div class="row">
                     <div class="col-sm-12">
-                        <h2>` +
-            e.title +
-            `</h2><br> 
-                        <p>` +
-            e.content +
-            `
-                        </p><br>
-                        
-                       
+                        <h2>` +e.title +`</h2><br> 
+                    <p>` +e.content +`</p><br>
                     </div>
-                   
                     </div>
-                    </div>`;
-          $("#content").append(html);
+                     </div>`;
+          
           break;
         case "bulletpoints":
           let listItems = e.items;
           let listString = "";
           listItems.forEach(elem => {
             listString +=
-              '<li class="list-group-item justify-content-between class="li' +
-              e.id +
-              '">' +
-              elem +
-              "</li>";
+              '<li class="list-group-item justify-content-between class="li' +e.id +'">' +elem +"</li>";
           });
-          html =
-            `<div id="` +
-            e.title +
-            `" class="container-fluid">
+          
+          html =`<div id="` +e.title +`" class="container-fluid">
                      <div class="row">
-                     <div class="col-sm-12">
-                         <h2>` +
-            e.title +
-            `</h2><br> 
-                         <p>` +
-            e.content +
-            `
-                         </p><br>
-                         ` +
-            listItems +
-            `
-                        
+                     <div class="col-sm-12"> 
+                     <h2>` +e.title +`</h2><br> 
+                     <p>` +e.content +`</p><br>  
+                     <ul class="list-group" id="ul`+e.id+`">
+                     `+listString+`  
+                     </ul>
                      </div>
+
                     `;
           break;
       }
+      $("#content").append(html);
     });
   });
 });
