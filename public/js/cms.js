@@ -109,9 +109,21 @@ $('#addsectionbutton').on('click',()=>{
             <h4>Bulletpoint section order: `+ElementID+`</h4>
             </div>
             <div class="row">
-             <ul class="list-group-flush">
-             <li class="list-group-item justify-content-between"> <input type="text" class="form-control" id="exampleInputPassword1" placeholder="New Item">
-             <button class="btn btn-primary btn-sm"  type="button">Add new Item</button></li>
+            <label for="section`+ElementID+`textboxtitle" class="control-label"> title </label>
+            <input type="text" id="section`+ElementID+`textboxtitle" class="form-control">
+            </div>
+            <br>
+            <div class="row">
+            <label for="section`+ElementID+`textarea" class="control-label"> content </label>
+            <textarea  id="section`+ElementID+`textarea" rows="4" class="form-control"></textarea>
+            </div>
+            <div class="row">
+            <p>Add items to bulletpoint list:</p>
+            </div>
+            <div class="row">
+             <ul class="list-group-flush" id="ul`+ElementID+`">
+             <li class="list-group-item justify-content-between"> <input type="text" class="" id="section`+ElementID+`bulval" placeholder="New Item">
+             <button class="btn btn-primary btn-sm"  type="button" onclick="addbulletpoint(`+ElementID+`)">Add new Item</button></li>
              
            </ul>
            </div>
@@ -148,13 +160,13 @@ $('#submitcontentcreation').on('click',()=>{
         }
     })
 console.log(json);
-    let sendablejson = JSON.stringify(json);
+    let sendableJson = JSON.stringify(json);
     let url = "http://localhost:8000/api/admin/content/"+$('#pageselector').val();
 
     $.ajax({
         type: "POST",
         url: url,
-        data : sendablejson,
+        data : sendableJson,
         contentType:'json',
         processData: false,
         contentType: 'charset=UTF-8' 
@@ -162,3 +174,10 @@ console.log(json);
 })
 
 
+function addbulletpoint(sectionid){
+    let newBulletPointValue = $('#section'+sectionid+'bulval').val();
+    $('#section'+sectionid+'bulval').val('');
+    $('#ul'+sectionid).append('<li class="list-group-item justify-content-between">'+newBulletPointValue+'</li>')
+    console.log(newBulletPointValue);
+    $()
+}
