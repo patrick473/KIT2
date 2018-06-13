@@ -10,10 +10,10 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
-     * 
+     *
      * Alternative casting
      */
-    protected $casts =[ 
+    protected $casts =[
         'schoolId' => 'integer'
     ];
 
