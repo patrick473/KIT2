@@ -59,6 +59,12 @@ class DatabaseSeeder extends Seeder
             $homepage = Page::create([
                 'name' => 'homepage'
             ]);
+            $startpage = Page::create([
+                'name' => 'startpage'
+            ]);
+            $contactpage = Page::create([
+                'name' => 'contactpage'
+            ]);
             $this->command->info('pages has been defined');
         }
     }

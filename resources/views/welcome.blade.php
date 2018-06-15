@@ -22,52 +22,17 @@
 
     </head>
     <body >
-        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark  ">
-
-
-            <a class="navbar-brand " href="#">
-                    <img src="{{ URL::asset('images/hu-logo.png') }}" width="30" height="30" class="d-inline-block align-top" alt="HU Logo">
-                    Kwaliteit Instrument Toetsprogramma
-            </a>
-
-            <!-- Opens and closes extendible link list on mobile -->
-            <button class="navbar-toggler"
-             type="button" data-toggle="collapse"
-              data-target="#navbarSupportedContent"
-               aria-controls="navbarSupportedContent" 
-               aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-
-<!-- The actual menu -->
-
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ml-auto">
-                            
-            @if (Route::has('login'))
-                    @auth
-                    <li class="nav-item ">
-                        <a class="nav-link " href="{{ url('/home') }}">Home</a>
-                        </li>
-                    @else
-                    <li class="nav-item ">
-                        <a class="nav-link " href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link " href="{{ route('register') }}">Register</a>
-                    </li>
-                    @endauth
-            @endif
-        </ul>
-    </div>
-            </nav>
-       <!-- End of navbar start of content -->
-
+        @include('includes.head')
+      
+       
             <div class="jumbotron text-center bg-primary">
                 <h1>Kwaliteit Instrument Toetsprogramma 2.0</h1>
                 <p>De tool om uw Toetsprogramma te evalueren</p>
             </div>
 
+            <div id="content" data-page="2">
+
+            </div>
             <!-- about app container -->
             <div id="aboutkit" class="container-fluid">
             <div class="row">
@@ -177,22 +142,14 @@
             </div>
             </div>
 
-            <footer class="text-muted">
-                <div class="container">
-                  <p class="float-right">
-                    <a href="#">Back to top</a>
-                  </p>
-                  <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
-                  <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
-                </div>
-              </footer>
+            @include('includes.footer') 
             
 
         
 
-           <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+         
     <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/loaddynamiccontentfront.js') }}"></script>
     </body>
 </html>
