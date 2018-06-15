@@ -10,6 +10,7 @@ class ContentController extends Controller
   {
     return view('admin.content');
   }
+  //save content json to correct page
   public function savecontent(Request $request,$page){
     $data = $request->getContent();
     $selectedpage = page::where('id','=',$page)->first();
@@ -17,6 +18,7 @@ class ContentController extends Controller
     $selectedpage->save();
     info($data);
   }
+  //return content json on page
   public function findcontent($id){
     $data = page::where('id','=',$id)->first()->content;
     return $data;
