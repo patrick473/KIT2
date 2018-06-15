@@ -204,6 +204,9 @@ $('#submitcontentcreation').on('click',()=>{
         processData: false,
         contentType: 'charset=UTF-8' 
     })
+    var popup = document.getElementById("snackbar");
+    popup.className = "show";
+    setTimeout(function(){ popup.className = popup.className.replace("show", ""); }, 3000);
 })
 
 

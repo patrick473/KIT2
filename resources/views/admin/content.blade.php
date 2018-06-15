@@ -32,8 +32,8 @@
 
 
 
-
-
+<!-- popup -->
+<div id="snackbar">Content has been saved</div>
 
 
 <!-- MODAL -->
