@@ -12,8 +12,6 @@
     <option value="3">Contact page</option>
 </select>
 <br>
-<button type="button" class="btn btn-primary btn-lg" id="pageselectbutton">select page</button>
-<hr>
 <button type="button"  class="btn btn-primary btn-lg" id="opensectionmodal">Add Section</button>
 <hr>
 

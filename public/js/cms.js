@@ -2,84 +2,13 @@
 
 
 
-$('#pageselectbutton').on('click',()=>{
-    let html;
-    var settings = {
-        
-        "url": "http://localhost:8000/api/admin/content/"+1,
-        "method": "GET"
-       
-      }
-      
-      $.ajax(settings).done(function (response) {
-        let contentjson = JSON.parse(response);
-        console.log(contentjson);
-        $.each(contentjson.sections,(i,e)=>{
-            console.log(e.id);
-            
-            switch (e.type) {
-                case 'text':
-                   html = `<div class="textsection form-group" data-index="`+e.id+`" data-type="text" id="section`+e.id+`"> 
-                    <div class="row">
-                    <h4>Text section order: `+e.id+`</h4>
-                    </div>
-                    <div class="row">
-                    <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
-                    <input type="text" id="section`+e.id+`textboxtitle" value="`+e.title+`" class="form-control">
-                    </div>
-                    <br>
-                    <div class="row">
-                    <label for="section`+e.id+`textarea" class="control-label"> content </label>
-                    <textarea  id="section`+e.id+`textarea" rows="4"  class="form-control">`+e.content+`</textarea>
-                    </div>
-                    <hr>
-                    </div>
-                    `;
-                 
-                    
-                    break;
-
-                 case 'bulletpoints':
-
-                 let listItems = e.items;
-                 let listString = '';
-                 listItems.forEach(elem => {
-                     listString += '<li class="list-group-item justify-content-between class="li'+e.id+'">'+elem+'</li>'
-                 });
-                     html=`<div class="bulletsection form-group" data-index="`+e.id+`" data-type="bulletpoints" id="section`+e.id+`"> 
-            <div class="row">
-            <h4>Bulletpoint section order: `+e.id+`</h4>
-            </div>
-            <div class="row">
-            <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
-            <input type="text" id="section`+e.id+`textboxtitle" class="form-control">
-            </div>
-            <br>
-            <div class="row">
-            <label for="section`+e.id+`textarea" class="control-label"> content </label>
-            <textarea  id="section`+e.id+`textarea" rows="4" class="form-control"></textarea>
-            </div>
-            <div class="row">
-            <p>Add items to bulletpoint list:</p>
-            </div>
-            <div class="row">
-             <ul class="list-group-flush" id="ul`+e.id+`">
-             <li class="list-group-item justify-content-between buttonitem"> <input type="text" class="" id="section`+e.id+`bulval" placeholder="New Item">
-             <button class="btn btn-primary btn-sm"  type="button" onclick="addbulletpoint(`+e.id+`)">Add new Item</button></li>
-             `+listString+ `
-             
-           </ul>
-           </div>
-             <hr>
-             </div>`;
-                    break;
-             }
-             $('#contentcreatorsection').append(html);
-        })
-
-      });
+$('#pageselector').on('change',()=>{
+  loadContent();
 })
 
+$(document).ready(()=>{
+    loadContent();
+})
 
 
 
@@ -216,4 +145,100 @@ function addbulletpoint(sectionid){
     $('#ul'+sectionid).append('<li class="list-group-item justify-content-between class="li'+sectionid+'">'+newBulletPointValue+'</li>')
     
 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function loadContent(){
+    $('#contentcreatorsection').html('');
+    let html;
+    var settings = {
+        
+        "url": "http://localhost:8000/api/admin/content/"+$('#pageselector').val(),
+        "method": "GET"
+       
+      }
+      
+      $.ajax(settings).done(function (response) {
+        let contentjson = JSON.parse(response);
+        console.log(contentjson);
+        $.each(contentjson.sections,(i,e)=>{
+            console.log(e.id);
+            
+            switch (e.type) {
+                case 'text':
+                   html = `<div class="textsection form-group" data-index="`+e.id+`" data-type="text" id="section`+e.id+`"> 
+                    <div class="row">
+                    <h4>Text section order: `+e.id+`</h4>
+                    </div>
+                    <div class="row">
+                    <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
+                    <input type="text" id="section`+e.id+`textboxtitle" value="`+e.title+`" class="form-control">
+                    </div>
+                    <br>
+                    <div class="row">
+                    <label for="section`+e.id+`textarea" class="control-label"> content </label>
+                    <textarea  id="section`+e.id+`textarea" rows="4"  class="form-control">`+e.content+`</textarea>
+                    </div>
+                    <hr>
+                    </div>
+                    `;
+                 
+                    
+                    break;
+
+                 case 'bulletpoints':
+
+                 let listItems = e.items;
+                 let listString = '';
+                 listItems.forEach(elem => {
+                     listString += '<li class="list-group-item justify-content-between class="li'+e.id+'">'+elem+'</li>'
+                 });
+                     html=`<div class="bulletsection form-group" data-index="`+e.id+`" data-type="bulletpoints" id="section`+e.id+`"> 
+            <div class="row">
+            <h4>Bulletpoint section order: `+e.id+`</h4>
+            </div>
+            <div class="row">
+            <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
+            <input type="text" id="section`+e.id+`textboxtitle" class="form-control">
+            </div>
+            <br>
+            <div class="row">
+            <label for="section`+e.id+`textarea" class="control-label"> content </label>
+            <textarea  id="section`+e.id+`textarea" rows="4" class="form-control"></textarea>
+            </div>
+            <div class="row">
+            <p>Add items to bulletpoint list:</p>
+            </div>
+            <div class="row">
+             <ul class="list-group-flush" id="ul`+e.id+`">
+             <li class="list-group-item justify-content-between buttonitem"> <input type="text" class="" id="section`+e.id+`bulval" placeholder="New Item">
+             <button class="btn btn-primary btn-sm"  type="button" onclick="addbulletpoint(`+e.id+`)">Add new Item</button></li>
+             `+listString+ `
+             
+           </ul>
+           </div>
+             <hr>
+             </div>`;
+                    break;
+
+
+            case 'video':
+
+                break;
+             }
+             $('#contentcreatorsection').append(html);
+        })
+
+      });
 }
