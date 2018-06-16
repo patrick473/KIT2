@@ -15,7 +15,7 @@ $(document).ready(() => {
       switch (e.type) {
         case "text":
           html =
-            `<div id="` +e.title +`" class="container-fluid">
+            `<div  class="container-fluid">
                     <div class="row">
                     <div class="col-sm-12">
                         <h2>` +e.title +`</h2><br> 
@@ -33,7 +33,7 @@ $(document).ready(() => {
               '<li class="list-group-item justify-content-between class="li' +e.id +'">' +elem +"</li>";
           });
           
-          html =`<div id="` +e.title +`" class="container-fluid">
+          html =`<div  class="container-fluid">
                      <div class="row">
                      <div class="col-sm-12"> 
                      <h2>` +e.title +`</h2><br> 
@@ -45,6 +45,15 @@ $(document).ready(() => {
 
                     `;
           break;
+          case "video":
+          html=`<div class="container-fluid">
+          <div class="row">
+                    <div class="col-sm-12">
+                        <h2>` +e.title +`</h2><br> 
+                    ` +e.content +`<br>
+                    </div>
+                    </div>
+          </div>`;
       }
       $("#content").append(html);
     });

@@ -49,6 +49,7 @@
         <select name="sectionselector" id="sectionselector" class="form-control">
           <option value="text">text section</option>
           <option value="bulletpoints">bullet points</option>
+          <option value="video">youtube video</option>
         </select>
       </div>
       <div class="modal-footer">

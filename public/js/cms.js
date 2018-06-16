@@ -79,6 +79,30 @@ $('#addsectionbutton').on('click',()=>{
              <hr>
              </div>` ;
            break;
+        case 'video':
+            html =  `
+            <div class="videosection form-group" data-index="`+ElementID+`" data-type="text" id="section`+ElementID+`"> 
+           <div class="row">
+           <h4>Video section order: `+ElementID+`</h4>
+           </div>
+           <div class="row">
+           <label for="section`+ElementID+`textboxtitle" class="control-label"> title </label>
+           <input type="text" id="section`+ElementID+`textboxtitle" class="form-control">
+           </div>
+           <br>
+           <div class="row">
+           <label for="section`+ElementID+`textarea" class="control-label"> Video </label>
+           <textarea  id="section`+ElementID+`textarea" rows="4" class="form-control"></textarea>
+           </div>
+           <div class="row">
+           <button type="button" class="btn btn-lg btn-danger" 
+           data-toggle="popover" title="Uploading youtube video to KIT 2.0"
+        data-content=" 1.on the selected youtube video select share, 2. press embed, 3. copy code into input</button>
+           </div>
+           <hr>
+           </div>
+            `;
+            break;
     }
     $('#contentcreatorsection').append(html);
 
@@ -116,9 +140,15 @@ $('#submitcontentcreation').on('click',()=>{
                   }
               });
             
-            json.sections.push({"id":id,"type":type,"title":title,"content":content,"items":listItems});
-                break;
+                json.sections.push({"id":id,"type":type,"title":title,"content":content,"items":listItems});
+            break;
             
+            case 'video':
+
+                title = $(e).find("input").val();
+                content = $(e).find("textarea").val();
+                json.sections.push({"id":id,"type":type,"title":title,"content":content});
+            break;
         }
     })
     console.log(json);
@@ -233,9 +263,30 @@ function loadContent(){
                     break;
 
 
-            case 'video':
-
-                break;
+                    case 'video':
+                    html =  `
+                    <div class="videosection form-group" data-index="`+e.id+`" data-type="text" id="section`+e.id+`"> 
+                   <div class="row">
+                   <h4>Video section order: `+e.id+`</h4>
+                   </div>
+                   <div class="row">
+                   <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
+                   <input type="text" id="section`+e.id+`textboxtitle" class="form-control">
+                   </div>
+                   <br>
+                   <div class="row">
+                   <label for="section`+e.id+`textarea" class="control-label"> Video </label>
+                   <textarea  id="section`+e.id+`textarea" rows="4" class="form-control"></textarea>
+                   </div>
+                   <div class="row">
+                   <button type="button" class="btn btn-lg btn-danger" 
+                   data-toggle="popover" title="Uploading youtube video to KIT 2.0"
+                data-content=" 1.on the selected youtube video select share, 2. press embed, 3. copy code into input</button>
+                   </div>
+                   <hr>
+                   </div>
+                    `;
+                    break;
              }
              $('#contentcreatorsection').append(html);
         })

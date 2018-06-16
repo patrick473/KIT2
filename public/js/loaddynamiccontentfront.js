@@ -24,15 +24,10 @@ $(document).ready(() => {
                     ` <div id="aboutkit" class="container-fluid `+ contentcolor+`">
                     <div class="row `+ alignment +`">
                         <div class="col-sm-8">
-                            <h2>Kwaliteit Instrument Toetsprogramma</h2><br>
-                            <h4>Give me some of your food give me some of your food give me some of your food meh, 
-                            i don't want it stare at wall turn and meow stare at wall some more meow again continue staring show belly lies down</h4><br>
-                            <p>Cat ipsum dolor sit amet, plop down in the middle where everybody walks hiding behind the couch until lured out by a feathery toy.
-                                Knock dish off table head butt cant eat out of my own dish milk the cow stick butt in face scream at teh bath run outside as soon as door open. 
-                                Grab pompom in mouth and put in water dish. 
-                                Stare at ceiling light sniff catnip and act crazy,
-                                but behind the couch, but spend six hours per day washing,
-                            </p><br>
+                        <h2>`+e.title+`</h2><br>
+                          
+                        <p>`+e.content+`
+                        </p><br>
                         
                            
                         </div>
@@ -53,14 +48,9 @@ $(document).ready(() => {
                   <div id="aboutkit" class="container-fluid">
                   <div class="row `+ alignment +`">
                       <div class="col-sm-8">
-                          <h2>Kwaliteit Instrument Toetsprogramma</h2><br>
-                          <h4>Give me some of your food give me some of your food give me some of your food meh, 
-                          i don't want it stare at wall turn and meow stare at wall some more meow again continue staring show belly lies down</h4><br>
-                          <p>Cat ipsum dolor sit amet, plop down in the middle where everybody walks hiding behind the couch until lured out by a feathery toy.
-                              Knock dish off table head butt cant eat out of my own dish milk the cow stick butt in face scream at teh bath run outside as soon as door open. 
-                              Grab pompom in mouth and put in water dish. 
-                              Stare at ceiling light sniff catnip and act crazy,
-                              but behind the couch, but spend six hours per day washing,
+                          <h2>`+e.title+`</h2><br>
+                          
+                          <p>`+e.content+`
                           </p><br>
                           <ul class="list-group" id="ul">
                           `+listString+`  
@@ -72,6 +62,22 @@ $(document).ready(() => {
                   </div>
                             `;
                   break;
+                  case "video":
+                    html = `
+                    <div id="aboutkit" class="container-fluid `+ contentcolor+`">
+                    <div class="row `+ alignment +`">
+                        <div class="col-sm-8">
+                        <h2>`+e.title+`</h2><br>
+                          
+                        `+e.content+`
+                        <br>
+                        
+                           
+                        </div>
+                        
+                    </div>
+                    </div>
+                    `
               }
               $("#content").append(html);
         });
