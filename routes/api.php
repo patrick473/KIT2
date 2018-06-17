@@ -20,4 +20,5 @@ Route::post('/admin/content/{page}','ContentController@savecontent')->name('edit
 Route::get('/admin/content/{id}','ContentController@findcontent')->name('find.content');
 
 Route::delete('/group/{id}', 'GroupController@destroyGroup')->name('delete.group');
-Route::get('/group/action', 'GroupController@action')->name('live_search.action');
+Route::get('/group/group_action', 'GroupController@GroupAction')->name('live_group_search.action');
+Route::get('/group/member_action', 'GroupController@MemberAction')->name('live_member_search.action');

@@ -47,3 +47,4 @@ Route::get('/admin/content','ContentController@editcontentview')->name('view.con
 //group
 Route::get('/group', 'GroupController@index')->name('index.group');
 Route::post('/group/store', 'GroupController@store')->name('store.group');
+Route::get('/group/members', 'GroupController@member')->name('group.member');

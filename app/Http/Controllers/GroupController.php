@@ -8,9 +8,9 @@ use \App\Group;
 class GroupController extends Controller
 {
 
-  public function new_group(){
-
-  }
+    public function member(){
+      	return view('group.members');
+    }
 
     /**
      * Display a listing of the resource.
@@ -93,7 +93,58 @@ class GroupController extends Controller
       $group->delete();
     }
 
-    function action(Request $request)
+    function MemberAction(Request $request){
+      if($request->ajax())
+      {
+       $output = '';
+       $query = $request->get('query');
+       if($query != '')
+       {
+        $data = User::where('name', 'like', '%'.$query.'%')
+          ->get();
+
+       }
+       else
+       {
+        $data = User::orderBy('name', 'desc')
+          ->get();
+       }
+       $total_row = $data->count();
+       if($total_row > 0)
+       {
+       $data = $data->sortBy('name');
+       foreach($data as $row)
+       {
+
+         $output .= '
+         <div class="card">
+           <div class="card-body">
+             <h5 class="card-title">'.$row->name.'</h5>
+             <p class="card-text">'.$row->email.'</p>
+             </div>
+           </div>
+         </div>
+         ';
+        }
+       }
+       else
+       {
+         $output .= '
+         <div class="card">
+           <div class="card-body">Geen gebruikers met deze naam gevonden.</div>
+         </div>
+         ';
+       }
+       $data = array(
+        'table_data'  => $output,
+        'total_data'  => $total_row
+       );
+
+       echo json_encode($data);
+      }
+     }
+
+    function GroupAction(Request $request)
     {
      if($request->ajax())
      {
@@ -116,12 +167,6 @@ class GroupController extends Controller
       $data = $data->sortBy('id');
       foreach($data as $row)
       {
-        // $output .= '
-        // <tr>
-        //  <td>'.$row->id.'</td>
-        //  <td>'.$row->title.'</td>
-        // </tr>
-        // ';
 
         $output .= '
         <div class="card">
