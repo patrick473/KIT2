@@ -14,7 +14,7 @@ class User extends Authenticatable
      * Alternative casting
      */
     protected $casts =[
-        'schoolId' => 'integer'
+        
     ];
 
     /**
@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','schoolid','id',
+        'name', 'email', 'password','id',
     ];
 
     /**
@@ -35,10 +35,5 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function school(){
-        return $this->hasOne(School::class);
-    }
-    public function surveys() {
-        return $this->hasMany(Survey::class);
-      }
+   
 }
