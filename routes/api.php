@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/admin/content/{page}','ContentController@savecontent')->name('edit.content');
 Route::get('/admin/content/{id}','ContentController@findcontent')->name('find.content');
+Route::delete('/group/{id}', 'GroupController@destroyGroup')->name('delete.group');

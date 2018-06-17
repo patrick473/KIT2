@@ -43,6 +43,8 @@ Route::patch('/question/{question}/update', 'QuestionController@update')->name('
 //TODO: need to make admin section
 
 Route::get('/admin/content','ContentController@editcontentview')->name('view.content');
-Route::get('/admin/group', 'GroupController@index')->name('index.group');
-Route::get('admin/group/action', 'GroupController@action')->name('live_search.action');
-Route::post('admin/group/store', 'GroupController@store')->name('store.group');
+
+//group
+Route::get('/group', 'GroupController@index')->name('index.group');
+Route::get('/group/action', 'GroupController@action')->name('live_search.action');
+Route::post('/group/store', 'GroupController@store')->name('store.group');

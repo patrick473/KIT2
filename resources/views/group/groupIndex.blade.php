@@ -15,21 +15,11 @@
    <div class="form-group">
     <input type="text" name="search" id="search" class="form-control" placeholder="Zoek voor een groep" />
    </div>
-   <div class="table-responsive">
-    <table class="table table-striped table-bordered">
-     <thead>
-      <tr>
-       <th>id</th>
-       <th>Groep naam</th>
-      </tr>
-     </thead>
-     <tbody>
+   <div class="row">
+     <div class="col-sm-12" id="GroupBody">
 
-     </tbody>
-    </table>
+     </div>
    </div>
-  </div>
- </div>
 </div>
 
 @endsection

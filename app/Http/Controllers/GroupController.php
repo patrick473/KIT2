@@ -19,7 +19,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-      return view('admin.group.groupIndex');
+      return view('group.groupIndex');
     }
 
     /**
@@ -40,7 +40,7 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        dd(request()->all());
+        //
     }
 
     /**
@@ -83,9 +83,11 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroyGroup($id)
     {
-        //
+      $group = App\Group::find($id);
+
+      $group->delete();
     }
 
     function action(Request $request)
@@ -108,23 +110,36 @@ class GroupController extends Controller
       $total_row = $data->count();
       if($total_row > 0)
       {
-       foreach($data as $row)
-       {
+      $data = $data->sortBy('id');
+      foreach($data as $row)
+      {
+        // $output .= '
+        // <tr>
+        //  <td>'.$row->id.'</td>
+        //  <td>'.$row->title.'</td>
+        // </tr>
+        // ';
+
         $output .= '
-        <tr>
-         <td>'.$row->id.'</td>
-         <td>'.$row->title.'</td>
-        </tr>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">'.$row->id.'. '.$row->title.'</h5>
+            <p class="card-text">'.$row->description.'</p>
+            <form method="delete" action="/api/group/{'.$row->id.'}">
+            <button type="submit" class="btn btn-danger" id="Group_'.$row->id.'">Verwijder groep</button>
+            </form>
+          </div>
+        </div>
         ';
        }
       }
       else
       {
-       $output = '
-       <tr>
-        <td align="center" colspan="5">Geen groepen met deze naam gevonden</td>
-       </tr>
-       ';
+        $output .= '
+        <div class="card">
+          <div class="card-body">Geen groepen met deze naam gevonden.</div>
+        </div>
+        ';
       }
       $data = array(
        'table_data'  => $output,
