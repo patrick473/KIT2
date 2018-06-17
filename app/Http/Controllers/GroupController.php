@@ -40,7 +40,10 @@ class GroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $group = new Group;
+        Group::create(['title' =>$request->title,
+                      'description' => $request->description]);
+        return redirect('/group');
     }
 
     /**
@@ -123,11 +126,16 @@ class GroupController extends Controller
         $output .= '
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">'.$row->id.'. '.$row->title.'</h5>
+            <h5 class="card-title">'.$row->title.'</h5>
             <p class="card-text">'.$row->description.'</p>
-            
-            <button type="button" class="btn btn-danger deletebutton" data-id="'.$row->id.'"id="Group_'.$row->id.'">Verwijder groep</button>
-            
+            <div class="row">
+              <div class="col-sm-2">
+                <button type="button" class="btn btn-success" data-id="'.$row->id.'"id="Add_Group_'.$row->id.'">Voeg leden toe</button>
+              </div>
+              <div class="col-sm-2 offset-sm-8">
+                <button type="button" class="btn btn-danger deletebutton" data-id="'.$row->id.'"id="Delete_Group_'.$row->id.'">Verwijder groep</button>
+              </div>
+            </div>
           </div>
         </div>
         ';
