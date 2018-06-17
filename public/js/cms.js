@@ -153,7 +153,7 @@ $('#submitcontentcreation').on('click',()=>{
     })
     console.log(json);
     let sendableJson = JSON.stringify(json);
-    let url = "http://localhost:8000/api/admin/content/"+$('#pageselector').val();
+    let url = "/api/admin/content/"+$('#pageselector').val();
 
     $.ajax({
         type: "POST",
@@ -162,10 +162,11 @@ $('#submitcontentcreation').on('click',()=>{
         contentType:'json',
         processData: false,
         contentType: 'charset=UTF-8' 
-    })
+    }).done(function (response) {
     var popup = document.getElementById("snackbar");
     popup.className = "show";
     setTimeout(function(){ popup.className = popup.className.replace("show", ""); }, 3000);
+    })
 })
 
 
@@ -194,12 +195,13 @@ function loadContent(){
     let html;
     var settings = {
         
-        "url": "http://localhost:8000/api/admin/content/"+$('#pageselector').val(),
+        "url": "/api/admin/content/"+$('#pageselector').val(),
         "method": "GET"
        
       }
       
       $.ajax(settings).done(function (response) {
+          if(response.length > 0){
         let contentjson = JSON.parse(response);
         console.log(contentjson);
         $.each(contentjson.sections,(i,e)=>{
@@ -290,6 +292,6 @@ function loadContent(){
              }
              $('#contentcreatorsection').append(html);
         })
-
+    }
       });
 }

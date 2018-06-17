@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Group;
+use \App\Group;
 
 class GroupController extends Controller
 {
@@ -85,7 +85,7 @@ class GroupController extends Controller
      */
     public function destroyGroup($id)
     {
-      $group = App\Group::find($id);
+      $group = Group::find($id);
 
       $group->delete();
     }
@@ -125,9 +125,9 @@ class GroupController extends Controller
           <div class="card-body">
             <h5 class="card-title">'.$row->id.'. '.$row->title.'</h5>
             <p class="card-text">'.$row->description.'</p>
-            <form method="delete" action="/api/group/{'.$row->id.'}">
-            <button type="submit" class="btn btn-danger" id="Group_'.$row->id.'">Verwijder groep</button>
-            </form>
+            
+            <button type="button" class="btn btn-danger deletebutton" data-id="'.$row->id.'"id="Group_'.$row->id.'">Verwijder groep</button>
+            
           </div>
         </div>
         ';
