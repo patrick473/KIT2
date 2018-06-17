@@ -18,8 +18,7 @@ class Users extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->unsignedInteger('school_id');
-            $table->foreign('school_id')->references('id')->on('schools')->onDelete('cascade'); 
+            
             $table->rememberToken();
             $table->timestamps();
         });
