@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 use \App\User;
 use \App\page;
 use \App\Group;
+use \App\Admin;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -32,14 +33,20 @@ class DatabaseSeeder extends Seeder
            
 
             $user1 = User::create([
-                'name' => 'patrick',
+                'username' => 'patrick',
                 'email' => 'patrick.kottman@hu.nl',
                 'password' => Hash::make('password')
             ]);
 
             $user2 = User::create([
-                'name' => 'jan',
+                'username' => 'jan',
                 'email' => 'jan.janssen@cals.nl',
+                'password' => Hash::make('password')
+               
+            ]);
+            $admin = Admin::create([
+                'username' => 'admin',
+                'email' => 'admin.admin@admin.nl',
                 'password' => Hash::make('password')
                
             ]);

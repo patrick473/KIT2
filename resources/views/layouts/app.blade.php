@@ -35,6 +35,7 @@
 
         
         <div class="contentSection ">
+
             <div class="row">
                 <div class="sideBarSection col-sm-2">
                     @if(Auth::check())
@@ -42,6 +43,7 @@
                     @endif
                     </div>
                 <div class="mainContentSection col-sm-10">
+                    @include('includes.who')
             @yield('content')
                 </div>
             </div>

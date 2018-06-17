@@ -18,33 +18,44 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@home')->name('home');
-Route::get('/survey/new', 'SurveyController@new_survey')->name('new.survey');
-Route::get('/survey/user','SurveyController@user_survey')->name('user.survey');
+Route::get('/user/logout','Auth\LoginController@userLogout')->name('user.logout');
 
-
-
-Route::get('/survey/{survey}', 'SurveyController@detail_survey')->name('detail.survey');
-Route::get('/survey/view/{survey}', 'SurveyController@view_survey')->name('view.survey');
-Route::get('/survey/answers/{survey}', 'SurveyController@view_survey_answers')->name('view.survey.answers');
-Route::get('/survey/{survey}/delete', 'SurveyController@delete_survey')->name('delete.survey');
-
-Route::get('/survey/{survey}/edit', 'SurveyController@edit')->name('edit.survey');
-Route::patch('/survey/{survey}/update', 'SurveyController@update')->name('update.survey');
-
-Route::post('/survey/view/{survey}/completed', 'AnswerController@store')->name('complete.survey');
-Route::post('/survey/create', 'SurveyController@create')->name('create.survey');
-
-// Questions related
-Route::post('/survey/{survey}/questions', 'QuestionController@store')->name('store.question');
-
-Route::get('/question/{question}/edit', 'QuestionController@edit')->name('edit.question');
-Route::patch('/question/{question}/update', 'QuestionController@update')->name('update.question');
-
-//TODO: need to make admin section
-
-Route::get('/admin/content','ContentController@editcontentview')->name('view.content');
 
 //group
 Route::get('/group', 'GroupController@index')->name('index.group');
 Route::post('/group/store', 'GroupController@store')->name('store.group');
 Route::get('/group/members', 'GroupController@member')->name('group.member');
+//TODO: Delete
+Route::get('/survey/new', 'SurveyController@new_survey')->name('new.survey');
+Route::get('/survey/user','SurveyController@user_survey')->name('user.survey');
+Route::get('/survey/{survey}', 'SurveyController@detail_survey')->name('detail.survey');
+Route::get('/survey/view/{survey}', 'SurveyController@view_survey')->name('view.survey');
+Route::get('/survey/answers/{survey}', 'SurveyController@view_survey_answers')->name('view.survey.answers');
+Route::get('/survey/{survey}/delete', 'SurveyController@delete_survey')->name('delete.survey');
+Route::get('/survey/{survey}/edit', 'SurveyController@edit')->name('edit.survey');
+Route::patch('/survey/{survey}/update', 'SurveyController@update')->name('update.survey');
+Route::post('/survey/view/{survey}/completed', 'AnswerController@store')->name('complete.survey');
+Route::post('/survey/create', 'SurveyController@create')->name('create.survey');
+
+//till here
+
+
+// Questions related
+Route::post('/survey/{survey}/questions', 'QuestionController@store')->name('store.question');
+Route::get('/question/{question}/edit', 'QuestionController@edit')->name('edit.question');
+Route::patch('/question/{question}/update', 'QuestionController@update')->name('update.question');
+
+//ADMINSECTION
+
+
+Route::prefix('admin')->group(function(){
+    Route::get('/content','ContentController@editcontentview')->name('admin.content');
+    Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
+    Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
+    Route::get('/', 'AdminController@home')->name('admin.home');
+    Route::get('/logout','Auth\AdminLoginController@logout')->name('admin.logout');
+});
+
+
+
+//Route::get('','')->name('');
