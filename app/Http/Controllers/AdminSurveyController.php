@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Log;
 use Auth;
 use App\Survey;
 use App\Answer;
+use App\Question;
+
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
-class SurveyController extends Controller
+class AdminSurveyController extends Controller
 {
-    public function __construct()
-    {
-      $this->middleware('auth');
-    }
+ 
 
 
 #view returners
@@ -82,4 +83,56 @@ class SurveyController extends Controller
    {
      return view('answersurvey.answer');
    }
+
+
+
+
+   public function saveSurvey(Request $request){
+
+    //get json
+    $json = json_decode($request->getContent(),true);
+
+    $survey = Survey::create([
+        'title' => $json['title'],
+        'description' => $json['description']
+    ]);
+    
+    foreach($json['questions'] as $question){
+        $saveablequestion = Question::create([
+            'survey_id' => $survey['id'],
+            'type' => $question['type'],
+            'title' => $question['title'],
+            'attributes' => json_encode($question['attributes'])
+        ]);
+    } 
+
+    Log::debug($json['title']);
+    // make json into eloquent objects
+    
+    //save to database
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
