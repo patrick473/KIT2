@@ -13,8 +13,8 @@ class AnswerController extends Controller
   {
     $this->middleware('auth');
   }
- 
-  public function store(Request $request, Survey $survey) 
+
+  public function store(Request $request, Survey $survey)
   {
     // remove the token
     $arr = $request->except('_token');
@@ -29,9 +29,20 @@ class AnswerController extends Controller
       $newAnswer->question_id = $key;
       $newAnswer->user_id = Auth::id();
       $newAnswer->survey_id = $survey->id;
- 
+
       $newAnswer->save();
     };
     return redirect()->action('SurveyController@view_survey_answers', [$survey->id]);
   }
-}
+  public function storeanswer(Request $request, $id)
+    {
+        // Validate the request...
+
+        $answer = new Answer;
+
+        $answer->content = $request->getContent();
+
+        $answer->id = $id;
+        $answer->save();
+    }
+  }
