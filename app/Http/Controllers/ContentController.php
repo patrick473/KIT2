@@ -11,7 +11,7 @@ class ContentController extends Controller
   {
       $this->middleware('auth:admin');
   }
-    public function editcontentview() 
+    public function editcontentview()
   {
     return view('admin.content');
   }
@@ -23,6 +23,7 @@ class ContentController extends Controller
     $selectedpage->save();
     info($data);
   }
+
   //return content json on page
   public function findcontent($id){
     $data = page::where('id','=',$id)->first()->content;

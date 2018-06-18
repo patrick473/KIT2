@@ -39,7 +39,10 @@ Route::post('/survey/create', 'SurveyController@create')->name('create.survey');
 
 //till here
 
+// Survey
 
+Route::get('/answer', 'SurveyController@answer')->name('answer.survey');
+Route::post('/answer/{id}', 'AnswerController@storeanswer')->name('answer.store');
 // Questions related
 Route::post('/survey/{survey}/questions', 'QuestionController@store')->name('store.question');
 Route::get('/question/{question}/edit', 'QuestionController@edit')->name('edit.question');
