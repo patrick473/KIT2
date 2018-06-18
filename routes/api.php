@@ -24,3 +24,5 @@ Route::get('/group/group_action', 'GroupController@GroupAction')->name('live_gro
 Route::get('/group/member_action', 'GroupController@MemberAction')->name('live_member_search.action');
 
 Route::post('/admin/survey', 'AdminSurveyController@saveSurvey')->name('survey.save');
+Route::post('/survey/answer', 'AdminSurveyController@saveAnswer')->name('survey.answer');
+Route::post('/group/survey', 'AdminSurveyController@copySurvey')->name('survey.copy');
