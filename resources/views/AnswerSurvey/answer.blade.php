@@ -5,7 +5,8 @@
     <title></title>
   </head>
   <body>
-    <form class="" action="answer/" method="post">
+    <form class="" action="answer/1" method="post">
+      @csrf
     <div id="answers">
 <input id="school" value="Hogeschool Utrecht">
     </div>

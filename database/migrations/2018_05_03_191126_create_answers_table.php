@@ -15,11 +15,11 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
+            $table->unsignedInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('survey_id');
-            $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade'); 
-            $table->string('answer');
+            $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade');
+            $table->json('content');
             $table->timestamps();
         });
     }

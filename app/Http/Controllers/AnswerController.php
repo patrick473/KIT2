@@ -39,10 +39,12 @@ class AnswerController extends Controller
         // Validate the request...
 
         $answer = new Answer;
-
-        $answer->content = $request->getContent();
-
-        $answer->id = $id;
-        $answer->save();
+        Answer::create(['survey_id' =>$id,
+                      'content' => $request->getContent()]);
+        return redirect('/answer');
+        // $answer->content = $request->getContent();
+        //
+        // $answer->id = $id;
+        // $answer->save();
     }
   }
