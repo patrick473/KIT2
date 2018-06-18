@@ -15,6 +15,10 @@ class CreateMembersTable extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('group_id');
+            $table->foreign('group_id')->references('id')->on('group')->onDelete('cascade');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

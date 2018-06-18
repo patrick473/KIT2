@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Group;
+use \App\User;
 
 class GroupController extends Controller
 {
@@ -100,26 +101,26 @@ class GroupController extends Controller
        $query = $request->get('query');
        if($query != '')
        {
-        $data = User::where('name', 'like', '%'.$query.'%')
+        $data = User::where('username', 'like', '%'.$query.'%')
           ->get();
 
        }
        else
        {
-        $data = User::orderBy('name', 'desc')
+        $data = User::orderBy('username', 'desc')
           ->get();
        }
        $total_row = $data->count();
        if($total_row > 0)
        {
-       $data = $data->sortBy('name');
+       $data = $data->sortBy('username');
        foreach($data as $row)
        {
 
          $output .= '
          <div class="card">
            <div class="card-body">
-             <h5 class="card-title">'.$row->name.'</h5>
+             <h5 class="card-title">'.$row->username.'</h5>
              <p class="card-text">'.$row->email.'</p>
              </div>
            </div>
@@ -174,11 +175,11 @@ class GroupController extends Controller
             <h5 class="card-title">'.$row->title.'</h5>
             <p class="card-text">'.$row->description.'</p>
             <div class="row">
-              <div class="col-sm-2">
+              <div class="col align-self-start">
                 <button type="button" class="btn btn-success" data-id="'.$row->id.'"id="Add_Group_'.$row->id.'">Voeg leden toe</button>
               </div>
-              <div class="col-sm-2 offset-sm-8">
-                <button type="button" class="btn btn-danger deletebutton" data-id="'.$row->id.'"id="Delete_Group_'.$row->id.'">Verwijder groep</button>
+              <div class="col align-self-end">
+                <button type="button" class="btn btn-danger float-right deletebutton" data-id="'.$row->id.'"id="Delete_Group_'.$row->id.'">Verwijder groep</button>
               </div>
             </div>
           </div>
