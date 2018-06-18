@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use \App\page;
 class ContentController extends Controller
 {
+
+  public function __construct()
+  {
+      $this->middleware('auth:admin');
+  }
     public function editcontentview() 
   {
     return view('admin.content');
