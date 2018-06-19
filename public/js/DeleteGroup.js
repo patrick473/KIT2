@@ -1,7 +1,7 @@
 $(document).on("click",".deletebutton",(e)=>{
     let id = $(e.target).data("id");
 
-    let url = "/api/group/"+id;
+    let url = "/api/admin/group/"+id;
     $.ajax({
         type: "DELETE",
         url: url,

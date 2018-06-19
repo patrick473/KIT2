@@ -19,6 +19,7 @@ class CreateMembersTable extends Migration
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('group_leader');
             $table->timestamps();
         });
     }

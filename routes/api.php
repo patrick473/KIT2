@@ -19,9 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/admin/content/{page}','admin\ContentController@savecontent')->name('edit.content');
 Route::get('/admin/content/{id}','ContentController@findcontent')->name('find.content');
 
-Route::delete('/group/{id}', 'GroupController@destroyGroup')->name('delete.group');
-Route::get('/group/group_action', 'GroupController@GroupAction')->name('live_group_search.action');
-Route::get('/group/member_action', 'GroupController@MemberAction')->name('live_member_search.action');
+Route::delete('/admin/group/{id}', 'AdminGroupController@destroyGroup')->name('admin.delete.group');
+Route::get('/admin/group/group_action', 'AdminGroupController@GroupAction')->name('admin.live_group_search.action');
+Route::get('/admin/group/member_action', 'AdminGroupController@MemberAction')->name('admin.live_member_search.action');
 
 Route::post('/admin/survey', 'AdminSurveyController@saveSurvey')->name('survey.save');
 Route::post('/survey/answer', 'AdminSurveyController@saveAnswer')->name('survey.answer');

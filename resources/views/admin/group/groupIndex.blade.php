@@ -2,7 +2,7 @@
 
 @section('content')
   <h3>Groep aanmaken.</h3>
-  <form method="POST" action="/group/store">
+  <form method="POST" action="/admin/group/store">
     {{ csrf_field() }}
     <div class="form-group">
       <label for="title">Groep naam</label>
@@ -20,7 +20,10 @@
   <hr>
 
   <div class="container box">
-    <h3>Uw groepen.</h3>
+    <h3>Zoek een groep.</h3>
+     <div class="form-group">
+      <input type="text" name="search" id="search" class="form-control" placeholder="Zoek voor een groep" />
+     </div>
      <div class="row">
        <div class="col-sm-12" id="GroupBody">
 
@@ -31,5 +34,6 @@
 @endsection
 
 @section('extrascripts')
-
+<script src="{{ asset('js/live_group_search.js') }}"></script>
+<script src="{{ asset('js/DeleteGroup.js') }}"></script>
 @endsection
