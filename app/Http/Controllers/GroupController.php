@@ -17,10 +17,15 @@ class GroupController extends Controller
   public function index()
   {
     //TODO: $user_id is still hard coded
-    $user_id=2;
+    $user_id=1;
     $members = Member::where('user_id', '=', $user_id)->get();
-    Log::debug($members);
-    dd($members);
+    // Log::debug($members);
+    // dd($members);
+    foreach($members as $member){
+        
+            $member->groups = Group::where('id',$member->group_id)->get();
+            
+    }
     return view('group.groupIndex', compact('members'));
   }
 
