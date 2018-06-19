@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Group;
+use \App\Member;
+use Log;
 
 class GroupController extends Controller
 {
@@ -14,7 +16,12 @@ class GroupController extends Controller
    */
   public function index()
   {
-    return view('group.groupIndex');
+    //TODO: $user_id is still hard coded
+    $user_id=2;
+    $members = Member::where('user_id', '=', $user_id)->get();
+    Log::debug($members);
+    dd($members);
+    return view('group.groupIndex', compact('members'));
   }
 
   /**

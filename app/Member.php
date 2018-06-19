@@ -6,8 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Member extends Model
 {
-  public function User()
+  public function Users()
   {
-    return $this->hasMany('\App\User');
+    return $this->belongsTo('App\User');
+  }
+
+  public function Groups()
+  {
+    return $this->belongsTo('\App\Group');
   }
 }
