@@ -37,7 +37,7 @@
                          <button type="button" class="btn btn-success">Voeg leden toe</button>
                        </div>
                        <div class="col align-self-end">
-                         <button type="button" class="btn btn-danger float-right deletebutton" data-id={{$group->id}}>Verwijder groep</button>
+                         <button type="button" class="btn btn-danger float-right groupDeletebutton" data-id={{$group->id}}>Verwijder groep</button>
                        </div>
                      </div>
                    @else
@@ -46,7 +46,7 @@
                          <button type="button" class="btn btn-light">Alleen beheerder kan lid toevoegen</button>
                        </div>
                        <div class="col align-self-end">
-                         <button type="button" class="btn btn-danger float-right">Verlaat groep</button>
+                         <button type="button" class="btn btn-danger float-right memberDeletebutton" data-id={{$member->id}}>Verlaat groep</button>
                        </div>
                      </div>
                   @endif

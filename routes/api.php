@@ -25,6 +25,8 @@ Route::get('/admin/group/member_action', 'AdminGroupController@MemberAction')->n
 
 Route::delete('/group/{id}', 'GroupController@destroyGroup')->name('delete.group');
 
+Route::delete('/member/{id}', 'MemberController@destroy')->name('delete.member');
+
 Route::post('/admin/survey', 'AdminSurveyController@saveSurvey')->name('survey.save');
 Route::post('/survey/answer', 'AdminSurveyController@saveAnswer')->name('survey.answer');
 Route::post('/group/survey', 'AdminSurveyController@copySurvey')->name('survey.copy');
