@@ -41,10 +41,7 @@ class AdminSurveyController extends Controller
         ]);
     } 
 
-    Log::debug($json['title']);
-    // make json into eloquent objects
     
-    //save to database
 
    }
    public function copySurvey(Request $request){
