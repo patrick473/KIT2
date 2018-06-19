@@ -21,10 +21,15 @@ Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/user/logout','Auth\LoginController@userLogout')->name('user.logout');
 
 
-//group
-Route::get('/group', 'GroupController@index')->name('index.group');
-Route::post('/group/store', 'GroupController@store')->name('store.group');
-Route::get('/group/members', 'GroupController@member')->name('group.member');
+//admin group
+Route::get('/admin/group', 'AdminGroupController@index')->name('admin.index.group');
+Route::post('/admin/group/store', 'AdminGroupController@store')->name('admin.store.group');
+Route::get('/admin/group/members', 'AdminGroupController@member')->name('admin.group.member');
+
+//user group
+Route::get('/group', 'GroupController@index')->name('group.index');
+Route::post('/group/store', 'GroupController@store')->name('group.store');
+
 //TODO: Delete
 Route::get('/survey/new', 'SurveyController@new_survey')->name('new.survey');
 Route::get('/survey/user','SurveyController@user_survey')->name('user.survey');

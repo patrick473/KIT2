@@ -7,7 +7,7 @@ $(document).ready(function(){
 
  function fetch_member_data(query = '') {
   $.ajax({
-   url:"/api/group/member_action",
+   url:"/api/admin/group/member_action",
    method:'GET',
    data:{query:query},
    dataType:'json',
