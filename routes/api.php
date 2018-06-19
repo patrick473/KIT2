@@ -26,4 +26,5 @@ Route::get('/group/member_action', 'GroupController@MemberAction')->name('live_m
 Route::post('/admin/survey', 'AdminSurveyController@saveSurvey')->name('survey.save');
 Route::post('/survey/answer', 'AdminSurveyController@saveAnswer')->name('survey.answer');
 Route::post('/group/survey', 'AdminSurveyController@copySurvey')->name('survey.copy');
+Route::get('/survey/{id}', 'AdminSurveyController@getSurveyFromGroup')->name('survey.answerform');
 Route::get('/group/survey/{id}', 'AdminSurveyController@getSurveyOverview')->name('survey.overview');

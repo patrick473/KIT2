@@ -64,11 +64,30 @@ class AdminSurveyController extends Controller
         ]);
 
         }
+    public function getSurveyFromGroup($id){
+        $app = app();
+        $jsonObject = $app->make('stdClass');
+        $groupSurvey = survey_group::where('id',$id)->first();
+        $survey = Survey::where('id',$groupSurvey->survey_id)->first();
+        $questions = Question::where('survey_id',$groupSurvey->survey_id)->get();
+        foreach($questions as $question){
+            $question->attributes = json_decode($question->attributes);
+            
+        }
+        $jsonObject->surveyid = $groupSurvey->survey_id;
+        $jsonObject->title = $survey->title;
+        $jsonObject->description = $survey->description;
+        $jsonObject->group = $groupSurvey->group_id;
+        $jsonObject->questions = $questions;
+        return json_encode($jsonObject);
+
+    }
     public function getSurveyOverview($id){
         $app = app();
         //get variables
         $jsonObject = $app->make('stdClass');
         $groupSurvey = survey_group::where('id',$id)->first();
+        $survey = Survey::where('id',$groupSurvey->survey_id)->first();
         $questions = Question::where('survey_id',$groupSurvey->survey_id)->get();
         foreach($questions as $question){
             $question->attributes = json_decode($question->attributes);
@@ -99,6 +118,8 @@ class AdminSurveyController extends Controller
 
         //construct object to be responded with
         $jsonObject->survey = $groupSurvey->survey_id;
+        $jsonObject->title = $survey->title;
+        $jsonObject->description = $survey->description;
         $jsonObject->group = $groupSurvey->group_id;
 
         $jsonObject->questions = $questions;
