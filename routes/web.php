@@ -52,7 +52,7 @@ Route::patch('/question/{question}/update', 'QuestionController@update')->name('
 
 
 Route::prefix('admin')->group(function(){
-    Route::get('/content','ContentController@editcontentview')->name('admin.content');
+    Route::get('/content','admin\ContentController@editcontentview')->name('admin.content');
     Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'AdminController@home')->name('admin.home');

@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/admin/content/{page}','ContentController@savecontent')->name('edit.content');
+Route::post('/admin/content/{page}','admin\ContentController@savecontent')->name('edit.content');
 Route::get('/admin/content/{id}','ContentController@findcontent')->name('find.content');
 
 Route::delete('/group/{id}', 'GroupController@destroyGroup')->name('delete.group');
