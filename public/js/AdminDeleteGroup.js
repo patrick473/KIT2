@@ -1,7 +1,7 @@
 $(document).on("click",".deletebutton",(e)=>{
     let id = $(e.target).data("id");
 
-    let url = "/api/group/"+id;
+    let url = "/api/admin/group/"+id;
     $.ajax({
         type: "DELETE",
         url: url,
@@ -9,6 +9,7 @@ $(document).on("click",".deletebutton",(e)=>{
         processData: false,
         contentType: 'charset=UTF-8'
     }).done(function (response) {
-      location.reload();
+      document.getElementById('search').value = '';
+      fetch_customer_data();
     })
 })

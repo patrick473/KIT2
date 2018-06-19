@@ -35,5 +35,5 @@
 
 @section('extrascripts')
 <script src="{{ asset('js/live_group_search.js') }}"></script>
-<script src="{{ asset('js/DeleteGroup.js') }}"></script>
+<script src="{{ asset('js/AdminDeleteGroup.js') }}"></script>
 @endsection

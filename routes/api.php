@@ -23,6 +23,8 @@ Route::delete('/admin/group/{id}', 'AdminGroupController@destroyGroup')->name('a
 Route::get('/admin/group/group_action', 'AdminGroupController@GroupAction')->name('admin.live_group_search.action');
 Route::get('/admin/group/member_action', 'AdminGroupController@MemberAction')->name('admin.live_member_search.action');
 
+Route::delete('/group/{id}', 'GroupController@destroyGroup')->name('delete.group');
+
 Route::post('/admin/survey', 'AdminSurveyController@saveSurvey')->name('survey.save');
 Route::post('/survey/answer', 'AdminSurveyController@saveAnswer')->name('survey.answer');
 Route::post('/group/survey', 'AdminSurveyController@copySurvey')->name('survey.copy');

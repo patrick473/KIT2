@@ -22,9 +22,8 @@ class GroupController extends Controller
     // Log::debug($members);
     // dd($members);
     foreach($members as $member){
-        
+
             $member->groups = Group::where('id',$member->group_id)->get();
-            
     }
     return view('group.groupIndex', compact('members'));
   }
@@ -95,6 +94,8 @@ class GroupController extends Controller
    */
   public function destroyGroup($id)
   {
+    $group = Group::find($id);
 
+    $group->delete();
   }
 }

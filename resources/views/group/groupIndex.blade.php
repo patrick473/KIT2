@@ -23,17 +23,45 @@
     <h3>Uw groepen.</h3>
      <div class="row">
        <div class="col-sm-12" id="GroupBody">
-         @foreach($members as $member)
-          
-           @foreach($member->groups as $group)
-             <div class="card">
-               <div class="card-body">
-                 <h5 class="card-title">{{$group->title}}</h5>
-                 <p class="card-text">{{$group->description}}</p>
+         @if(!$members->isEmpty())
+           @foreach($members as $member)
+             @foreach($member->groups as $group)
+
+               <div class="card">
+                 <div class="card-body">
+                   <h5 class="card-title">{{$group->title}}</h5>
+                   <p class="card-text">{{$group->description}}</p>
+                   @if ($member->group_leader == 1)
+                     <div class="row">
+                       <div class="col align-self-start">
+                         <button type="button" class="btn btn-success">Voeg leden toe</button>
+                       </div>
+                       <div class="col align-self-end">
+                         <button type="button" class="btn btn-danger float-right deletebutton" data-id={{$group->id}}>Verwijder groep</button>
+                       </div>
+                     </div>
+                   @else
+                     <div class="row">
+                       <div class="col align-self-start">
+                         <button type="button" class="btn btn-light">Alleen beheerder kan lid toevoegen</button>
+                       </div>
+                       <div class="col align-self-end">
+                         <button type="button" class="btn btn-danger float-right">Verlaat groep</button>
+                       </div>
+                     </div>
+                  @endif
                </div>
              </div>
-           @endforeach
-          @endforeach
+
+             @endforeach
+            @endforeach
+          @else
+
+            <div class="card">
+              <div class="card-body">Geen gebruikers met deze naam gevonden.</div>
+            </div>
+
+          @endif
       </div>
     </div>
   </div>
@@ -42,5 +70,5 @@
 @endsection
 
 @section('extrascripts')
-
+  <script src="{{ asset('js/DeleteGroup.js') }}"></script>
 @endsection
