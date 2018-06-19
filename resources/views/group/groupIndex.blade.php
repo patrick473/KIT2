@@ -23,10 +23,21 @@
     <h3>Uw groepen.</h3>
      <div class="row">
        <div class="col-sm-12" id="GroupBody">
-
-       </div>
-     </div>
+         @foreach($members->toArray() as $member)
+           {{dd($member)}}
+           @foreach($member->Groups as $group)
+             <div class="card">
+               <div class="card-body">
+                 <h5 class="card-title">{{$group->title}}</h5>
+                 <p class="card-text">{{$group->description}}</p>
+               </div>
+             </div>
+           @endforeach
+          @endforeach
+      </div>
+    </div>
   </div>
+</div>
 
 @endsection
 
