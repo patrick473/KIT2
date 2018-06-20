@@ -19,11 +19,6 @@ class CreateInvitesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedInteger('group_id');
             $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
-            $table->string('token',16)->unique();
-            $table->string('email');
-            $table->string('user1name');
-            $table->string('user2name');
-            $table->string('groupname');
             $table->timestamps();
         });
     }

@@ -27,3 +27,8 @@ $(document).on("click",".memberDeletebutton",(e)=>{
       location.reload();
     })
 })
+
+document.getElementById("addMember").onclick = function () {
+        let group_id = $(this).data("id");
+        location.href = "/group/invite/"+group_id;
+};
