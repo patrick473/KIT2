@@ -27,7 +27,6 @@ class AdminSurveyController extends Controller
     $jsonObject = $app->make('stdClass');
    
     $json = json_decode($request->getContent(),true);
-    $survey;
     if( isset($json['id'])){
         $survey = Survey::where('id','=',$json['id'])->first();
         $survey->title = $json['title'];
