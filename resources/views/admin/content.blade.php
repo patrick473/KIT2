@@ -50,6 +50,7 @@
           <option value="text">text section</option>
           <option value="bulletpoints">bullet points</option>
           <option value="video">youtube video</option>
+          <option value="picture">picture</option>
         </select>
       </div>
       <div class="modal-footer">

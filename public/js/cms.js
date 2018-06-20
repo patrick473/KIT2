@@ -104,9 +104,9 @@ $('#addsectionbutton').on('click',()=>{
             `;
             break;
         case 'picture':
-            html = `<div class="textsection form-group" data-index="`+ElementID+`" data-type="text" id="section`+ElementID+`"> 
+            html = `<div class="textsection form-group" data-index="`+ElementID+`" data-type="picture" id="section`+ElementID+`"> 
             <div class="row">
-            <h4>Text section order: `+ElementID+`</h4>
+            <h4>Picture section order: `+ElementID+`</h4>
             </div>
             <div class="row">
             <label for="section`+ElementID+`textboxtitle" class="control-label"> title </label>
@@ -114,7 +114,7 @@ $('#addsectionbutton').on('click',()=>{
             </div>
             <br>
             <div class="row">
-            <label for="section`+ElementID+`textarea" class="control-label"> content </label>
+            <label for="section`+ElementID+`textarea" class="control-label"> picturename </label>
             <textarea  id="section`+ElementID+`textarea" rows="4" class="form-control"></textarea>
             </div>
             <hr>
