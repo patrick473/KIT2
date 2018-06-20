@@ -17,11 +17,9 @@ class CreateQuestionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('survey_id');
             $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade'); 
-            $table->unsignedInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); 
+            $table->string('type');
             $table->string('title');
-            $table->string('question_type');
-            $table->string('option_name')->nullable();
+            $table->json('attributes');
             $table->timestamps();
         });
     }

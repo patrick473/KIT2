@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMembersTable extends Migration
+class CreateAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('group_id');
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->boolean('group_leader');
+            $table->unsignedInteger('survey_id');
+            $table->foreign('survey_id')->references('id')->on('surveys_group')->onDelete('cascade');
+            $table->json('answers');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateMembersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('answers');
     }
 }

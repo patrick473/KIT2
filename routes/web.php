@@ -21,10 +21,34 @@ Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/user/logout','Auth\LoginController@userLogout')->name('user.logout');
 
 
-//group
-Route::get('/group', 'GroupController@index')->name('index.group');
-Route::post('/group/store', 'GroupController@store')->name('store.group');
-Route::get('/group/members', 'GroupController@member')->name('group.member');
+//admin group
+Route::get('/admin/group', 'AdminGroupController@index')->name('admin.index.group');
+Route::post('/admin/group/store', 'AdminGroupController@store')->name('admin.store.group');
+Route::get('/admin/group/members', 'AdminGroupController@member')->name('admin.group.member');
+
+//user group
+Route::get('/group', 'GroupController@index')->name('group.index');
+Route::post('/group/store', 'GroupController@store')->name('group.store');
+Route::get('/group/invite/{group_id}', 'GroupController@invite')->name('group.invite');
+
+// {token} is a required parameter that will be exposed to us in the controller method
+Route::get('accept/{token}', 'InviteController@accept')->name('group.accept');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //TODO: Delete
 Route::get('/survey/new', 'SurveyController@new_survey')->name('new.survey');
 Route::get('/survey/user','SurveyController@user_survey')->name('user.survey');
@@ -39,7 +63,10 @@ Route::post('/survey/create', 'SurveyController@create')->name('create.survey');
 
 //till here
 
+// Survey
 
+Route::get('/answer', 'SurveyController@answer')->name('answer.survey');
+Route::post('/answer/{id}', 'AnswerController@storeanswer')->name('answer.store');
 // Questions related
 Route::post('/survey/{survey}/questions', 'QuestionController@store')->name('store.question');
 Route::get('/question/{question}/edit', 'QuestionController@edit')->name('edit.question');
@@ -49,7 +76,7 @@ Route::patch('/question/{question}/update', 'QuestionController@update')->name('
 
 
 Route::prefix('admin')->group(function(){
-    Route::get('/content','ContentController@editcontentview')->name('admin.content');
+    Route::get('/content','admin\ContentController@editcontentview')->name('admin.content');
     Route::get('/login','Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'AdminController@home')->name('admin.home');

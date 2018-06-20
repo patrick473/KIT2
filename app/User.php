@@ -14,7 +14,7 @@ class User extends Authenticatable
      * Alternative casting
      */
     protected $casts =[
-        
+
     ];
 
     /**
@@ -35,5 +35,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-   
+    public function Members(){
+      return $this->hasMany('App\Member');
+    }
+
 }

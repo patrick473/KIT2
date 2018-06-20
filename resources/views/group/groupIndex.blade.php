@@ -20,20 +20,55 @@
   <hr>
 
   <div class="container box">
-    <h3>Zoek een groep.</h3>
-     <div class="form-group">
-      <input type="text" name="search" id="search" class="form-control" placeholder="Zoek voor een groep" />
-     </div>
+    <h3>Uw groepen.</h3>
      <div class="row">
        <div class="col-sm-12" id="GroupBody">
+         @if(!$members->isEmpty())
+           @foreach($members as $member)
+             @foreach($member->groups as $group)
 
-       </div>
-     </div>
+               <div class="card">
+                 <div class="card-body">
+                   <h5 class="card-title">{{$group->title}}</h5>
+                   <p class="card-text">{{$group->description}}</p>
+                   @if ($member->group_leader == 1)
+                     <div class="row">
+                       <div class="col align-self-start">
+                         <button type="button" class="btn btn-success" id="addMember" data-id={{$group->id}}>Voeg leden toe</button>
+                       </div>
+                       <div class="col align-self-end">
+                         <button type="button" class="btn btn-danger float-right groupDeletebutton" data-id={{$group->id}}>Verwijder groep</button>
+                       </div>
+                     </div>
+                   @else
+                     <div class="row">
+                       <div class="col align-self-start">
+                         <button type="button" class="btn btn-light">Alleen beheerder kan lid toevoegen</button>
+                       </div>
+                       <div class="col align-self-end">
+                         <button type="button" class="btn btn-danger float-right memberDeletebutton" data-id={{$member->id}}>Verlaat groep</button>
+                       </div>
+                     </div>
+                  @endif
+               </div>
+             </div>
+
+             @endforeach
+            @endforeach
+          @else
+
+            <div class="card">
+              <div class="card-body">Geen gebruikers met deze naam gevonden.</div>
+            </div>
+
+          @endif
+      </div>
+    </div>
   </div>
+</div>
 
 @endsection
 
 @section('extrascripts')
-<script src="{{ asset('js/live_group_search.js') }}"></script>
-<script src="{{ asset('js/DeleteGroup.js') }}"></script>
+  <script src="{{ asset('js/DeleteGroup.js') }}"></script>
 @endsection

@@ -6,6 +6,7 @@ use \App\User;
 use \App\page;
 use \App\Group;
 use \App\Admin;
+use \App\Member;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-       
+
         $this->call('UserAndSchoolSeeder');
         $this->command->info('Seeding has been completed.');
 
@@ -26,11 +27,11 @@ class DatabaseSeeder extends Seeder
 
         public function run(){
 
-           
-    
-    
 
-           
+
+
+
+
 
             $user1 = User::create([
                 'username' => 'patrick',
@@ -42,13 +43,13 @@ class DatabaseSeeder extends Seeder
                 'username' => 'jan',
                 'email' => 'jan.janssen@cals.nl',
                 'password' => Hash::make('password')
-               
+
             ]);
             $admin = Admin::create([
                 'username' => 'admin',
                 'email' => 'admin.admin@admin.nl',
                 'password' => Hash::make('password')
-               
+
             ]);
             $this->command->info('Users are alive and well');
             $homepage = Page::create([
@@ -62,7 +63,7 @@ class DatabaseSeeder extends Seeder
             ]);
             $this->command->info('pages has been defined');
 
-            
+
             $group1 = Group::create([
                 'title' =>'groep1',
                 'description' =>'Leverage agile frameworks to provide a robust synopsis for high level overviews.
@@ -88,6 +89,30 @@ class DatabaseSeeder extends Seeder
                  Keeping your eye on the ball while performing a deep dive on the start-up mentality to derive convergence on cross-platform integration.'
             ]);
             $this->command->info('groups have been created');
+
+            $member1 = Member::create([
+              'group_id' => 1,
+              'user_id' => 1,
+              'group_leader' => 1
+            ]);
+
+            $member2 = Member::create([
+              'group_id' => 3,
+              'user_id' => 1,
+              'group_leader' => 0
+            ]);
+
+            $member3 = Member::create([
+              'group_id' => 4,
+              'user_id' => 1,
+              'group_leader' => 0
+            ]);
+
+            $member4 = Member::create([
+              'group_id' => 1,
+              'user_id' => 2,
+              'group_leader' => 0
+            ]);
+            $this->command->info('members have been created');
         }
     }
-
