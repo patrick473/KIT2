@@ -28,3 +28,4 @@ Route::post('/survey/answer', 'AdminSurveyController@saveAnswer')->name('survey.
 Route::post('/group/survey', 'AdminSurveyController@copySurvey')->name('survey.copy');
 Route::get('/survey/{id}', 'AdminSurveyController@getSurveyFromGroup')->name('survey.answerform');
 Route::get('/group/survey/{id}', 'AdminSurveyController@getSurveyOverview')->name('survey.overview');
+Route::post('/invite', 'InviteController@process')->name('group.process');

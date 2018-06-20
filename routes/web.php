@@ -29,6 +29,25 @@ Route::get('/admin/group/members', 'AdminGroupController@member')->name('admin.g
 //user group
 Route::get('/group', 'GroupController@index')->name('group.index');
 Route::post('/group/store', 'GroupController@store')->name('group.store');
+Route::get('/group/invite', 'InviteController@invite')->name('group.invite');
+
+// {token} is a required parameter that will be exposed to us in the controller method
+Route::get('accept/{token}', 'InviteController@accept')->name('group.accept');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //TODO: Delete
 Route::get('/survey/new', 'SurveyController@new_survey')->name('new.survey');
