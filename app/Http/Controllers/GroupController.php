@@ -109,23 +109,33 @@ class GroupController extends Controller
     $group->delete();
   }
 
-  function Members(Request $request, $group_id){
+  function Members(Request $request, $id){
     if($request->ajax())
     {
      $output = '';
      $query = $request->get('query');
      if($query != '')
      {
-      $data = User::join('members', 'members.user_id', '=', 'users.id')
-        ->where('username', 'like', '%'.$query.'%')
-        ->where('members.group_id', '!=', $group_id)
-        ->get();
+
+        $data = User::whereNotIn('id', function($q){
+          $q->select('user_id')
+          ->from(with(new Member)->getTable())
+          ->where('group_id','=', $id);
+          })
+          ->where('username', 'like', '%'.$query.'%')
+          ->get();
 
      }
      else
      {
-      $data = User::orderBy('username', 'desc')
-        ->get();
+
+        $data = User::whereNotIn('id', function($q){
+          $q->select('user_id')
+          ->from(with(new Member)->getTable())
+          ->where('group_id','=', $id);
+          })
+          ->orderBy('username', 'desc')
+          ->get();
      }
      $total_row = $data->count();
      if($total_row > 0)
