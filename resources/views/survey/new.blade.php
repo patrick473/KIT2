@@ -25,7 +25,7 @@
       </form>
 
 
-      <h4 class="card-title"> Add Question</h4>
+      <h4 class="card-title">Voeg een vraag toe</h4>
       <form class='col-md-12 col-form-label text-md-right'>
         <div class="form-group row">
           <div class="col-md-12">

@@ -89,6 +89,7 @@ function saveSurvey(){
         url: "/api/admin/survey/",
         type: "POST",
         data: toJSON(numberOfQuestions),
+        contentType: 'json',
         success: function(){
             alert("send something!");
         },
