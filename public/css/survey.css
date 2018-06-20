@@ -1,0 +1,27 @@
+.survey-input{
+    width: 75%;
+    float: right;
+}
+.input-label {
+    width: 100%;
+    font-weight: bold;
+    text-align:left !important;
+}
+.question-title{
+    font-weight: bold;
+}
+.survey-textarea {
+    height: 150px;
+}
+.card{
+    margin-top: 10px;
+}
+.questions-wrapper{
+    width: 100%;
+}
+.example-title-input{
+    width: 50% !important;
+}
+.example-input{
+    margin-top: 10px;
+}

@@ -1,46 +1,68 @@
 @extends('layouts.app')
 
 @section('content')
+
+  <link href="{{ asset('css/survey.css')}}" rel="stylesheet">
+  <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
+  <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
   <div class="card">
-      <div class="card-body">
-      <h4 class="card-title"> Add Survey</h4>
-      {!!Form::open(['route' => 'create.survey'])!!}
-      
-        {!! Form::token()!!}
-     
+    <div class="card-body">
+      <h4 class="card-title">Vragenlijst</h4>
+      <form class='col-md-12 col-form-label text-md-right'>
         <div class="form-group row">
-         
-          {!! Form::label('title', __('Title'), array('class' => 'col-md-2 col-form-label text-md-right'))!!}
-          <div class="col-md-6">
-              <input id="title" type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" name="title" value="{{ old('title') }}" required autofocus>
 
-              @if ($errors->has('title'))
-                  <span class="invalid-feedback">
-                      <strong>{{ $errors->first('title') }}</strong>
-                  </span>
-              @endif
+
+          <div class="col-md-12">
+            <label class="input-label">Vragenlijst titel <input id="survey-title-input" class="form-control survey-input" name="title" required autofocus></label>
           </div>
-      </div> 
-      <div class="form-group row">
-       
-        {!! Form::label('description', __('Description'), array('class' => 'col-md-2 col-form-label text-md-right'))!!}
-        <div class="col-md-6">
-            <input id="description" type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" value="{{ old('description') }}" required autofocus>
-
-            @if ($errors->has('description'))
-                <span class="invalid-feedback">
-                    <strong>{{ $errors->first('description') }}</strong>
-                </span>
-            @endif
         </div>
-    </div> 
-         
-
-          <div class="input-field col s12">
-            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <label class="input-label">Vragenlijst beschrijving: <textarea id="survey-description-input" class="form-control survey-input survey-textarea" name="description" required autofocus></textarea></label>
           </div>
-        
-        {!! Form::close()!!}
+        </div>
+      </form>
+
+
+      <h4 class="card-title"> Add Question</h4>
+      <form class='col-md-12 col-form-label text-md-right'>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <label class="input-label">Vraag titel: <input id="question-title-input" class="form-control survey-input" name="title" required autofocus></label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <label class="input-label">Vraag beschrijving: <textarea id="question-description-input" class="form-control survey-input survey-textarea" name="description" required autofocus></textarea></label>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-12">
+            <label class="input-label">Type vraag: <select id="question-type-input" class="form-control survey-input survey-select" name="type" required autofocus>
+                <option>Text</option>
+              </select></label>
+          </div>
+        </div>
+      </form>
+      <div class="input-field col s12">
+        <button id="add-question-button" class="col-md-6 col-lg-offset-3 btn btn-primary btn-lg">Add question</button>
+        <button id="test" class="col-md-6 col-lg-offset-3 btn btn-primary btn-lg">test</button>
+      </div>
     </div>
   </div>
+
+  <div class="card">
+    <form id="survey-example-form">
+      <div class="card-body">
+        <h4 id="example-title" class="card-title"></h4><br/>
+        <div class="questions-wrapper">
+
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="{{ asset('js/survey.js') }}"></script>
+
 @endsection
