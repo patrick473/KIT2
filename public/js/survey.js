@@ -86,7 +86,7 @@ function toJSON(no){
 //TODO: Function that saves the question JSON
 function saveSurvey(){
     $.ajax({
-        url: "/api/admin/survey/",
+        url: "/api/admin/survey",
         type: "POST",
         data: toJSON(numberOfQuestions),
         contentType: 'json',
@@ -112,7 +112,7 @@ $("#add-question-button").click(function(){
     clearQuestionFields();
 });
 
-$("#survey-title-input").change(function(){
+$("#survey-title-input").keyup(function(){
     $("#example-title").text($("#survey-title-input").val());
 });
 
