@@ -110,6 +110,7 @@ class GroupController extends Controller
   }
 
   function Members(Request $request, $id){
+    
     if($request->ajax())
     {
      $output = '';
@@ -117,7 +118,7 @@ class GroupController extends Controller
      if($query != '')
      {
 
-        $data = User::whereNotIn('id', function($q){
+        $data = User::whereNotIn('id', function($q) use($id){
           $q->select('user_id')
           ->from(with(new Member)->getTable())
           ->where('group_id','=', $id);
@@ -128,11 +129,11 @@ class GroupController extends Controller
      }
      else
      {
-
-        $data = User::whereNotIn('id', function($q){
+        Log::debug($id);
+        $data = User::whereNotIn('id', function($q) use($id){
           $q->select('user_id')
           ->from(with(new Member)->getTable())
-          ->where('group_id','=', $id);
+          ->where('group_id','=',$id);
           })
           ->orderBy('username', 'desc')
           ->get();
