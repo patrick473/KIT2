@@ -23,24 +23,58 @@ class AdminSurveyController extends Controller
 
 
    public function saveSurvey(Request $request){
-
-    //get json
+    $app = app();
+    $jsonObject = $app->make('stdClass');
+   
     $json = json_decode($request->getContent(),true);
-
+    $survey ;
+    if( isset($json['id'])){
+        $survey = Survey::where('id','=',$json['id'])->first();
+        $survey->title = $json['title'];
+        $survey->description = $json['description'];
+        $survey->save();
+        Log::debug('id is set');
+    }
+    else{
     $survey = Survey::create([
         'title' => $json['title'],
         'description' => $json['description']
     ]);
+    Log::debug('id is not set');
+    }
+    Log::debug(json_decode( json_encode($survey), true));
+    $questions = collect([]);
     
     foreach($json['questions'] as $question){
+        if(isset($question['id'])){
+
+        $saveablequestion = Question::where('id',$question['id'])->first();
+        $saveablequestion->type = $question['type'];
+        $saveablequestion->title = $question['title'];
+        $saveablequestion->attributes = json_encode($question['attributes']);
+        $saveablequestion->save();
+        
+        $questions->push($saveablequestion);
+        }
+        else{
         $saveablequestion = Question::create([
             'survey_id' => $survey['id'],
             'type' => $question['type'],
             'title' => $question['title'],
             'attributes' => json_encode($question['attributes'])
         ]);
+        $questions->push($saveablequestion);
+        }
     } 
-
+    $jsonObject->title = $survey->title;
+    $jsonObject->description = $survey->description;
+    $jsonObject->id = $survey->id;
+    $jsonObject->questions = $questions;
+    foreach($jsonObject->questions as $question){
+        $question->attributes = json_decode($question->attributes);
+        
+    }
+    return json_encode($jsonObject);
     
 
    }
@@ -65,6 +99,7 @@ class AdminSurveyController extends Controller
         $app = app();
         $jsonObject = $app->make('stdClass');
         $groupSurvey = survey_group::where('id',$id)->first();
+        Log::debug($groupSurvey);
         $survey = Survey::where('id',$groupSurvey->survey_id)->first();
         $questions = Question::where('survey_id',$groupSurvey->survey_id)->get();
         foreach($questions as $question){
