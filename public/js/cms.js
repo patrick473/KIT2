@@ -103,6 +103,26 @@ $('#addsectionbutton').on('click',()=>{
            </div>
             `;
             break;
+        case 'picture':
+            html = `<div class="textsection form-group" data-index="`+ElementID+`" data-type="text" id="section`+ElementID+`"> 
+            <div class="row">
+            <h4>Text section order: `+ElementID+`</h4>
+            </div>
+            <div class="row">
+            <label for="section`+ElementID+`textboxtitle" class="control-label"> title </label>
+            <input type="text" id="section`+ElementID+`textboxtitle" class="form-control">
+            </div>
+            <br>
+            <div class="row">
+            <label for="section`+ElementID+`textarea" class="control-label"> content </label>
+            <textarea  id="section`+ElementID+`textarea" rows="4" class="form-control"></textarea>
+            </div>
+            <hr>
+            </div>
+            `;
+            
+            
+            break;
     }
     $('#contentcreatorsection').append(html);
 
@@ -149,6 +169,15 @@ $('#submitcontentcreation').on('click',()=>{
                 content = $(e).find("textarea").val();
                 json.sections.push({"id":id,"type":type,"title":title,"content":content});
             break;
+            case 'picture':
+            
+                title = $(e).find("input").val();
+                content = $(e).find("textarea").val();
+                json.sections.push({"id":id,"type":type,"title":title,"content":content});
+                break;
+            
+            
+            
         }
     })
     console.log(json);

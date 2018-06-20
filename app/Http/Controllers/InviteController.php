@@ -8,6 +8,7 @@ use App\Mail\InviteCreated;
 use App\User;
 use App\Group;
 use App\Member;
+use Log;
 class InviteController extends Controller
 {
     public function invite()
@@ -33,7 +34,7 @@ public function process(Request $request)
     $user2 = User::where('id',$json['user2']);
     $group = Group::where('id',$json['group']);
 
-
+    Log::debug($user1);
     //create a new invite record
     $invite = Invite::create([
         'email' => $json['email'],
@@ -46,7 +47,7 @@ public function process(Request $request)
     ]);
 
     // send the email
-    Mail::to($invite->email)->send(new InviteCreated($invite));
+    Mail::to($invite->email)->send('emails.invite', array('invite'->$invite))->subject('je bent uitgenodigd om een groep te joinen');
 
     // redirect back where we came from
     return redirect()
@@ -76,4 +77,4 @@ public function accept($token)
     return 'Good job! Invite accepted!';
 }
 }
-}
+
