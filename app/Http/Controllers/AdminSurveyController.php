@@ -27,6 +27,7 @@ class AdminSurveyController extends Controller
     $jsonObject = $app->make('stdClass');
    
     $json = json_decode($request->getContent(),true);
+    Log::debug($json);
     if( isset($json['id'])){
         $survey = Survey::where('id','=',$json['id'])->first();
         $survey->title = $json['title'];
@@ -35,6 +36,7 @@ class AdminSurveyController extends Controller
         Log::debug('id is set');
     }
     else{
+        
     $survey = Survey::create([
         'title' => $json['title'],
         'description' => $json['description']

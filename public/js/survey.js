@@ -80,7 +80,7 @@ function toJSON(no){
         console.log($("#question-title" + x).val());
         console.log($("#question-description" + x).val());
     }*/
-    return json;
+    return JSON.stringify(json);
 }
 
 //TODO: Function that saves the question JSON
