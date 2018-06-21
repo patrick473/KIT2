@@ -13,13 +13,22 @@ class InviteController extends Controller
 {
 
   public function index($group_id){
-    return view('group.invite', compact('group_id'));
+    $invites = Invite::where('group_id', '=', $group_id)->get();
+
+    foreach($invites as $invite){
+            $invite->users = User::where('id',$invite->user_id)->get();
+    }
+
+    $members = Member::where('group_id', '=', $group_id)->where('group_leader', '!=', 1)->get();
+
+    foreach($members as $member){
+            $member->users = User::where('id',$member->user_id)->get();
+    }
+
+    return view('group.invite', compact(['group_id', 'invites', 'members']));
   }
 
   public function store($user_id, $group_id){
-    //Log::debug($group_id);
-    //Log::debug($user_id);
-
     $result = Invite::where('user_id','=',$user_id)
       ->where('group_id', '=', $group_id)
       ->get();
@@ -36,6 +45,12 @@ class InviteController extends Controller
     }
 
     return redirect()->route('group.invite', ['id' => $group_id]);
+  }
+
+  public function destroy($id){
+    $invite = Invite::find($id);
+
+    $invite->delete();
   }
 
 

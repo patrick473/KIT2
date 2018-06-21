@@ -34,7 +34,7 @@
                    @if ($member->group_leader == 1)
                      <div class="row">
                        <div class="col align-self-start">
-                         <button type="button" class="btn btn-success addMember" id="addMember" data-id={{$group->id}}>Voeg leden toe</button>
+                         <button type="button" class="btn btn-success addMember" id="addMember" data-id={{$group->id}}>Beheer groep leden</button>
                        </div>
                        <div class="col text-center">
                          <button type="button" class="btn btn-info groupOverview" id="groupOverview" data-id={{$group->id}}>Overzicht</button>
