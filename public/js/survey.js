@@ -27,7 +27,7 @@ function addNewQuestion(qttl, qdesc, type){
                         "<div class='question-content col-md-6'>" +
                             "<textarea id='question-description" + numberOfQuestions + "' class='example-input form-control survey-textarea question-description'>" + qdesc + "</textarea>" +
                             "<input id='question-type" + numberOfQuestions + "' value='" + type + "' type='hidden'/>" +
-                            "<input id='question-id" + numberOfQuestions + "' value='" + type + "' type='hidden'/>" +
+                            "<input id='question-id" + numberOfQuestions + "' type='hidden'/>" +
                         "</div>" +
                         "<div class='question-content col-md-6'>" +
                             "<textarea id='question-answer" + numberOfQuestions + "' disabled class='example-input form-control survey-textarea'></textarea>" +
@@ -68,16 +68,29 @@ function toJSON(){
             "questions": []
         }
     }
-
-    for(var x = 1; x < numberOfQuestions + 1; x++) {
-        json["questions"].push({
-            "type": $("#question-type" + x).val(),
-            "title": $("#question-title" + x).val(),
-            "description": $("#question-description" + x).val(),
-            "attributes": {}
-        });
+    if($("#survey-id").val() != ""){
+        json.id = $("#survey-id").val();
     }
-
+    for(var x = 1; x < numberOfQuestions + 1; x++) {
+        if($("#question-id" + x).val() != "" && $("#survey-id").val() != ""){
+            json["questions"].push({
+                "type": $("#question-type" + x).val(),
+                "title": $("#question-title" + x).val(),
+                "description": $("#question-description" + x).val(),
+                "survey_id": $("#survey-id").val(),
+                "id": $("#question-id" + x).val(),
+                "attributes": {}
+            });
+        }
+        else{
+            json["questions"].push({
+                "type": $("#question-type" + x).val(),
+                "title": $("#question-title" + x).val(),
+                "description": $("#question-description" + x).val(),
+                "attributes": {}
+            });
+        }
+    }
     return JSON.stringify(json);
 }
 
@@ -89,8 +102,12 @@ function saveSurvey(){
         data: toJSON(),
         contentType: 'json',
         success: function(response){
-            
-            console.log(response.questions);
+            data = JSON.parse(response);
+            console.log("server returned: ");
+            console.log(data);
+            //Remove old questions and replace them with id's
+            $(".questions-wrapper").empty();
+            addQuestion(data);
         },
         error: function(xhr, response){
             if(xhr.status == 401){
@@ -116,6 +133,5 @@ $("#survey-title-input").keyup(function(){
 });
 
 $("#test").click(function() {
-    console.log(toJSON());
     saveSurvey()
 });

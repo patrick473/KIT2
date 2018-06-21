@@ -11,7 +11,7 @@
       <h4 class="card-title">Vragenlijst</h4>
       <form class='col-md-12 col-form-label text-md-right'>
         <div class="form-group row">
-
+          <input id='survey-id' type='hidden'/>
 
           <div class="col-md-12">
             <label class="input-label">Vragenlijst titel <input id="survey-title-input" class="form-control survey-input" name="title" required autofocus></label>
