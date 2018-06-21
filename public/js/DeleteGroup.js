@@ -28,7 +28,7 @@ $(document).on("click",".memberDeletebutton",(e)=>{
     })
 })
 
-document.getElementById("addMember").onclick = function () {
-        let group_id = $(this).data("id");
+$(document).on("click",".addMember",(e)=>{
+        let group_id = $(e.target).data("id");
         location.href = "/group/invite/"+group_id;
-};
+});
