@@ -1,4 +1,5 @@
-$(document).ready(() => {
+<script>
+    $(document).ready(() => {
   let pageId = $("#content").data("page");
   let html;
   let settings = {
@@ -60,12 +61,15 @@ $(document).ready(() => {
           <div class="row">
                     <div class="col-sm-12">
                         <h2>` +e.title +`</h2><br> 
-                        <img src= /images/"` +e.content +`"height="42" width="42"><br>
+                        <img src="{{ URL::asset('images/') }}/`+e.content+`" "height="42" width="42"><br>
                     </div>
                     </div>
           </div>`;
+          break;
       }
       $("#content").append(html);
     });
   });
 });
+
+</script>

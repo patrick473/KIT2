@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/admin/content/{page}','admin\ContentController@savecontent')->name('edit.content');
-Route::get('/admin/content/{id}','ContentController@findcontent')->name('find.content');
+Route::get('/admin/content/{id}','ContentFinderController@findcontent')->name('find.content');
 
 Route::delete('/admin/group/{id}', 'AdminGroupController@destroyGroup')->name('admin.delete.group');
 Route::get('/admin/group/group_action', 'AdminGroupController@GroupAction')->name('admin.live_group_search.action');
