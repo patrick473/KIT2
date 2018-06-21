@@ -4,7 +4,7 @@
         <a href="{{route('admin.content')}}" class="list-group-item list-group-item-action">
           Paginas aanmaken
         </a>
-      <a href="{{route('user.survey')}}" class="list-group-item list-group-item-action">Vragenlijsten beheren</a>
+      <a href="{{route('survey.overview')}}" class="list-group-item list-group-item-action">Vragenlijsten beheren</a>
       
        
       </div>

@@ -28,28 +28,15 @@ Route::prefix('user')->group(function(){
 
 //user group
 
+
+
+
 Route::prefix('group')->group(function(){
     Route::get('/', 'GroupController@index')->name('group.index');
     Route::post('/store', 'GroupController@store')->name('group.store');
     Route::get('/invite/{id}', 'InviteController@index')->name('group.invite');
     Route::get('/accept', 'InviteController@sendInvite')->name('accept.invite');
 });
-
-Route::prefix('survey')->group(function(){
-    Route::get('/overview', 'admin\SurveyController@overview')->name('new.survey');
-    Route::get('/new', 'admin\SurveyController@new')->name('new.survey');
-    Route::get('/detail/{survey}', 'admin\SurveyController@detail')->name('new.survey');
-});
-
-//TODO: Delete
-Route::get('/survey/view/{survey}', 'SurveyController@view_survey')->name('view.survey');
-Route::get('/survey/answers/{survey}', 'SurveyController@view_survey_answers')->name('view.survey.answers');
-Route::get('/survey/{survey}/delete', 'SurveyController@delete_survey')->name('delete.survey');
-Route::get('/survey/{survey}/edit', 'SurveyController@edit')->name('edit.survey');
-Route::patch('/survey/{survey}/update', 'SurveyController@update')->name('update.survey');
-Route::post('/survey/view/{survey}/completed', 'AnswerController@store')->name('complete.survey');
-Route::post('/survey/create', 'SurveyController@create')->name('create.survey');
-
 
 
 
@@ -59,11 +46,13 @@ Route::prefix('admin')->group(function(){
     Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'AdminController@home')->name('admin.home');
     Route::get('/logout','Auth\AdminLoginController@logout')->name('admin.logout');
-    Route::get('/group', 'AdminGroupController@index')->name('admin.index.group');
-    Route::post('/group/store', 'AdminGroupController@store')->name('admin.store.group');
-    Route::get('/group/members', 'AdminGroupController@member')->name('admin.group.member');
+    Route::get('/group', 'GroupController@index')->name('admin.index.group');
+    Route::post('/group/store', 'GroupController@store')->name('admin.store.group');
+    Route::get('/survey/overview', 'admin\SurveyController@overview')->name('survey.overview');
+    Route::get('/survey/new', 'admin\SurveyController@new')->name('survey.new');
     Route::get('/survey/{survey}', 'admin\SurveyController@detail')->name('survey.detail');
 });
+
 
 
 

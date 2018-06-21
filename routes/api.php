@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('member')->group(function(){
-    Route::delete('/{id}', 'MemberController@destroy')->name('delete.member');
+    Route::delete('/{id}', 'APIMemberController@destroy')->name('delete.member');
 });
 Route::prefix('survey')->group(function(){
     Route::post('/answer', 'APISurveyController@saveAnswer')->name('survey.answer');
