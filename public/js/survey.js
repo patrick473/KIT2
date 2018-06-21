@@ -21,10 +21,10 @@ function addNewQuestion(qttl, qdesc, type, qid){
             $(".questions-wrapper").append(
             "<div id='question-row" + numberOfQuestions + "' class='row'>" +
                 "<div class='col-md-12'>" +
-                    "<input id='question-title" + numberOfQuestions + "' type='text' value='" + qttl + "' class='form-control example-input example-title-input question-title'></input>" +
+                    "<input id='question-title" + numberOfQuestions + "' type='text' value='" + qttl + "' class='autosave form-control example-input example-title-input question-title'></input>" +
                     "<div class='question row'>" +
                         "<div class='question-content col-md-6'>" +
-                            "<textarea id='question-description" + numberOfQuestions + "' class='example-input form-control survey-textarea question-description'>" + qdesc + "</textarea>" +
+                            "<textarea id='question-description" + numberOfQuestions + "' class='autosave example-input form-control survey-textarea question-description'>" + qdesc + "</textarea>" +
                             "<input id='question-type" + numberOfQuestions + "' value='" + type + "' type='hidden'/>" +
                             "<input id='question-id" + numberOfQuestions + "' value='" + qid + "' type='hidden'/>" +
                         "</div>" +
@@ -75,7 +75,6 @@ function toJSON(){
 
 //TODO: Function that saves the question JSON
 function saveSurvey(){
-    console.log(JSON.parse(toJSON()));
     $.ajax({
         url: "/api/admin/survey",
         type: "POST",
@@ -83,6 +82,7 @@ function saveSurvey(){
         contentType: 'json',
         success: function(response){
             response = JSON.parse(response);
+            console.log("Saved!");
             console.log(response);
             $("#survey-id").val(response.id);
             $.each(response.questions, function (index, question) {
@@ -112,6 +112,6 @@ $("#survey-title-input").keyup(function(){
     $("#example-title").text($("#survey-title-input").val());
 });
 
-$("#test").click(function() {
-    saveSurvey()
+$(".autosave").on('change', '.autosave', function() {
+    saveSurvey();
 });
