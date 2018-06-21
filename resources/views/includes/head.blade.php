@@ -1,4 +1,4 @@
- <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark  "  id="navbar" data-userid="{{Auth::id()}}>
+ <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark  "  id="navbar" data-userid="{{Auth::id()}}">
 
 
             <a class="navbar-brand " href="#">
