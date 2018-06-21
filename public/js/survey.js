@@ -14,9 +14,8 @@ function clearQuestionFields(){
 }
 
 //TODO: Add more types
-function addNewQuestion(qttl, qdesc, type){
+function addNewQuestion(qttl, qdesc, type, qid){
     numberOfQuestions += 1;
-    console.log(numberOfQuestions);
     switch(type){
         case 'Text':
             $(".questions-wrapper").append(
@@ -27,7 +26,7 @@ function addNewQuestion(qttl, qdesc, type){
                         "<div class='question-content col-md-6'>" +
                             "<textarea id='question-description" + numberOfQuestions + "' class='example-input form-control survey-textarea question-description'>" + qdesc + "</textarea>" +
                             "<input id='question-type" + numberOfQuestions + "' value='" + type + "' type='hidden'/>" +
-                            "<input id='question-id" + numberOfQuestions + "' type='hidden'/>" +
+                            "<input id='question-id" + numberOfQuestions + "' value='" + qid + "' type='hidden'/>" +
                         "</div>" +
                         "<div class='question-content col-md-6'>" +
                             "<textarea id='question-answer" + numberOfQuestions + "' disabled class='example-input form-control survey-textarea'></textarea>" +
@@ -38,26 +37,6 @@ function addNewQuestion(qttl, qdesc, type){
             );
     }
 }
-
-//TODO: function that loops through json array of questions and adds them to the form
-/*function addQuestion(qttl, qdesc, type){
-    switch(type){
-        case 'Text':
-            $(".questions-wrapper").append(
-                "<div class='row'>" +
-                "<div class='col-md-12'>" +
-                "<h5 class='question-title'>" + qttl + "</h5>" +
-                "<div class='question row'>" +
-                "<div class='col-md-5 question-description'>" + qdesc + "</div>" +
-                "<div class='question-content col-md-7'>" +
-                "<textarea class='form-control survey-input survey-textarea'></textarea>" +
-                "</div>" +
-                "</div>" +
-                "</div>" +
-                "</div>"
-            );
-    }
-}*/
 
 //TODO: Function to converts questions to JSON
 function toJSON(){
@@ -96,18 +75,19 @@ function toJSON(){
 
 //TODO: Function that saves the question JSON
 function saveSurvey(){
+    console.log(JSON.parse(toJSON()));
     $.ajax({
         url: "/api/admin/survey",
         type: "POST",
         data: toJSON(),
         contentType: 'json',
         success: function(response){
-            data = JSON.parse(response);
-            console.log("server returned: ");
-            console.log(data);
-            //Remove old questions and replace them with id's
-            $(".questions-wrapper").empty();
-            addQuestion(data);
+            response = JSON.parse(response);
+            console.log(response);
+            $("#survey-id").val(response.id);
+            $.each(response.questions, function (index, question) {
+                $("#question-id" + (index + 1)).val(question.id);
+            });
         },
         error: function(xhr, response){
             if(xhr.status == 401){
@@ -124,7 +104,7 @@ function saveSurvey(){
 
 // EVENT LISTENERS
 $("#add-question-button").click(function(){
-    addNewQuestion($("#question-title-input").val(), $("#question-description-input").val(), $("#question-type-input").val())
+    addNewQuestion($("#question-title-input").val(), $("#question-description-input").val(), $("#question-type-input").val(), "");
     clearQuestionFields();
 });
 
