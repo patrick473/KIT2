@@ -42,7 +42,6 @@ function addNewQuestion(qttl, qdesc, type, qid){
     }
 }
 
-//TODO: Function to converts questions to JSON
 function toJSON(){
     if(localStorage.getItem("survey_id") === null){
         var json = {
@@ -77,7 +76,6 @@ function toJSON(){
     return JSON.stringify(json);
 }
 
-//TODO: Function that saves the question JSON
 function saveSurvey(){
     //Change status text
     $("#status-label").text("Opslaan...");
@@ -115,6 +113,10 @@ function getCurrentDateTime(){
     var time = d.toLocaleTimeString();
     var datetime = time + " op " + d.getDate() + "-" + (d.getMonth() + 1)+ "-" + d.getFullYear();
     return datetime;
+}
+
+function getSurveyById(){
+
 }
 
 //TODO: ADD FUCNTION TO FILL SELECT LIST WITH ALL OPTIONS
