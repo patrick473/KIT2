@@ -15,10 +15,13 @@ class SurveyController extends Controller
 {
   
   public function detail($survey){
-    
+    return view('survey.detail',$survey);
   }
   public function new(){
     return view('survey.new');
+  }
+  public function overview(){
+    return view('survey.overview');
   }
   
 }

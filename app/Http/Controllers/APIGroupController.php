@@ -6,22 +6,10 @@ use Illuminate\Http\Request;
 use \App\Group;
 use \App\User;
 
-class AdminGroupController extends Controller
+class APIGroupController extends Controller
 {
 
-    public function member(){
-      	return view('admin.group.members');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-      return view('admin.group.groupIndex');
-    }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -33,19 +21,7 @@ class AdminGroupController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $group = new Group;
-        Group::create(['title' =>$request->title,
-                      'description' => $request->description]);
-        return redirect('/admin/group');
-    }
+    
 
     /**
      * Display the specified resource.
