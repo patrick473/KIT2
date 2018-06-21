@@ -30,6 +30,7 @@ Route::get('/admin/group/members', 'AdminGroupController@member')->name('admin.g
 Route::get('/group', 'GroupController@index')->name('group.index');
 Route::post('/group/store', 'GroupController@store')->name('group.store');
 Route::get('/group/invite/{id}', 'InviteController@index')->name('group.invite');
+Route::get('/group/accept', 'InviteController@sendInvite')->name('accept.invite');
 
 // {token} is a required parameter that will be exposed to us in the controller method
 Route::get('accept/{token}', 'InviteController@accept')->name('group.accept');

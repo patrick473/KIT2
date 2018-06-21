@@ -11,7 +11,7 @@
       <h4 class="card-title">Vragenlijst</h4>
       <form class='col-md-12 col-form-label text-md-right'>
         <div class="form-group row">
-
+          <input id='survey-id' type='hidden'/>
 
           <div class="col-md-12">
             <label class="input-label">Vragenlijst titel <input id="survey-title-input" class="form-control survey-input" name="title" required autofocus></label>
@@ -46,7 +46,7 @@
         </div>
       </form>
       <div class="input-field col s12">
-        <button id="add-question-button" class="col-md-6 col-lg-offset-3 btn btn-primary btn-lg">Add question</button>
+        <button id="add-question-button" class="col-md-6 col-lg-offset-3 btn btn-primary btn-lg">Vraag toevoegen</button>
         <button id="test" class="col-md-6 col-lg-offset-3 btn btn-primary btn-lg">test</button>
       </div>
     </div>

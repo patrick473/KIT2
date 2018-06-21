@@ -20,12 +20,14 @@ function addNewQuestion(qttl, qdesc, type){
     switch(type){
         case 'Text':
             $(".questions-wrapper").append(
-            "<div class='row'>" +
+            "<div id='question-row" + numberOfQuestions + "' class='row'>" +
                 "<div class='col-md-12'>" +
                     "<input id='question-title" + numberOfQuestions + "' type='text' value='" + qttl + "' class='form-control example-input example-title-input question-title'></input>" +
                     "<div class='question row'>" +
                         "<div class='question-content col-md-6'>" +
                             "<textarea id='question-description" + numberOfQuestions + "' class='example-input form-control survey-textarea question-description'>" + qdesc + "</textarea>" +
+                            "<input id='question-type" + numberOfQuestions + "' value='" + type + "' type='hidden'/>" +
+                            "<input id='question-id" + numberOfQuestions + "' type='hidden'/>" +
                         "</div>" +
                         "<div class='question-content col-md-6'>" +
                             "<textarea id='question-answer" + numberOfQuestions + "' disabled class='example-input form-control survey-textarea'></textarea>" +
@@ -58,28 +60,37 @@ function addNewQuestion(qttl, qdesc, type){
 }*/
 
 //TODO: Function to converts questions to JSON
-function toJSON(no){
+function toJSON(){
     if(localStorage.getItem("survey_id") === null){
         var json = {
             "title": $("#survey-title-input").val(),
             "description": $("#survey-description-input").val(),
-            "questions": [
-                {
-                    "type": "text",
-                    "title": "a title",
-                    "attributes": "{\"test\":\"test\"}"
-                }
-            ]
+            "questions": []
         }
     }
-
-
-    /*no = no -1;
-    for(x = 0; x == no; x++) {
-        console.log("x is: " + x);
-        console.log($("#question-title" + x).val());
-        console.log($("#question-description" + x).val());
-    }*/
+    if($("#survey-id").val() != ""){
+        json.id = $("#survey-id").val();
+    }
+    for(var x = 1; x < numberOfQuestions + 1; x++) {
+        if($("#question-id" + x).val() != "" && $("#survey-id").val() != ""){
+            json["questions"].push({
+                "type": $("#question-type" + x).val(),
+                "title": $("#question-title" + x).val(),
+                "description": $("#question-description" + x).val(),
+                "survey_id": $("#survey-id").val(),
+                "id": $("#question-id" + x).val(),
+                "attributes": {}
+            });
+        }
+        else{
+            json["questions"].push({
+                "type": $("#question-type" + x).val(),
+                "title": $("#question-title" + x).val(),
+                "description": $("#question-description" + x).val(),
+                "attributes": {}
+            });
+        }
+    }
     return JSON.stringify(json);
 }
 
@@ -88,17 +99,22 @@ function saveSurvey(){
     $.ajax({
         url: "/api/admin/survey",
         type: "POST",
-        data: toJSON(numberOfQuestions),
+        data: toJSON(),
         contentType: 'json',
-        success: function(){
-            alert("send something!");
+        success: function(response){
+            data = JSON.parse(response);
+            console.log("server returned: ");
+            console.log(data);
+            //Remove old questions and replace them with id's
+            $(".questions-wrapper").empty();
+            addQuestion(data);
         },
-        error: function(xhr){
+        error: function(xhr, response){
             if(xhr.status == 401){
-                alert("Please log in!");
+                console.log(response);
             }
             else{
-                alert("Something went wrong!");
+                console.log(response);
             }
         }
     });
@@ -117,6 +133,5 @@ $("#survey-title-input").keyup(function(){
 });
 
 $("#test").click(function() {
-    console.log(toJSON(numberOfQuestions));
     saveSurvey()
 });
