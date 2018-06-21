@@ -17,5 +17,8 @@ class SurveyController extends Controller
   public function detail($survey){
     
   }
+  public function new(){
+    return view('survey.new');
+  }
   
 }
