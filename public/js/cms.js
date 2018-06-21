@@ -33,9 +33,9 @@ $('#addsectionbutton').on('click',()=>{
     
     switch (section) {
        case 'text':
-           html = `<div class="textsection form-group" data-index="`+ElementID+`" data-type="text" id="section`+ElementID+`"> 
+           html = `<div class="textsection form-group contentsector" data-index="`+ElementID+`" data-type="text" id="section`+ElementID+`"> 
            <div class="row">
-           <h4>Text section order: `+ElementID+`</h4>
+           <h4>Text section </h4>
            </div>
            <div class="row">
            <label for="section`+ElementID+`textboxtitle" class="control-label"> title </label>
@@ -46,6 +46,7 @@ $('#addsectionbutton').on('click',()=>{
            <label for="section`+ElementID+`textarea" class="control-label"> content </label>
            <textarea  id="section`+ElementID+`textarea" rows="4" class="form-control"></textarea>
            </div>
+           <button type="button" class="btn btn-danger deletesectionbutton">Delete</button>
            <hr>
            </div>
            `;
@@ -53,9 +54,9 @@ $('#addsectionbutton').on('click',()=>{
            
            break;
         case 'bulletpoints':
-            html=`<div class="bulletsection form-group" data-index="`+ElementID+`" data-type="bulletpoints" id="section`+ElementID+`"> 
+            html=`<div class="bulletsection form-group contentsector" data-index="`+ElementID+`" data-type="bulletpoints" id="section`+ElementID+`"> 
             <div class="row">
-            <h4>Bulletpoint section order: `+ElementID+`</h4>
+            <h4>Bulletpoint section </h4>
             </div>
             <div class="row">
             <label for="section`+ElementID+`textboxtitle" class="control-label"> title </label>
@@ -76,14 +77,15 @@ $('#addsectionbutton').on('click',()=>{
              
            </ul>
            </div>
+           <button type="button" class="btn btn-danger deletesectionbutton">Delete</button>
              <hr>
              </div>` ;
            break;
         case 'video':
             html =  `
-            <div class="videosection form-group" data-index="`+ElementID+`" data-type="text" id="section`+ElementID+`"> 
+            <div class="videosection form-group contentsector" data-index="`+ElementID+`" data-type="text" id="section`+ElementID+`"> 
            <div class="row">
-           <h4>Video section order: `+ElementID+`</h4>
+           <h4>Video section </h4>
            </div>
            <div class="row">
            <label for="section`+ElementID+`textboxtitle" class="control-label"> title </label>
@@ -99,14 +101,15 @@ $('#addsectionbutton').on('click',()=>{
            data-toggle="popover" title="Uploading youtube video to KIT 2.0"
         data-content=" 1.on the selected youtube video select share, 2. press embed, 3. copy code into input</button>
            </div>
+           <button type="button" class="btn btn-danger deletesectionbutton">Delete</button>
            <hr>
            </div>
             `;
             break;
         case 'picture':
-            html = `<div class="textsection form-group" data-index="`+ElementID+`" data-type="picture" id="section`+ElementID+`"> 
+            html = `<div class="textsection form-group contentsector" data-index="`+ElementID+`" data-type="picture" id="section`+ElementID+`"> 
             <div class="row">
-            <h4>Picture section order: `+ElementID+`</h4>
+            <h4>Picture section </h4>
             </div>
             <div class="row">
             <label for="section`+ElementID+`textboxtitle" class="control-label"> title </label>
@@ -117,6 +120,7 @@ $('#addsectionbutton').on('click',()=>{
             <label for="section`+ElementID+`textarea" class="control-label"> picturename </label>
             <textarea  id="section`+ElementID+`textarea" rows="4" class="form-control"></textarea>
             </div>
+            <button type="button" class="btn btn-danger deletesectionbutton">Delete</button>
             <hr>
             </div>
             `;
@@ -202,16 +206,23 @@ $('#submitcontentcreation').on('click',()=>{
 function addbulletpoint(sectionid){
     let newBulletPointValue = $('#section'+sectionid+'bulval').val();
     $('#section'+sectionid+'bulval').val('');
-    $('#ul'+sectionid).append('<li class="list-group-item justify-content-between class="li'+sectionid+'">'+newBulletPointValue+'</li>')
+    $('#ul'+sectionid).append('<li class="list-group-item justify-content-between li'+sectionid+' listbullet" >'+newBulletPointValue+' <button type="button" class="btn btn-danger deletebulletpointbutton">Delete</button></li>')
     
 
 }
 
 
+$('#contentcreatorsection').delegate(".deletesectionbutton","click", (e)=>{
+    console.log("test");
+    $(e.target).parents('.contentsector').remove();
+})
 
 
 
-
+$('#contentcreatorsection').delegate(".deletebulletpointbutton","click", (e)=>{
+    console.log("test");
+    $(e.target).parents('.listbullet').remove();
+})
 
 
 
@@ -238,9 +249,9 @@ function loadContent(){
             
             switch (e.type) {
                 case 'text':
-                   html = `<div class="textsection form-group" data-index="`+e.id+`" data-type="text" id="section`+e.id+`"> 
+                   html = `<div class="textsection form-group contentsector" data-index="`+e.id+`" data-type="text" id="section`+e.id+`"> 
                     <div class="row">
-                    <h4>Text section order: `+e.id+`</h4>
+                    <h4>Text section </h4>
                     </div>
                     <div class="row">
                     <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
@@ -251,7 +262,9 @@ function loadContent(){
                     <label for="section`+e.id+`textarea" class="control-label"> content </label>
                     <textarea  id="section`+e.id+`textarea" rows="4"  class="form-control">`+e.content+`</textarea>
                     </div>
+                    <button type="button" class="btn btn-danger deletesectionbutton">Delete</button>
                     <hr>
+                    
                     </div>
                     `;
                  
@@ -263,11 +276,11 @@ function loadContent(){
                  let listItems = e.items;
                  let listString = '';
                  listItems.forEach(elem => {
-                     listString += '<li class="list-group-item justify-content-between class="li'+e.id+'">'+elem+'</li>'
+                     listString += '<li class="list-group-item justify-content-between li'+e.id+' listbullet">'+elem+' <button type="button" class="btn btn-danger deletebulletpointbutton">Delete</button></li>'
                  });
-                     html=`<div class="bulletsection form-group" data-index="`+e.id+`" data-type="bulletpoints" id="section`+e.id+`"> 
+                     html=`<div class="bulletsection form-group contentsector" data-index="`+e.id+`" data-type="bulletpoints" id="section`+e.id+`"> 
             <div class="row">
-            <h4>Bulletpoint section order: `+e.id+`</h4>
+            <h4>Bulletpoint section </h4>
             </div>
             <div class="row">
             <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
@@ -289,16 +302,18 @@ function loadContent(){
              
            </ul>
            </div>
+           <button type="button" class="btn btn-danger deletesectionbutton">Delete</button>
              <hr>
+            
              </div>`;
                     break;
 
 
                     case 'video':
                     html =  `
-                    <div class="videosection form-group" data-index="`+e.id+`" data-type="text" id="section`+e.id+`"> 
+                    <div class="videosection form-group contentsector" data-index="`+e.id+`" data-type="text" id="section`+e.id+`"> 
                    <div class="row">
-                   <h4>Video section order: `+e.id+`</h4>
+                   <h4>Video section </h4>
                    </div>
                    <div class="row">
                    <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
@@ -314,14 +329,16 @@ function loadContent(){
                    data-toggle="popover" title="Uploading youtube video to KIT 2.0"
                 data-content=" 1.on the selected youtube video select share, 2. press embed, 3. copy code into input</button>
                    </div>
+                   <button type="button" class="btn btn-danger deletesectionbutton">Delete</button>
                    <hr>
+                  
                    </div>
                     `;
                     break;
                     case 'picture':
-            html = `<div class="textsection form-group" data-index="`+e.id+`" data-type="picture" id="section`+e.id+`"> 
+            html = `<div class="picturesection form-group contentsector" data-index="`+e.id+`" data-type="picture" id="section`+e.id+`"> 
             <div class="row">
-            <h4>Picture section order: `+e.id+`</h4>
+            <h4>Picture section </h4>
             </div>
             <div class="row">
             <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
@@ -332,7 +349,9 @@ function loadContent(){
             <label for="section`+e.id+`textarea" class="control-label"> picturename </label>
             <textarea  id="section`+e.id+`textarea" rows="4" class="form-control">`+e.content+`</textarea>
             </div>
+            <button type="button" class="btn btn-danger deletesectionbutton">Delete</button>
             <hr>
+           
             </div>
             `;
             
