@@ -244,7 +244,7 @@ function loadContent(){
                     </div>
                     <div class="row">
                     <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
-                    <input type="text" id="section`+e.id+`textboxtitle" value="`+e.title+`" class="form-control">
+                    <input type="text" id="section`+e.id+`textboxtitle"  value="`+e.title+`" class="form-control">
                     </div>
                     <br>
                     <div class="row">
@@ -271,12 +271,12 @@ function loadContent(){
             </div>
             <div class="row">
             <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
-            <input type="text" id="section`+e.id+`textboxtitle" class="form-control">
+            <input type="text" id="section`+e.id+`textboxtitle" value="`+e.title+`" class="form-control">
             </div>
             <br>
             <div class="row">
             <label for="section`+e.id+`textarea" class="control-label"> content </label>
-            <textarea  id="section`+e.id+`textarea" rows="4" class="form-control"></textarea>
+            <textarea  id="section`+e.id+`textarea" rows="4" class="form-control">`+e.content+`</textarea>
             </div>
             <div class="row">
             <p>Add items to bulletpoint list:</p>
@@ -302,12 +302,12 @@ function loadContent(){
                    </div>
                    <div class="row">
                    <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
-                   <input type="text" id="section`+e.id+`textboxtitle" class="form-control">
+                   <input type="text" id="section`+e.id+`textboxtitle" value"`+e.title+`" class="form-control">
                    </div>
                    <br>
                    <div class="row">
                    <label for="section`+e.id+`textarea" class="control-label"> Video </label>
-                   <textarea  id="section`+e.id+`textarea" rows="4" class="form-control"></textarea>
+                   <textarea  id="section`+e.id+`textarea" rows="4" class="form-control">`+e.content+`</textarea>
                    </div>
                    <div class="row">
                    <button type="button" class="btn btn-lg btn-danger" 
@@ -318,6 +318,26 @@ function loadContent(){
                    </div>
                     `;
                     break;
+                    case 'picture':
+            html = `<div class="textsection form-group" data-index="`+e.id+`" data-type="picture" id="section`+e.id+`"> 
+            <div class="row">
+            <h4>Picture section order: `+e.id+`</h4>
+            </div>
+            <div class="row">
+            <label for="section`+e.id+`textboxtitle" class="control-label"> title </label>
+            <input type="text" id="section`+e.id+`textboxtitle" value="`+e.title+`" class="form-control">
+            </div>
+            <br>
+            <div class="row">
+            <label for="section`+e.id+`textarea" class="control-label"> picturename </label>
+            <textarea  id="section`+e.id+`textarea" rows="4" class="form-control">`+e.content+`</textarea>
+            </div>
+            <hr>
+            </div>
+            `;
+            
+            
+            break;
              }
              $('#contentcreatorsection').append(html);
         })

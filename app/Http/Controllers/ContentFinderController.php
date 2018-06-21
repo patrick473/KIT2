@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\page;
-class ContentController extends Controller
+
+class ContentFinderController extends Controller
 {
 
   //return content json on page
