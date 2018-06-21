@@ -18,8 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@home')->name('home');
-Route::get('/user/logout','Auth\LoginController@userLogout')->name('user.logout');
 
+
+Route::prefix('user')->group(function(){
+    Route::get('/logout','Auth\LoginController@userLogout')->name('user.logout');
+});
 
 //admin group
 
@@ -33,13 +36,12 @@ Route::prefix('group')->group(function(){
 });
 
 Route::prefix('survey')->group(function(){
-    
+    Route::get('/overview', 'admin\SurveyController@overview')->name('new.survey');
+    Route::get('/new', 'admin\SurveyController@new')->name('new.survey');
+    Route::get('/detail/{survey}', 'admin\SurveyController@detail')->name('new.survey');
 });
 
 //TODO: Delete
-Route::get('/survey/new', 'admin\SurveyController@new')->name('new.survey');
-Route::get('/survey/user','SurveyController@user_survey')->name('user.survey');
-
 Route::get('/survey/view/{survey}', 'SurveyController@view_survey')->name('view.survey');
 Route::get('/survey/answers/{survey}', 'SurveyController@view_survey_answers')->name('view.survey.answers');
 Route::get('/survey/{survey}/delete', 'SurveyController@delete_survey')->name('delete.survey');
