@@ -34,7 +34,10 @@
                    @if ($member->group_leader == 1)
                      <div class="row">
                        <div class="col align-self-start">
-                         <button type="button" class="btn btn-success" id="addMember" data-id={{$group->id}}>Voeg leden toe</button>
+                         <button type="button" class="btn btn-success addMember" id="addMember" data-id={{$group->id}}>Voeg leden toe</button>
+                       </div>
+                       <div class="col text-center">
+                         <button type="button" class="btn btn-info groupOverview" id="addMember" data-id={{$group->id}}>Overzicht</button>
                        </div>
                        <div class="col align-self-end">
                          <button type="button" class="btn btn-danger float-right groupDeletebutton" data-id={{$group->id}}>Verwijder groep</button>
@@ -44,6 +47,9 @@
                      <div class="row">
                        <div class="col align-self-start">
                          <button type="button" class="btn btn-light">Alleen beheerder kan lid toevoegen</button>
+                       </div>
+                       <div class="col text-center">
+                         <button type="button" class="btn btn-info groupOverview" id="addMember" data-id={{$group->id}}>Overzicht</button>
                        </div>
                        <div class="col align-self-end">
                          <button type="button" class="btn btn-danger float-right memberDeletebutton" data-id={{$member->id}}>Verlaat groep</button>
