@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use \App\Member;
+use \App\Group;
+use \App\User;
+use \App\Invite;
+use Log;
 
 class MemberController extends Controller
 {
@@ -85,4 +89,83 @@ class MemberController extends Controller
 
     $member->delete();
   }
+
+  function Members(Request $request, $id){
+
+    if($request->ajax())
+    {
+     $output = '';
+     $query = $request->get('query');
+     if($query != '')
+     {
+
+        $data = User::whereNotIn('id', function($q) use($id){
+          $q->select('user_id')
+          ->from(with(new Member)->getTable())
+          ->where('group_id','=', $id);
+          })
+          ->whereNotIn('id', function($q) use($id){
+            $q->select('user_id')
+            ->from(with(new Invite)->getTable())
+            ->where('group_id','=', $id);
+            })
+          ->where('username', 'like', '%'.$query.'%')
+          ->get();
+
+     }
+     else
+     {
+        $data = User::whereNotIn('id', function($q) use($id){
+          $q->select('user_id')
+          ->from(with(new Member)->getTable())
+          ->where('group_id','=',$id);
+          })
+          ->whereNotIn('id', function($q) use($id){
+            $q->select('user_id')
+            ->from(with(new Invite)->getTable())
+            ->where('group_id','=', $id);
+            })
+          ->orderBy('username', 'desc')
+          ->get();
+     }
+     $total_row = $data->count();
+     if($total_row > 0)
+     {
+     $data = $data->sortBy('username');
+     foreach($data as $row)
+     {
+
+       $output .= '
+       <div class="card">
+         <div class="card-body">
+           <h5 class="card-title">'.$row->username.'</h5>
+             <div class="row">
+               <div class="col align-self-end">
+                 <button type="button" class="btn btn-success float-right memberInvitebutton" data-user_id="'.$row->id.'">Nodig '. $row->username .' uit</button>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       ';
+      }
+     }
+     else
+     {
+       $output .= '
+       <div class="card">
+         <div class="card-body">
+          <h5 class="card-title">Geen gebruikers met deze naam gevonden.</h5>
+         </div>
+       </div>
+       ';
+     }
+     $data = array(
+      'table_data'  => $output,
+      'total_data'  => $total_row
+     );
+
+     echo json_encode($data);
+    }
+   }
 }

@@ -37,7 +37,7 @@
                          <button type="button" class="btn btn-success addMember" id="addMember" data-id={{$group->id}}>Voeg leden toe</button>
                        </div>
                        <div class="col text-center">
-                         <button type="button" class="btn btn-info groupOverview" id="addMember" data-id={{$group->id}}>Overzicht</button>
+                         <button type="button" class="btn btn-info groupOverview" id="groupOverview" data-id={{$group->id}}>Overzicht</button>
                        </div>
                        <div class="col align-self-end">
                          <button type="button" class="btn btn-danger float-right groupDeletebutton" data-id={{$group->id}}>Verwijder groep</button>

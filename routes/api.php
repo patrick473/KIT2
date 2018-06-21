@@ -24,8 +24,8 @@ Route::get('/admin/group/group_action', 'AdminGroupController@GroupAction')->nam
 Route::get('/admin/group/member_action', 'AdminGroupController@MemberAction')->name('admin.live_member_search.action');
 
 Route::delete('/group/{id}', 'GroupController@destroyGroup')->name('delete.group');
-Route::get('/group/invite/member_action/{id}', 'GroupController@Members')->name('protected_member_search');
-Route::post('/invite/{id}', 'GroupController@createInvite')->name('invite.member');
+Route::get('/group/invite/member_action/{id}', 'MemberController@Members')->name('protected_member_search');
+Route::post('/invite/member/{user_id}/{group_id}', 'InviteController@store')->name('invite.member');
 
 Route::delete('/member/{id}', 'MemberController@destroy')->name('delete.member');
 

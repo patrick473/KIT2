@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 
  function fetch_member_data(query = '') {
-  let group_id = $( "#MemberBody" ).data("id");
+  let group_id = $( "#MemberBody" ).data("group_id");
   $.ajax({
    url:"/api/group/invite/member_action/"+group_id,
    method:'GET',
@@ -25,9 +25,12 @@ $(document).ready(function(){
  });
 
  $(document).on("click",".memberInvitebutton",(e)=>{
-     let id = $(e.target).data("id");
+     let user_id = $(e.target).data("user_id");
+     let group_id = $('#MemberBody').data("group_id");
 
-     let url = "/api/invite/member/"+id;
+     console.log(group_id);
+
+     let url = "/api/invite/member/"+user_id+'/'+group_id;
      $.ajax({
          type: "POST",
          url: url,
@@ -35,6 +38,6 @@ $(document).ready(function(){
          processData: false,
          contentType: 'charset=UTF-8'
      }).done(function (response) {
-       fetch_member_data(query);
+       fetch_member_data();
      })
  })
