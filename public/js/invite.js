@@ -28,8 +28,6 @@ $(document).ready(function(){
      let user_id = $(e.target).data("user_id");
      let group_id = $('#UserBody').data("group_id");
 
-     console.log(group_id);
-
      let url = "/api/invite/member/"+user_id+'/'+group_id;
      $.ajax({
          type: "POST",
