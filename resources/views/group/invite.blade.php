@@ -8,7 +8,7 @@
       <input type="text" name="search" id="search" class="form-control" placeholder="Zoek voor een gebruiker" />
      </div>
      <div class="row">
-       <div class="col-sm-12" id="MemberBody" data-id={{$group_id}}>
+       <div class="col-sm-12" id="MemberBody" data-group_id={{$group_id}}>
 
        </div>
      </div>
