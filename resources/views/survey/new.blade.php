@@ -46,7 +46,7 @@
         </div>
       </form>
       <div class="input-field col s12">
-        <button id="add-question-button" class="col-md-6 col-lg-offset-3 btn btn-primary btn-lg">Add question</button>
+        <button id="add-question-button" class="col-md-6 col-lg-offset-3 btn btn-primary btn-lg">Vraag toevoegen</button>
         <button id="test" class="col-md-6 col-lg-offset-3 btn btn-primary btn-lg">test</button>
       </div>
     </div>
