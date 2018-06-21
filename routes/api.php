@@ -16,12 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('/admin/content/{page}','admin\ContentController@savecontent')->name('edit.content');
-Route::get('/admin/content/{id}','ContentFinderController@findcontent')->name('find.content');
-
-Route::delete('/admin/group/{id}', 'AdminGroupController@destroyGroup')->name('admin.delete.group');
-Route::get('/admin/group/group_action', 'AdminGroupController@GroupAction')->name('admin.live_group_search.action');
-Route::get('/admin/group/member_action', 'AdminGroupController@MemberAction')->name('admin.live_member_search.action');
 
 Route::delete('/group/{id}', 'GroupController@destroyGroup')->name('delete.group');
 Route::get('/group/invite/member_action/{id}', 'MemberController@Members')->name('protected_member_search');
@@ -31,9 +25,19 @@ Route::delete('/invite/{id}', 'InviteController@destroy')->name('delete.invite')
 
 Route::delete('/member/{id}', 'MemberController@destroy')->name('delete.member');
 
-Route::post('/admin/survey', 'AdminSurveyController@saveSurvey')->name('survey.save');
-Route::post('/survey/answer', 'AdminSurveyController@saveAnswer')->name('survey.answer');
-Route::post('/group/survey', 'AdminSurveyController@copySurvey')->name('survey.copy');
-Route::get('/survey/{id}', 'AdminSurveyController@getSurveyFromGroup')->name('survey.answerform');
-Route::get('/group/survey/{id}', 'AdminSurveyController@getSurveyOverview')->name('survey.overview');
+
+Route::post('/survey/answer', 'APISurveyController@saveAnswer')->name('survey.answer');
+Route::post('/group/survey', 'APISurveyController@copySurvey')->name('survey.copy');
+Route::get('/survey/{id}', 'APISurveyController@getSurveyFromGroup')->name('survey.fillanswerpage');
+Route::get('/group/survey/{id}', 'APISurveyController@getSurveyOverview')->name('survey.overview');
 Route::post('/group/invite', 'InviteController@process')->name('group.process');
+Route::get('/content/{id}','ContentFinderController@findcontent')->name('find.content');
+
+Route::prefix('admin')->group(function(){
+    Route::post('/survey', 'admin\APISurveyController@saveSurvey')->name('survey.save');
+    Route::post('/content/{page}','admin\APIContentController@savecontent')->name('edit.content');
+    Route::delete('/group/{id}', 'AdminGroupController@destroyGroup')->name('admin.delete.group');
+    Route::get('/group/group_action', 'AdminGroupController@GroupAction')->name('admin.live_group_search.action');
+    Route::get('/group/member_action', 'AdminGroupController@MemberAction')->name('admin.live_member_search.action');
+    
+});

@@ -33,7 +33,7 @@ Route::prefix('group')->group(function(){
 });
 
 Route::prefix('survey')->group(function(){
-    Route::get('/survey/{survey}', 'SurveyController@detail_survey')->name('detail.survey');
+    
 });
 
 //TODO: Delete
@@ -48,18 +48,7 @@ Route::patch('/survey/{survey}/update', 'SurveyController@update')->name('update
 Route::post('/survey/view/{survey}/completed', 'AnswerController@store')->name('complete.survey');
 Route::post('/survey/create', 'SurveyController@create')->name('create.survey');
 
-//till here
 
-// Survey
-
-Route::get('/answer', 'SurveyController@answer')->name('answer.survey');
-Route::post('/answer/{id}', 'AnswerController@storeanswer')->name('answer.store');
-// Questions related
-Route::post('/survey/{survey}/questions', 'QuestionController@store')->name('store.question');
-Route::get('/question/{question}/edit', 'QuestionController@edit')->name('edit.question');
-Route::patch('/question/{question}/update', 'QuestionController@update')->name('update.question');
-
-//ADMINSECTION
 
 
 Route::prefix('admin')->group(function(){
@@ -68,9 +57,10 @@ Route::prefix('admin')->group(function(){
     Route::post('/login','Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::get('/', 'AdminController@home')->name('admin.home');
     Route::get('/logout','Auth\AdminLoginController@logout')->name('admin.logout');
-    Route::get('/admin/group', 'AdminGroupController@index')->name('admin.index.group');
+    Route::get('/group', 'AdminGroupController@index')->name('admin.index.group');
     Route::post('/group/store', 'AdminGroupController@store')->name('admin.store.group');
     Route::get('/group/members', 'AdminGroupController@member')->name('admin.group.member');
+    Route::get('/survey/{survey}', 'admin\SurveyController@detail')->name('survey.detail');
 });
 
 
