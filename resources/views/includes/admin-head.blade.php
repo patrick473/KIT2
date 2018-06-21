@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark  " id="navbar" data-userid="{{Auth::id()}}">
 
 
-            <a class="navbar-brand " href="#">
+            <a class="navbar-brand " href="{{route('admin.home')}}">
                     <img src="{{ URL::asset('images/hu-logo.png') }}" width="30" height="30" class="d-inline-block align-top" alt="HU Logo">
                     Kwaliteit Instrument Toetsprogramma
             </a>
