@@ -37,7 +37,7 @@ Route::prefix('survey')->group(function(){
 });
 
 //TODO: Delete
-Route::get('/survey/new', 'SurveyController@new_survey')->name('new.survey');
+Route::get('/survey/new', 'admin\SurveyController@new')->name('new.survey');
 Route::get('/survey/user','SurveyController@user_survey')->name('user.survey');
 
 Route::get('/survey/view/{survey}', 'SurveyController@view_survey')->name('view.survey');
