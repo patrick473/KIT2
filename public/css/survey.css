@@ -25,3 +25,16 @@
 .example-input{
     margin-top: 10px;
 }
+#status-label{
+    font-style: italic;
+    font-weight: normal;
+}
+.not-saved{
+    color:red;
+}
+.saving{
+    color: orange;
+}
+.saved{
+    color: green;
+}

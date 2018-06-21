@@ -9,6 +9,7 @@
   <div class="card">
     <div class="card-body">
       <h4 class="card-title">Vragenlijst</h4>
+      <h5>Status: <label id="status-label"> geen</label></h5>
       <form class='col-md-12 col-form-label text-md-right'>
         <div class="form-group row">
           <input id='survey-id' type='hidden'/>
