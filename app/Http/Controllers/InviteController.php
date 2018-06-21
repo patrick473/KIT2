@@ -50,7 +50,6 @@ class InviteController extends Controller
   }
 
   public function accept($invite_id){
-    Log::debug($invite_id);
     $invite = Invite::where('id', '=', $invite_id)->first();
 
     $member = new Member;
