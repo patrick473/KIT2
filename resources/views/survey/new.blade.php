@@ -14,12 +14,12 @@
           <input id='survey-id' type='hidden'/>
 
           <div class="col-md-12">
-            <label class="input-label">Vragenlijst titel <input id="survey-title-input" class="form-control survey-input" name="title" required autofocus></label>
+            <label class="input-label">Vragenlijst titel: <input id="survey-title-input" class="autosave form-control survey-input" name="title" required autofocus></label>
           </div>
         </div>
         <div class="form-group row">
           <div class="col-md-12">
-            <label class="input-label">Vragenlijst beschrijving: <textarea id="survey-description-input" class="form-control survey-input survey-textarea" name="description" required autofocus></textarea></label>
+            <label class="input-label">Vragenlijst beschrijving: <textarea id="survey-description-input" class="autosave form-control survey-input survey-textarea" name="description" required autofocus></textarea></label>
           </div>
         </div>
       </form>

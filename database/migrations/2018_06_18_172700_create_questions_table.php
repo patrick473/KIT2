@@ -19,6 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->foreign('survey_id')->references('id')->on('surveys')->onDelete('cascade'); 
             $table->string('type');
             $table->string('title');
+            $table->string('description');
             $table->json('attributes');
             $table->timestamps();
         });

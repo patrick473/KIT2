@@ -10,7 +10,7 @@ use \App\User;
 use \App\Invite;
 use Log;
 
-class MemberController extends Controller
+class APIMemberController extends Controller
 {
   /**
    * Display a listing of the resource.
