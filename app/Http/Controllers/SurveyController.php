@@ -62,6 +62,10 @@ class SurveyController extends Controller
        
         return view('group.surveyOverview')->with(['survey'=>$jsonObject]);
     }
+    public function surveyoverview(){
+        $surveys = Survey::all();
+        return view('group.selectsurvey',compact('surveys'));
+      }
 
     public function groupSurveys($id){
         
