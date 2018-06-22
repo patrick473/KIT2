@@ -9,6 +9,7 @@
   <div class="card">
     <div class="card-body">
       <h4 class="card-title">Vragenlijst</h4>
+      <h5>Status: <label id="status-label"> geen</label></h5>
       <form class='col-md-12 col-form-label text-md-right'>
         <div class="form-group row">
           <input id='survey-id' type='hidden'/>
@@ -45,9 +46,8 @@
           </div>
         </div>
       </form>
-      <div class="input-field col s12">
+      <div class="input-field col-s-12">
         <button id="add-question-button" class="col-md-6 col-lg-offset-3 btn btn-primary btn-lg">Vraag toevoegen</button>
-        <button id="test" class="col-md-6 col-lg-offset-3 btn btn-primary btn-lg">test</button>
       </div>
     </div>
   </div>

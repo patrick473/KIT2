@@ -28,13 +28,11 @@ class APISurveyController extends Controller
     $jsonObject = $app->make('stdClass');
    
     $json = json_decode($request->getContent(),true);
-    Log::debug($json);
     if( isset($json['id'])){
         $survey = Survey::where('id','=',$json['id'])->first();
         $survey->title = $json['title'];
         $survey->description = $json['description'];
         $survey->save();
-        Log::debug('id is set');
     }
     else{
         
@@ -42,9 +40,7 @@ class APISurveyController extends Controller
         'title' => $json['title'],
         'description' => $json['description']
     ]);
-    Log::debug('id is not set');
     }
-    Log::debug(json_decode( json_encode($survey), true));
     $questions = collect([]);
     
     foreach($json['questions'] as $question){

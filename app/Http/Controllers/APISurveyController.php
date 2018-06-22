@@ -56,7 +56,10 @@ public function getSurveyFromGroup($id){
 
 }
 
+//TODO: Add function to get survey by id
+public function getSurveyById($id){
 
+}
 
 public function getSurveyOverview($id){
     $app = app();

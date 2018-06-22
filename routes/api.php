@@ -22,7 +22,6 @@ Route::prefix('member')->group(function(){
 });
 Route::prefix('survey')->group(function(){
     Route::post('/answer', 'APISurveyController@saveAnswer')->name('survey.answer');
-
     Route::get('/{id}', 'APISurveyController@getSurveyFromGroup')->name('survey.fillanswerpage');
 });
 Route::prefix('content')->group(function(){

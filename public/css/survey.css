@@ -25,3 +25,12 @@
 .example-input{
     margin-top: 10px;
 }
+#status-label{
+    font-style: italic;
+    font-weight: normal;
+}
+.center-children{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

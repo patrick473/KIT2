@@ -6,6 +6,7 @@ var numberOfQuestions = 0;
 
 function initialize(){
     //fillOptions();
+    $("#status-label").css("color", "red");
 }
 
 function clearQuestionFields(){
@@ -35,10 +36,12 @@ function addNewQuestion(qttl, qdesc, type, qid){
                 "</div>" +
             "</div><br/>"
             );
+            $(".autosave").on('change', function() {
+                saveSurvey();
+            });
     }
 }
 
-//TODO: Function to converts questions to JSON
 function toJSON(){
     if(localStorage.getItem("survey_id") === null){
         var json = {
@@ -73,8 +76,11 @@ function toJSON(){
     return JSON.stringify(json);
 }
 
-//TODO: Function that saves the question JSON
 function saveSurvey(){
+    //Change status text
+    $("#status-label").text("Opslaan...");
+    $("#status-label").css("color", "orange");
+
     $.ajax({
         url: "/api/admin/survey",
         type: "POST",
@@ -88,6 +94,8 @@ function saveSurvey(){
             $.each(response.questions, function (index, question) {
                 $("#question-id" + (index + 1)).val(question.id);
             });
+            $("#status-label").text("Opgeslagen om: " + getCurrentDateTime());
+            $("#status-label").css("color", "green");
         },
         error: function(xhr, response){
             if(xhr.status == 401){
@@ -98,6 +106,17 @@ function saveSurvey(){
             }
         }
     });
+}
+
+function getCurrentDateTime(){
+    var d = new Date();
+    var time = d.toLocaleTimeString();
+    var datetime = time + " op " + d.getDate() + "-" + (d.getMonth() + 1)+ "-" + d.getFullYear();
+    return datetime;
+}
+
+function getSurveyById(){
+
 }
 
 //TODO: ADD FUCNTION TO FILL SELECT LIST WITH ALL OPTIONS
@@ -112,6 +131,8 @@ $("#survey-title-input").keyup(function(){
     $("#example-title").text($("#survey-title-input").val());
 });
 
-$(".autosave").on('change', '.autosave', function() {
+$(".autosave").on('change', function() {
     saveSurvey();
 });
+
+initialize();
