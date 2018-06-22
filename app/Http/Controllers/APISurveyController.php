@@ -21,6 +21,8 @@ class APISurveyController extends Controller
             'group_id' => $json['group_id'],
             'survey_id' => $json['survey_id']
         ]);
+        return $groupSurvey->id;
+
    }
 
    
@@ -31,7 +33,7 @@ class APISurveyController extends Controller
         'survey_id' => $json['survey_id'],
         'answers' => json_encode($json['answers'])
     ]);
-
+    
     }
 
 
