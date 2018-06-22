@@ -17,7 +17,6 @@ class SurveyController extends Controller
       }
       public function overview(){
         $surveys = Survey::all();
-        dd($surveys);
         return view('survey.overview',compact('surveys'));
       }
 
@@ -35,7 +34,7 @@ class SurveyController extends Controller
         $questions = Question::where('survey_id',$groupSurvey->survey_id)->get();
         foreach($questions as $question){
             $question->attributes = json_decode($question->attributes);
-            
+
         }
         $answers = Answer::where('survey_id',$id)->get();
         foreach($answers as $answer){
@@ -45,7 +44,7 @@ class SurveyController extends Controller
         foreach($questions as $question){
             $questionanswers = collect([]);
             foreach($answers as $answer){
-                
+
                 foreach($answer->answers as $questionAnswer){
                     if( $question->id == $questionAnswer->id){
                         $answerObject = $app->make('stdClass');
@@ -57,19 +56,19 @@ class SurveyController extends Controller
             }
             $question->answers = $questionanswers;
         }
-        
+
         //add answers to question
-    
+
         //construct object to be responded with
         $jsonObject->survey = $groupSurvey->survey_id;
         $jsonObject->title = $survey->title;
         $jsonObject->description = $survey->description;
         $jsonObject->group = $groupSurvey->group_id;
-    
+
         $jsonObject->questions = $questions;
-        
-     
-       
+
+
+
         return view('group.surveyOverview')->with(['survey'=>$jsonObject]);
     }
 }

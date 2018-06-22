@@ -5,5 +5,5 @@
 @endsection
 
 @section('extrascripts')
-  {{-- <script src="{{ asset('js/DeleteGroup.js') }}"></script> --}}
+  script src="{{ asset('js/surveyOverview.js') }}"></script>
 @endsection
