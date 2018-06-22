@@ -10,24 +10,6 @@ use App\Group;
 use App\survey_group;
 class SurveyController extends Controller
 {
-
-    public function detail($survey){
-        return view('survey.detail',compact('survey'));
-      }
-      public function new(){
-        return view('survey.new');
-      }
-      public function overview(){
-        $surveys = Survey::all();
-        return view('survey.overview',compact('surveys'));
-      }
-
-
-
-
-
-
-
       public function getSurveyOverview($id){
         $app = app();
         //get variables
