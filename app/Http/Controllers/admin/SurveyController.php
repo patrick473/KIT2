@@ -13,12 +13,11 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Redirect;
 class SurveyController extends Controller
 {
- /* public function __construct()
-    {
-  
-        $this->middleware('auth:admin');
-    }
-*/
+  public function __construct()
+  {
+      $this->middleware('auth:admin');
+  }
+
   
   public function detail($survey){
     return view('survey.detail',compact('survey'));
