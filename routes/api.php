@@ -37,7 +37,7 @@ Route::prefix('invite')->group(function(){
 Route::prefix('group')->group(function(){
     Route::get('/group_action', 'APIGroupController@GroupAction')->name('group.search');
     Route::get('/member_action', 'APIGroupController@MemberAction')->name('group.searchmember');
-    Route::get('/survey/{id}', 'APISurveyController@getSurveyOverview')->name('survey.overview');
+   
     Route::get('/invite/member_action/{id}', 'APIMemberController@Members')->name('protected_member_search');
     Route::post('/invite', 'InviteController@process')->name('group.process');
     Route::post('/survey', 'APISurveyController@copySurvey')->name('survey.copy');  
