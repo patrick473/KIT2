@@ -10,7 +10,19 @@ use App\Group;
 use App\survey_group;
 class SurveyController extends Controller
 {
- 
+
+    public function detail($survey){
+        return view('survey.detail',compact('survey'));
+      }
+      public function new(){
+        return view('survey.new');
+      }
+      public function overview(){
+        $surveys = Survey::all();
+        return view('survey.overview',compact('surveys'));
+      }
+
+
 
 
 
@@ -25,7 +37,7 @@ class SurveyController extends Controller
         $questions = Question::where('survey_id',$groupSurvey->survey_id)->get();
         foreach($questions as $question){
             $question->attributes = json_decode($question->attributes);
-            
+
         }
         $answers = Answer::where('survey_id',$id)->get();
         foreach($answers as $answer){
@@ -35,7 +47,7 @@ class SurveyController extends Controller
         foreach($questions as $question){
             $questionanswers = collect([]);
             foreach($answers as $answer){
-                
+
                 foreach($answer->answers as $questionAnswer){
                     if( $question->id == $questionAnswer->id){
                         $answerObject = $app->make('stdClass');
@@ -47,19 +59,19 @@ class SurveyController extends Controller
             }
             $question->answers = $questionanswers;
         }
-        
+
         //add answers to question
-    
+
         //construct object to be responded with
         $jsonObject->survey = $groupSurvey->survey_id;
         $jsonObject->title = $survey->title;
         $jsonObject->description = $survey->description;
         $jsonObject->group = $groupSurvey->group_id;
-    
+
         $jsonObject->questions = $questions;
-        
-     
-       
+
+
+
         return view('group.surveyOverview')->with(['survey'=>$jsonObject]);
     }
     public function surveyoverview(){
@@ -68,7 +80,7 @@ class SurveyController extends Controller
       }
 
     public function groupSurveys($id){
-        
+
         $group = Group::where('id',$id)->first();
         $surveysgroup = survey_group::where('group_id',$group->id)->get();
         $surveys = collect([]);
@@ -76,7 +88,7 @@ class SurveyController extends Controller
             $survey = Survey::where('id',$surveygroup->survey_id)->first();
             $surveys->push($survey);
         }
-       
+
         return view('group.surveys',compact('surveys'));
 
 
