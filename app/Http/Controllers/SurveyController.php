@@ -7,6 +7,8 @@ use App\Survey;
 use App\Answer;
 use App\Question;
 use App\Group;
+use App\Member;
+use App\User;
 use App\survey_group;
 class SurveyController extends Controller
 {
@@ -58,7 +60,7 @@ class SurveyController extends Controller
     }
     public function surveyoverview(){
         $surveys = Survey::all();
-        return view('group.selectsurvey',compact('surveys'));
+        return view('group.selectSurvey',compact('surveys'));
       }
 
     public function groupSurveys($id){
@@ -71,8 +73,15 @@ class SurveyController extends Controller
             $surveys->push($survey);
         }
 
-        return view('group.surveys',compact('surveys'));
+        $members = Member::where('group_id', '=', $id)->orderBy('group_leader', 'DESC')->get();
 
+        foreach($members as $member){
+                $member->users = User::where('id',$member->user_id)->get();
+        }
+
+        $firstMember = $members->firstWhere('group_leader', '0');
+
+        return view('group.surveyOverview',compact(['surveys', 'members', 'firstMember']));
 
     }
 }

@@ -41,7 +41,7 @@
                          <button type="button" class="btn btn-success addMember" id="addMember" data-id={{$group->id}}>Beheer groep leden</button>
                        </div>
                        <div class="col text-center">
-                         <button type="button" class="btn btn-info groupOverview" id="groupOverview" data-id={{$group->id}}>Overzicht</button>
+                         <button type="button" class="btn btn-info groupOverview" id="groupOverview" data-id={{$group->id}}>Survey overzicht</button>
                        </div>
                        <div class="col align-self-end">
                          <button type="button" class="btn btn-danger float-right groupDeletebutton" data-id={{$group->id}}>Verwijder groep</button>
@@ -53,7 +53,7 @@
                          <button type="button" class="btn btn-light">Alleen beheerder kan lid toevoegen</button>
                        </div>
                        <div class="col text-center">
-                         <button type="button" class="btn btn-info groupOverview" id="addMember" data-id={{$group->id}}>Overzicht</button>
+                         <button type="button" class="btn btn-info groupOverview" id="addMember" data-id={{$group->id}}>Survey overzicht</button>
                        </div>
                        <div class="col align-self-end">
                          <button type="button" class="btn btn-danger float-right memberDeletebutton" data-id={{$member->id}}>Verlaat groep</button>
