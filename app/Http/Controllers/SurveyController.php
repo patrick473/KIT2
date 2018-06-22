@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Survey;
+use App\Answer;
+use App\Question;
+use App\survey_group;
 class SurveyController extends Controller
 {
     public function detail($survey){
@@ -65,7 +68,8 @@ class SurveyController extends Controller
     
         $jsonObject->questions = $questions;
         
+     
        
-        return $jsonObject;
+        return view('group.surveyOverview')->with(['survey'=>$jsonObject]);
     }
 }

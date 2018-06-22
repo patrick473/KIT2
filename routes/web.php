@@ -36,7 +36,7 @@ Route::prefix('group')->group(function(){
     Route::post('/store', 'GroupController@store')->name('group.store');
     Route::get('/invite/{id}', 'InviteController@index')->name('group.invite');
     Route::get('/accept', 'InviteController@sendInvite')->name('accept.invite');
-    Route::get('/survey/{id}', 'APISurveyController@getSurveyOverview')->name('survey.overview');
+    Route::get('/survey/{id}', 'SurveyController@getSurveyOverview')->name('survey.overview');
 });
 
 
