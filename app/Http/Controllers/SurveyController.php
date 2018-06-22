@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use App\Survey;
 use App\Answer;
 use App\Question;
+use App\Group;
 use App\survey_group;
 class SurveyController extends Controller
 {
+
     public function detail($survey){
         return view('survey.detail',compact('survey'));
       }
@@ -19,6 +21,7 @@ class SurveyController extends Controller
         $surveys = Survey::all();
         return view('survey.overview',compact('surveys'));
       }
+
 
 
 
@@ -70,5 +73,20 @@ class SurveyController extends Controller
 
 
         return view('group.surveyOverview')->with(['survey'=>$jsonObject]);
+    }
+
+    public function groupSurveys($id){
+
+        $group = Group::where('id',$id)->first();
+        $surveysgroup = survey_group::where('group_id',$group->id)->get();
+        $surveys = collect([]);
+        foreach($surveysgroup as $surveygroup){
+            $survey = Survey::where('id',$surveygroup->survey_id)->first();
+            $surveys->push($survey);
+        }
+
+        return view('group.surveys',compact('surveys'));
+
+
     }
 }
