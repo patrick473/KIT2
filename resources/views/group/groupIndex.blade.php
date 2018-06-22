@@ -20,7 +20,11 @@
   <hr>
 
   <div class="container box">
-    <h3>Uw groepen.</h3>
+    <div class="row">
+      <div class="col text-center">
+        <h3>Uw groepen</h3>
+      </div>
+    </div>
      <div class="row">
        <div class="col-sm-12" id="GroupBody">
          @if(!$members->isEmpty())
