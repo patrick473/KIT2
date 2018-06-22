@@ -36,6 +36,7 @@ Route::prefix('group')->group(function(){
     Route::post('/store', 'GroupController@store')->name('group.store');
     Route::get('/invite/{id}', 'InviteController@index')->name('group.invite');
     Route::get('/accept', 'InviteController@sendInvite')->name('accept.invite');
+    Route::get('/survey/{id}', 'APISurveyController@getSurveyOverview')->name('survey.overview');
 });
 
 
@@ -51,6 +52,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/survey/overview', 'admin\SurveyController@overview')->name('survey.overview');
     Route::get('/survey/new', 'admin\SurveyController@new')->name('survey.new');
     Route::get('/survey/{survey}', 'admin\SurveyController@detail')->name('survey.detail');
+
 });
 
 
