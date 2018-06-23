@@ -36,9 +36,11 @@ Route::prefix('group')->group(function(){
     Route::post('/store', 'GroupController@store')->name('group.store');
     Route::get('/invite/{id}', 'InviteController@index')->name('group.invite');
     Route::get('/accept', 'InviteController@sendInvite')->name('accept.invite');
-    Route::get('/selectsurvey', 'SurveyController@surveyoverview')->name('survey.select');
+    Route::get('/selectsurveypage/{group_id}', 'SurveyController@selectsurvey')->name('survey.selectpage');
+    Route::get('/selectsurvey/{group_id}', 'SurveyController@surveyoverview')->name('survey.select');
     Route::get('/surveys/{id}', 'SurveyController@groupSurveys')->name('group.survey.overview');
     Route::get('/survey/{id}', 'SurveyController@getSurveyOverview')->name('group.survey.detail');
+    Route::get('/answer/{surveyid}','SurveyController@getSurvey')->name('survey.answer');
 });
 
 

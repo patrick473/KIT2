@@ -7,6 +7,8 @@ use \App\page;
 use \App\Group;
 use \App\Admin;
 use \App\Member;
+use \App\Survey;
+use \App\Question;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -222,7 +224,21 @@ class DatabaseSeeder extends Seeder
               'user_id' => 4,
               'group_leader' => 1
             ]);
-
+            
             $this->command->info('members have been created');
+
+            $survey1 = Survey::create([
+                'title' => 'testsurvey',
+                'description' => 'testdescription'
+
+            ]);
+            $question1 = Question::create([
+               'survey_id' => $survey1->id,
+               'type' => 'Text',
+               'title' => 'testquestion',
+               'description' => 'testdescription',
+               'attributes' => '[]'
+
+            ]);
         }
     }

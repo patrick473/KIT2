@@ -7,7 +7,7 @@
         @foreach($members as $member)
           @foreach($member->users as $user)
               <div class="card">
-                @if($member->group_leader == 1)
+                @if($member->id == $groupLeader->id)
                   <h5 class="card-header">Groepsleider:</h5>
                 @elseif ($firstMember->id == $member->id)
                   <h5 class="card-header">Groepsleden:</h5>
@@ -35,6 +35,13 @@
     <h3>Surveys voor deze groep</h3>
     <div class="row">
       <div class="col-sm-12" id="SurveyBody">
+        @if($groupLeader->id == $currentUser)
+          <div class="card">
+            <div class="card-body">
+              <div class="card-text col text-center"><a type="button" class="btn btn-success addSurvey" id='addSurvey' data-group_id ="{{$id}}" href="{{route('survey.selectpage',['group_id'=>$id]}}">Voeg een survey toe aan de groep</a></div>
+            </div>
+          </div>
+        @endif
         @if(!$surveys->isEmpty())
           @foreach($surveys as $survey)
               <div class="card">
@@ -42,9 +49,18 @@
                   <h5 class="card-title">{{$survey->title}}</h5>
                   <p class="card-text">{{$survey->description}}</p>
                   <div class="row">
-                    <div class="col align-self-end">
-                      <button type="button" class="btn btn-success float-right answerSurvey" id='answerSurvey' data-member_id = {{$survey->id}}>Beantwoord survey</button>
+                    <div class="col align-self-start">
+                      <button type="button" class="btn btn-success answerSurvey" id='answerSurvey' data-survey_id = {{$survey->id}}>Beantwoord survey</button>
                     </div>
+                    @if($groupLeader->id == $currentUser)
+                      <div class="col align-self-end">
+                        <button type="button" class="btn btn-danger float-right removeSurvey_group" id='removeSurvey_group' data-survey_id = {{$survey->id}}>Verwijder survey uit de groep</button>
+                      </div>
+                    @else
+                      <div class="col align-self-end">
+                        <button type="button" class="btn btn-light float-right">Alleen groepsleider mag surveys uit groep verwijderen.</button>
+                      </div>
+                    @endif
                   </div>
                 </div>
               </div>
