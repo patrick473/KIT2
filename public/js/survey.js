@@ -77,9 +77,15 @@ function toJSON(){
 }
 
 function loadSurvey(id){
-    $.get("/api/admin/survey/" + id, function(data, xhr){
-        console.log(xhr);
-        console.log(data);
+    $.get("/api/admin/survey/" + id, function(response, xhr){
+        response = JSON.parse(response);
+        console.log(response);
+        $("#survey-title-input").val(response.title);
+        $("#survey-description-input").val(response.description);
+        $("#survey-id").text(response.id);
+        $.each(response.questions, function(index, question){
+            addNewQuestion(question.title, question.description, question.type, question.id);
+        });
     });
 }
 
