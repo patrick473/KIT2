@@ -34,7 +34,7 @@
 <!-- Start of main content -->
 
         
-        <div class="contentSection ">
+        <div class="contentSection">
 
             <div class="row">
                 <div class="sideBarSection col-sm-2">
@@ -42,7 +42,7 @@
                         @include('includes.sidebar')
                     @endif
                     </div>
-                <div class="mainContentSection col-sm-10">
+                <div class="mainContentSection col-xs-12 col-sm-10">
                     @include('includes.who')
             @yield('content')
                 </div>

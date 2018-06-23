@@ -79,7 +79,7 @@ function toJSON(){
 function loadSurvey(id){
     $.get("/api/admin/survey/" + id, function(response, xhr){
         response = JSON.parse(response);
-        console.log(response);
+        console.log(response.title);
         $("#survey-title-input").val(response.title);
         $("#survey-description-input").val(response.description);
         $("#survey-id").val(response.surveyid);
@@ -92,7 +92,7 @@ function loadSurvey(id){
 
 function saveSurvey(){
     //Change status text
-
+    console.log($("#survey-title-input").val());
     if($("#survey-title-input").val() === ""){
     return;
     }
