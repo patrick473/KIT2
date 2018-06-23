@@ -49,9 +49,18 @@
                   <h5 class="card-title">{{$survey->title}}</h5>
                   <p class="card-text">{{$survey->description}}</p>
                   <div class="row">
-                    <div class="col align-self-end">
-                      <button type="button" class="btn btn-success float-right answerSurvey" id='answerSurvey' data-member_id = {{$survey->id}}>Beantwoord survey</button>
+                    <div class="col align-self-start">
+                      <button type="button" class="btn btn-success answerSurvey" id='answerSurvey' data-survey_id = {{$survey->id}}>Beantwoord survey</button>
                     </div>
+                    @if($groupLeader->id == $currentUser)
+                      <div class="col align-self-end">
+                        <button type="button" class="btn btn-danger float-right removeSurvey_group" id='removeSurvey_group' data-survey_id = {{$survey->id}}>Verwijder survey uit de groep</button>
+                      </div>
+                    @else
+                      <div class="col align-self-end">
+                        <button type="button" class="btn btn-light float-right">Alleen groepsleider mag surveys uit groep verwijderen.</button>
+                      </div>
+                    @endif
                   </div>
                 </div>
               </div>

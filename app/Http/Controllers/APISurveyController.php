@@ -15,14 +15,12 @@ use App\survey_group;
 class APISurveyController extends Controller
 {
 
-    public function copySurvey(Request $request){
-        $json = json_decode($request->getContent(),true);
+    public function copySurvey($group_id, $survey_id){
         $groupSurvey = survey_group::create([
-            'group_id' => $json['group_id'],
-            'survey_id' => $json['survey_id']
+            'group_id' => $group_id,
+            'survey_id' => $survey_id
         ]);
         return $groupSurvey->id;
-
    }
 
 
@@ -73,7 +71,7 @@ function surveySearch(Request $request, $group_id){
 
      $surveys = Survey::whereNotIn('id', function($q) use($group_id){
        $q->select('survey_id')
-       ->from(with(new surveys_group)->getTable())
+       ->from(with(new survey_group)->getTable())
        ->where('group_id','=',$group_id);
        })
        ->where('title', 'like', '%'.$query.'%')

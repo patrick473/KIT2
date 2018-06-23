@@ -42,7 +42,7 @@ Route::prefix('group')->group(function(){
 
     Route::get('/invite/member_action/{id}', 'APIMemberController@Members')->name('protected_member_search');
     Route::post('/invite', 'InviteController@process')->name('group.process');
-    Route::post('/survey', 'APISurveyController@copySurvey')->name('survey.copy');
+    Route::post('/survey/{group_id}/{survey_id}', 'APISurveyController@copySurvey')->name('survey.copy');
     Route::delete('/{id}', 'GroupController@destroyGroup')->name('delete.group');
 });
 Route::prefix('admin')->group(function(){

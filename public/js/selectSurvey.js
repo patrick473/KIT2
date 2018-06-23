@@ -23,3 +23,18 @@ $(document).ready(function(){
   var query = $(this).val();
   fetch_survey_data(query);
  });
+
+ $(document).on("click",".addSurvey",(e)=>{
+   let survey_id = $(e.target).data("survey_id");
+   let group_id = $('#SurveyBody').data("group_id");
+   let url = "/api/group/survey/"+group_id+'/'+survey_id;
+   $.ajax({
+     type: "POST",
+     url: url,
+     contentType:'json',
+     processData: false,
+     contentType: 'charset=UTF-8'
+   }).done(function (response) {
+     location.reload();
+   })
+ });
