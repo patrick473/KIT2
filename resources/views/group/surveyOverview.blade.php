@@ -7,7 +7,7 @@
         @foreach($members as $member)
           @foreach($member->users as $user)
               <div class="card">
-                @if($member->group_leader == 1)
+                @if($member->id == $groupLeader->id)
                   <h5 class="card-header">Groepsleider:</h5>
                 @elseif ($firstMember->id == $member->id)
                   <h5 class="card-header">Groepsleden:</h5>
@@ -35,6 +35,13 @@
     <h3>Surveys voor deze groep</h3>
     <div class="row">
       <div class="col-sm-12" id="SurveyBody">
+        @if($groupLeader->id == $currentUser)
+          <div class="card">
+            <div class="card-body">
+              <div class="card-text col text-center"><button type="button" class="btn btn-success addSurvey" id='addSurvey' data-group_id = {{$id}}>Voeg een survey toe aan de groep</button></div>
+            </div>
+          </div>
+        @endif
         @if(!$surveys->isEmpty())
           @foreach($surveys as $survey)
               <div class="card">

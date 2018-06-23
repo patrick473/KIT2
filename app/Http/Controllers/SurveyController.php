@@ -9,6 +9,7 @@ use App\Question;
 use App\Group;
 use App\Member;
 use App\User;
+use Auth;
 use App\survey_group;
 class SurveyController extends Controller
 {
@@ -58,9 +59,17 @@ class SurveyController extends Controller
 
         return view('group.surveyOverview')->with(['survey'=>$jsonObject]);
     }
-    public function surveyoverview(){
-        $surveys = Survey::all();
-        return view('group.selectSurvey',compact('surveys'));
+    public function surveyoverview($group_id){
+
+        $surveys = Surveys::whereNotIn('id', function($q) use($group_id){
+          $q->select('survey_id')
+          ->from(with(new surveys_group)->getTable())
+          ->where('group_id','=',$group_id);
+          })
+          ->orderBy('title', 'desc')
+          ->get();
+          
+        return view('group.selectSurvey',compact(['surveys', 'group_id']));
       }
 
     public function groupSurveys($id){
@@ -79,9 +88,11 @@ class SurveyController extends Controller
                 $member->users = User::where('id',$member->user_id)->get();
         }
 
+        $groupLeader = $members->firstWhere('group_leader', '1');
         $firstMember = $members->firstWhere('group_leader', '0');
+        $currentUser = Auth::id();
 
-        return view('group.surveyOverview',compact(['surveys', 'members', 'firstMember']));
+        return view('group.surveyOverview',compact(['surveys', 'members', 'firstMember', 'groupLeader', 'id', 'currentUser']));
 
     }
 }
