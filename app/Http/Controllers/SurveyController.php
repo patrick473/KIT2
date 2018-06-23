@@ -44,7 +44,7 @@ class SurveyController extends Controller
             }
             $question->answers = $questionanswers;
         }
-
+        
         //add answers to question
 
         //construct object to be responded with
@@ -86,5 +86,14 @@ class SurveyController extends Controller
 
         return view('group.surveyOverview',compact(['surveys', 'members', 'firstMember', 'groupLeader', 'id', 'currentUser']));
 
+    }
+    public function getSurvey($surveyid){
+            $survey = Survey::where('id',$surveyid)->first();
+
+            return view('survey.answer',compact('survey'));
+    }
+    public function selectsurvey(){
+
+        return view('group.selectSurvey');
     }
 }
