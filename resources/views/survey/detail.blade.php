@@ -46,7 +46,7 @@
                     </div>
                 </div>
             </form>
-            <div class="input-field col-s-12 center-children">
+            <div class="input-field col-s-12">
                 <button id="add-question-button" class="col-md-6 col-lg-offset-3 btn btn-primary btn-lg">Vraag toevoegen</button>
             </div>
         </div>
