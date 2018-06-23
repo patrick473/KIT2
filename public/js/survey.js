@@ -6,7 +6,7 @@ var numberOfQuestions = 0;
 
 function initialize(){
     //fillOptions();
-    $("#status-label").css("color", "red");
+    changeStatus("geen", "red");
 }
 
 function clearQuestionFields(){
@@ -76,11 +76,21 @@ function toJSON(){
     return JSON.stringify(json);
 }
 
+function loadSurvey(id){
+    $.get("/api/admin/survey/" + id, function(data, xhr){
+        console.log(xhr);
+        console.log(data);
+    });
+}
+
 function saveSurvey(){
     //Change status text
-    $("#status-label").text("Opslaan...");
-    $("#status-label").css("color", "orange");
 
+    if($("#survey-title-input").val() === ""){
+    return;
+    }
+    else{
+        changeStatus("Opslaan...", "orange");
     $.ajax({
         url: "/api/admin/survey",
         type: "POST",
@@ -94,8 +104,7 @@ function saveSurvey(){
             $.each(response.questions, function (index, question) {
                 $("#question-id" + (index + 1)).val(question.id);
             });
-            $("#status-label").text("Opgeslagen om: " + getCurrentDateTime());
-            $("#status-label").css("color", "green");
+            changeStatus("Opgeslagen om: " + getCurrentDateTime(), "green");
         },
         error: function(xhr, response){
             if(xhr.status == 401){
@@ -106,6 +115,13 @@ function saveSurvey(){
             }
         }
     });
+    }
+
+}
+
+function changeStatus(text, color){
+    $("#status-label").text(text);
+    $("#status-label").css("color", color);
 }
 
 function getCurrentDateTime(){
@@ -115,16 +131,13 @@ function getCurrentDateTime(){
     return datetime;
 }
 
-function getSurveyById(){
-
-}
-
 //TODO: ADD FUCNTION TO FILL SELECT LIST WITH ALL OPTIONS
 
 // EVENT LISTENERS
 $("#add-question-button").click(function(){
     addNewQuestion($("#question-title-input").val(), $("#question-description-input").val(), $("#question-type-input").val(), "");
     clearQuestionFields();
+    saveSurvey();
 });
 
 $("#survey-title-input").keyup(function(){

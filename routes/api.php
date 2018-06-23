@@ -23,6 +23,7 @@ Route::prefix('member')->group(function(){
 Route::prefix('survey')->group(function(){
     Route::post('/answer', 'APISurveyController@saveAnswer')->name('survey.answer');
     Route::get('/{id}', 'APISurveyController@getSurveyFromGroup')->name('survey.fillanswerpage');
+
 });
 Route::prefix('content')->group(function(){
     Route::get('/{id}','ContentFinderController@findcontent')->name('find.content');
@@ -45,8 +46,7 @@ Route::prefix('group')->group(function(){
 });
 Route::prefix('admin')->group(function(){
     Route::post('/survey', 'admin\APISurveyController@saveSurvey')->name('survey.save');
+    Route::get('/survey/{id}', 'admin\APISurveyController@getSurveyById')->name('survey.getSurvey');
     Route::post('/content/{page}','admin\APIContentController@savecontent')->name('edit.content');
-    
-   
-    
+
 });

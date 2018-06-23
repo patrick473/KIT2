@@ -64,5 +64,6 @@
     </div>
 
     <script src="{{ asset('js/survey.js') }}"></script>
+    <script>loadSurvey({{$survey}})</script>
 
 @endsection
