@@ -10,6 +10,7 @@ use App\Group;
 use App\Member;
 use App\User;
 use Auth;
+use Log;
 use App\survey_group;
 class SurveyController extends Controller
 {
@@ -67,11 +68,12 @@ class SurveyController extends Controller
     public function groupSurveys($id){
 
         $group = Group::where('id',$id)->first();
-        $surveysgroup = survey_group::where('group_id',$group->id)->get();
+        $surveysgroup = survey_group::where('group_id',$id)->get();
         $surveys = collect([]);
         foreach($surveysgroup as $surveygroup){
             $survey = Survey::where('id',$surveygroup->survey_id)->first();
             $surveys->push($survey);
+            Log::debug($survey);
         }
 
         $members = Member::where('group_id', '=', $id)->orderBy('group_leader', 'DESC')->get();
@@ -92,8 +94,8 @@ class SurveyController extends Controller
 
             return view('survey.answer',compact('survey'));
     }
-    public function selectsurvey(){
+    public function selectsurvey($group_id){
 
-        return view('group.selectSurvey');
+        return view('group.selectSurvey',compact('group_id'));
     }
 }
