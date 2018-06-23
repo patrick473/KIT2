@@ -23,6 +23,7 @@ Route::prefix('member')->group(function(){
 Route::prefix('survey')->group(function(){
     Route::post('/answer', 'APISurveyController@saveAnswer')->name('survey.answer');
     Route::get('/{id}', 'APISurveyController@getSurveyFromGroup')->name('survey.fillanswerpage');
+    Route::get('/select/{group_id}', 'APISurveyController@surveySearch')->name('survey.search');
 });
 Route::prefix('content')->group(function(){
     Route::get('/{id}','ContentFinderController@findcontent')->name('find.content');
@@ -35,18 +36,19 @@ Route::prefix('invite')->group(function(){
 });
 
 Route::prefix('group')->group(function(){
+    //TODO: deze twee routes bestaan niet???
     Route::get('/group_action', 'APIGroupController@GroupAction')->name('group.search');
     Route::get('/member_action', 'APIGroupController@MemberAction')->name('group.searchmember');
-   
+
     Route::get('/invite/member_action/{id}', 'APIMemberController@Members')->name('protected_member_search');
     Route::post('/invite', 'InviteController@process')->name('group.process');
-    Route::post('/survey', 'APISurveyController@copySurvey')->name('survey.copy');  
+    Route::post('/survey/{group_id}/{survey_id}', 'APISurveyController@copySurvey')->name('survey.copy');
     Route::delete('/{id}', 'GroupController@destroyGroup')->name('delete.group');
 });
 Route::prefix('admin')->group(function(){
     Route::post('/survey', 'admin\APISurveyController@saveSurvey')->name('survey.save');
     Route::post('/content/{page}','admin\APIContentController@savecontent')->name('edit.content');
-    
-   
-    
+
+
+
 });
