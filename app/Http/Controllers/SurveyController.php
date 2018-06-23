@@ -59,17 +59,9 @@ class SurveyController extends Controller
 
         return view('group.surveyOverview')->with(['survey'=>$jsonObject]);
     }
-    public function surveyoverview($group_id){
 
-        $surveys = Surveys::whereNotIn('id', function($q) use($group_id){
-          $q->select('survey_id')
-          ->from(with(new surveys_group)->getTable())
-          ->where('group_id','=',$group_id);
-          })
-          ->orderBy('title', 'desc')
-          ->get();
-          
-        return view('group.selectSurvey',compact(['surveys', 'group_id']));
+    public function surveyoverview($group_id){
+        return view('group.selectSurvey',compact('group_id'));
       }
 
     public function groupSurveys($id){
