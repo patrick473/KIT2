@@ -80,11 +80,9 @@ class APISurveyController extends Controller
    }
 
     public function getSurveyById($id){
-        Log::Debug($id);
         $app = app();
         $json = $app->make('stdClass');
         $survey = Survey::where('id',$id)->first();
-        Log::Debug($survey);
         $questions = Question::where('survey_id',$survey->id)->get();
         foreach($questions as $question){
             $question->attributes = json_decode($question->attributes);
@@ -95,7 +93,6 @@ class APISurveyController extends Controller
         $json->description = $survey->description;
         $json->created_at = $survey->created_at;
         $json->questions = $questions;
-        Log::Debug(json_encode($json));
         return json_encode($json);
 
     }

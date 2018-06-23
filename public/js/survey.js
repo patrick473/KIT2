@@ -82,10 +82,11 @@ function loadSurvey(id){
         console.log(response);
         $("#survey-title-input").val(response.title);
         $("#survey-description-input").val(response.description);
-        $("#survey-id").text(response.id);
+        $("#survey-id").val(response.surveyid);
         $.each(response.questions, function(index, question){
             addNewQuestion(question.title, question.description, question.type, question.id);
         });
+        changeStatus("Voor het laatst opgeslagen: " + response.created_at.date, "orange")
     });
 }
 
