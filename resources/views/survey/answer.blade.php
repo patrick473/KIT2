@@ -7,9 +7,10 @@
         <h4 class="card-title"></h4>
         <p></p>
         <hr>
-
+        <div id="SurveyBody">
+        </div>
     </div>
-  
+
 </div>
 
 @endsection

@@ -159,7 +159,7 @@ class APISurveyController extends Controller
         $json->surveyid = $survey->id;
         $json->title = $survey->title;
         $json->description = $survey->description;
-        $json->created_at = $survey->created_at;
+        $json->updated_at = $survey->updated_at;
         $json->questions = $questions;
         return json_encode($json);
 

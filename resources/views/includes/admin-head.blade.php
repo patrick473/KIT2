@@ -5,7 +5,6 @@
                     <img src="{{ URL::asset('images/hu-logo.png') }}" width="30" height="30" class="d-inline-block align-top" alt="HU Logo">
                     Kwaliteit Instrument Toetsprogramma
             </a>
-
             <!-- Opens and closes extendible link list on mobile -->
             <button class="navbar-toggler"
              type="button" data-toggle="collapse"

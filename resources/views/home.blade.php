@@ -16,7 +16,5 @@
 
 @section('extrascripts')
 @include('scripts.contentscript')
-<!--
-    Probably redundant but to scared to delete
-    <script src="{{ asset('js/loaddynamiccontent.js') }}"></script>-->
+
 @endsection

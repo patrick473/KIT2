@@ -20,24 +20,33 @@ function addNewQuestion(qttl, qdesc, type, qid){
     switch(type){
         case 'Text':
             $(".questions-wrapper").append(
-            "<div id='question-row" + numberOfQuestions + "' class='row'>" +
+            "<div id='question-row" + numberOfQuestions + "' class='wrap question" + qid + " row'>" +
                 "<div class='col-md-12'>" +
-                    "<input id='question-title" + numberOfQuestions + "' type='text' value='" + qttl + "' class='autosave form-control example-input example-title-input question-title'></input>" +
-                    "<div class='question row'>" +
+                    "<input id='question-title" + numberOfQuestions + "' type='text' value='" + qttl + "' class='autosave" + numberOfQuestions + " form-control example-input example-title-input question-title'/>" +
+                    "<div class='row'>" +
                         "<div class='question-content col-md-6'>" +
-                            "<textarea id='question-description" + numberOfQuestions + "' class='autosave example-input form-control survey-textarea question-description'>" + qdesc + "</textarea>" +
+                            "<textarea id='question-description" + numberOfQuestions + "' class='autosave" + numberOfQuestions + " example-input form-control survey-textarea question-description'>" + qdesc + "</textarea>" +
                             "<input id='question-type" + numberOfQuestions + "' value='" + type + "' type='hidden'/>" +
                             "<input id='question-id" + numberOfQuestions + "' value='" + qid + "' type='hidden'/>" +
                         "</div>" +
                         "<div class='question-content col-md-6'>" +
                             "<textarea id='question-answer" + numberOfQuestions + "' disabled class='example-input form-control survey-textarea'></textarea>" +
+                            "<div id='" + qid + "' class='remove-question-button" + numberOfQuestions + " col-md-6 col-lg-offset-3 btn btn-danger btn-lg remove-question-button'>Verwijder</div>" +
                         "</div>" +
                     "</div>" +
                 "</div>" +
             "</div><br/>"
             );
-            $(".autosave").on('change', function() {
+            $(".autosave" + numberOfQuestions).on('change', function() {
                 saveSurvey();
+            });
+            $(".remove-question-button" + numberOfQuestions).click(function(event) {
+                if(event.target.id === ""){
+                    return;
+                }
+                else{
+                    deleteQuestion(event.target.id);
+                }
             });
     }
 }
@@ -76,25 +85,43 @@ function toJSON(){
     return JSON.stringify(json);
 }
 
+function deleteQuestion(id){
+    $.ajax({
+        url: "/api/admin/question/" + id,
+        type: "DELETE",
+        contentType: 'json',
+        success: function(response){
+            $("#" + id).parents(".wrap").fadeOut(500);
+            setTimeout(function(){
+                $("#" + id).parents(".wrap").remove();
+            }, 500);
+        },
+        error: function(xhr, response){
+            console.log(response);
+        }
+    });
+}
+
 function loadSurvey(id){
     $.get("/api/admin/survey/" + id, function(response, xhr){
         response = JSON.parse(response);
-        console.log(response.title);
         $("#survey-title-input").val(response.title);
         $("#survey-description-input").val(response.description);
         $("#survey-id").val(response.surveyid);
         $.each(response.questions, function(index, question){
             addNewQuestion(question.title, question.description, question.type, question.id);
+            console.log(question.id);
         });
-        changeStatus("Voor het laatst opgeslagen: " + response.created_at.date, "orange")
+        changeStatus("Voor het laatst opgeslagen: " + response.updated_at.date.slice(0, -7), "orange")
     });
 }
 
 function saveSurvey(){
+    $(".error-label").remove();
     //Change status text
-    console.log($("#survey-title-input").val());
     if($("#survey-title-input").val() === ""){
-    return;
+        validationError("survey-title-input")
+        return;
     }
     else{
         changeStatus("Opslaan...", "orange");
@@ -110,6 +137,7 @@ function saveSurvey(){
             $("#survey-id").val(response.id);
             $.each(response.questions, function (index, question) {
                 $("#question-id" + (index + 1)).val(question.id);
+                $(".remove-question-button" + (index + 1)).attr("id", question.id);
             });
             changeStatus("Opgeslagen om: " + getCurrentDateTime(), "green");
         },
@@ -126,6 +154,11 @@ function saveSurvey(){
 
 }
 
+function validationError(id){
+    $("#" + id).after("<label class='error-label'>Geef a.u.b. een waarde op!</label>");
+    $("#" + id).focus();
+}
+
 function changeStatus(text, color){
     $("#status-label").text(text);
     $("#status-label").css("color", color);
@@ -134,7 +167,7 @@ function changeStatus(text, color){
 function getCurrentDateTime(){
     var d = new Date();
     var time = d.toLocaleTimeString();
-    var datetime = time + " op " + d.getDate() + "-" + (d.getMonth() + 1)+ "-" + d.getFullYear();
+    var datetime = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + time;
     return datetime;
 }
 
@@ -142,16 +175,23 @@ function getCurrentDateTime(){
 
 // EVENT LISTENERS
 $("#add-question-button").click(function(){
-    addNewQuestion($("#question-title-input").val(), $("#question-description-input").val(), $("#question-type-input").val(), "");
-    clearQuestionFields();
-    saveSurvey();
+    $(".error-label").remove();
+    if($("#question-title-input").val() === ""){
+        validationError("question-title-input");
+        return;
+    }
+    else{
+        addNewQuestion($("#question-title-input").val(), $("#question-description-input").val(), $("#question-type-input").val(), "");
+        clearQuestionFields();
+        saveSurvey();
+    }
 });
 
 $("#survey-title-input").keyup(function(){
     $("#example-title").text($("#survey-title-input").val());
 });
 
-$(".autosave").on('change', function() {
+$(".autosave").on('change', function(){
     saveSurvey();
 });
 

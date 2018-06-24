@@ -33,6 +33,7 @@ class SurveyController extends Controller
     $surveys = Survey::all();
     return view('survey.overview',compact('surveys'));
   }
+
   public function selectSurvey($group_id){
       return view('admin.group.selectSurvey',compact('group_id'));
     }
@@ -61,4 +62,9 @@ class SurveyController extends Controller
 
     }
 
+
+  public function deleteSurvey($id){
+    $survey = Survey::find($id);
+    $survey->delete();
+}
 }

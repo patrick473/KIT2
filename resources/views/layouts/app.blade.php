@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Kwaliteits Isntrument Toetsprogramma | Hogeschool Utrecht') }}</title>
 
    
         <!-- Fonts -->
@@ -43,7 +43,7 @@
                     @endif
                     </div>
                 <div class="mainContentSection col-xs-12 col-sm-10">
-                    @include('includes.who')
+                   
             @yield('content')
                 </div>
             </div>

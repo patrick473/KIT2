@@ -130,7 +130,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'startpage'
             ]);
             $contactpage = Page::create([
-                'name' => 'contactpage'
+                'name' => 'adminhomepage'
             ]);
             $this->command->info('pages has been defined');
 
