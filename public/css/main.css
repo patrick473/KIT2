@@ -87,7 +87,7 @@
 }
 
 @-webkit-keyframes fadein {
-    from {bottom: 0; opacity: 0;} 
+    from {bottom: 0; opacity: 0;}
     to {bottom: 30px; opacity: 1;}
 }
 
@@ -97,7 +97,7 @@
 }
 
 @-webkit-keyframes fadeout {
-    from {bottom: 30px; opacity: 1;} 
+    from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
 
@@ -114,4 +114,19 @@
     .contentSection {
         width: 100%;
     }
+}
+
+.bg_custom{
+  background-color: #A0DB8E;
+}
+
+.bg_custom_2{
+  background-color: #FFB6B9;
+}
+
+.border_custom{
+  margin-bottom: 1em;
+  border-style: solid;
+  border-color: #A0DB8E;
+  border-radius: 5px;
 }
