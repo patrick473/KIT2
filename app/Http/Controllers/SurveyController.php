@@ -35,6 +35,7 @@ class SurveyController extends Controller
             foreach($answers as $answer){
 
                 foreach($answer->answers as $questionAnswer){
+                    dd($questionAnswer);
                     if( $question->id == $questionAnswer->id){
                         $answerObject = $app->make('stdClass');
                         $answerObject->userid = $answer->user_id;
