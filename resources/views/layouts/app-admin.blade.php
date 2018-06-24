@@ -52,7 +52,7 @@
  
 <!-- footer -->
         
-             @include('includes.footer')         
+                    
 
 
             <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

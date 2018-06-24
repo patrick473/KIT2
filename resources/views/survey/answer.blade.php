@@ -4,13 +4,14 @@
 
 <div class="card">
     <div class="card-body">
-        <h4 class="card-title">{{$survey->title}}</h4>
-        <p>{{$survey->description}}</p>
+        <h4 class="card-title"></h4>
+        <p></p>
         <hr>
-        
+
     </div>
+  
 </div>
-       
+
 @endsection
 
 @section('extrascripts')

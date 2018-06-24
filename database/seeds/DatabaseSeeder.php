@@ -9,6 +9,8 @@ use \App\Admin;
 use \App\Member;
 use \App\Survey;
 use \App\Question;
+use \App\survey_group;
+use \App\Answer;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -224,7 +226,7 @@ class DatabaseSeeder extends Seeder
               'user_id' => 4,
               'group_leader' => 1
             ]);
-            
+
             $this->command->info('members have been created');
 
             $survey1 = Survey::create([
@@ -235,10 +237,128 @@ class DatabaseSeeder extends Seeder
             $question1 = Question::create([
                'survey_id' => $survey1->id,
                'type' => 'Text',
-               'title' => 'testquestion',
-               'description' => 'testdescription',
+               'title' => 'Wat is uw ervaring met deze applicatie?',
+               'description' => 'geef uw eerste mening van deze applicatie.',
                'attributes' => '[]'
 
+            ]);
+            $question2 = Question::create([
+               'survey_id' => $survey1->id,
+               'type' => 'Text',
+               'title' => 'Hoe snel werkt deze applicatie?',
+               'description' => 'Is de applicatie traag op bepaalde plekken en waar?',
+               'attributes' => '[]'
+
+            ]);
+            $question3 = Question::create([
+               'survey_id' => $survey1->id,
+               'type' => 'Text',
+               'title' => 'Dit is een vraag waar je geen antwoord op geeft voor testen?',
+               'description' => 'Test vraag Test vraag Test vraag Test vraag Test vraag ',
+               'attributes' => '[]'
+
+            ]);
+            $group_survey1 = survey_group::create([
+                'survey_id' => $survey1->id,
+                'group_id' => $group1->id
+            ]);
+
+            $app = app();
+
+            $answerObject = $app->make('stdClass');
+            $questionObject = $app->make('stdClass');
+
+            $questionObject->id = $question1->id;
+            $questionObject->value = "De applicatie is duidelijk genoeg om er mee te werken.";
+            $answers = collect([]);
+            $answers->push($questionObject);
+
+            $answerObject->answers = $answers;
+
+            $answer1 = Answer::create([
+                'user_id' => $user1->id,
+                'survey_id' => $survey1->id,
+                'answers'=> json_encode($answerObject)
+            ]);
+
+            $answerObject1 = $app->make('stdClass');
+            $questionObject1 = $app->make('stdClass');
+
+            $questionObject1->id = $question1->id;
+            $questionObject1->value = "Deze applicatie werkt goed.";
+            $answers1 = collect([]);
+            $answers1->push($questionObject1);
+
+            $answerObject1->answers1 = $answers1;
+
+            $answer2 = Answer::create([
+                'user_id' => $user2->id,
+                'survey_id' => $survey1->id,
+                'answers'=> json_encode($answerObject1)
+            ]);
+
+            $answerObject2 = $app->make('stdClass');
+            $questionObject2 = $app->make('stdClass');
+
+            $questionObject2->id = $question1->id;
+            $questionObject2->value = "Ik denk dat ik deze applicatie gebruik in verschillende situaties.";
+            $answers2 = collect([]);
+            $answers2->push($questionObject2);
+
+            $answerObject2->answers2 = $answers2;
+
+            $answer3 = Answer::create([
+                'user_id' => $user3->id,
+                'survey_id' => $survey1->id,
+                'answers'=> json_encode($answerObject2)
+            ]);
+
+            $answerObject3 = $app->make('stdClass');
+            $questionObject3 = $app->make('stdClass');
+
+            $questionObject3->id = $question1->id;
+            $questionObject3->value = "Deze applicatie had betere styling mogen hebben.";
+            $answers3 = collect([]);
+            $answers3->push($questionObject3);
+
+            $answerObject3->answers3 = $answers3;
+
+            $answer4 = Answer::create([
+                'user_id' => $user4->id,
+                'survey_id' => $survey1->id,
+                'answers'=> json_encode($answerObject3)
+            ]);
+
+            $answerObject4 = $app->make('stdClass');
+            $questionObject4 = $app->make('stdClass');
+
+            $questionObject4->id = $question1->id;
+            $questionObject4->value = "Wauw dit overzicht werkt eindelijk!";
+            $answers4 = collect([]);
+            $answers4->push($questionObject4);
+
+            $answerObject4->answers4 = $answers4;
+
+            $answer5 = Answer::create([
+                'user_id' => $user5->id,
+                'survey_id' => $survey1->id,
+                'answers'=> json_encode($answerObject4)
+            ]);
+
+            $answerObject5 = $app->make('stdClass');
+            $questionObject5 = $app->make('stdClass');
+
+            $questionObject5->id = $question2->id;
+            $questionObject5->value = "Ik ben de eerste die hier antwoord op heeft gegeven";
+            $answers5 = collect([]);
+            $answers5->push($questionObject5);
+
+            $answerObject5->answers5 = $answers5;
+
+            $answer6 = Answer::create([
+                'user_id' => $user6->id,
+                'survey_id' => $survey1->id,
+                'answers'=> json_encode($answerObject5)
             ]);
         }
     }

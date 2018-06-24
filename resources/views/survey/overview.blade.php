@@ -3,6 +3,8 @@
 @section('content')
 <h1>Vragenlijsten</h1>
 <br>
+<a href="{{route('survey.new')}}" class="btn btn-primary btn-lg">Nieuwe vragenlijst toevoegen</a>
+<hr>
 @foreach ($surveys as $survey )
 <div class="card" >
     
