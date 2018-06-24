@@ -17,5 +17,5 @@
 @endsection
 
 @section('extrascripts')
-  <script src="{{ asset('js/selectSurvey.js') }}"></script>
+  <script src="{{ asset('js/adminSelectSurvey.js') }}"></script>
 @endsection

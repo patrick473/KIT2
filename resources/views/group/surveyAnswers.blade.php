@@ -28,7 +28,7 @@
                 </div>
               @endforeach
             @else
-              <div class='col-md-3'>
+              <div class='col-md-12'>
                   <p class='bg_custom_2'>Er zijn nog geen antwoorden gegeven op deze vraag.</p>
               </div>
             @endif
@@ -71,7 +71,7 @@
               </div>
             @endforeach
           @else
-            <div class='col-md-3'>
+            <div class='col-md-12'>
                 <p class='bg_custom_2'>Er zijn nog geen antwoorden gegeven op deze vraag.</p>
             </div>
           @endif
@@ -90,16 +90,38 @@
         </div>
       </div>
 
-      <div class='slider-wrapper row'>
-        <form>
-          <input disabled name='score' type='radio'><input class='autosave' value={{$question->attributes->first}} type='text'/></input><br>
-          <input disabled  name='score' type='radio'><input class='autosave'  value={{$question->attributes->second}}  type='text'/></input><br>
-          <input disabled  name='score' type='radio'><input class='autosave'  value={{$question->attributes->third}} type='text'/></input><br>
-          <input disabled  name='score' type='radio'><input class='autosave'  value={{$question->attributes->fourth}}  type='text'/></input><br>
-          <input disabled  name='score' type='radio'><input class='autosave'  value={{$question->attributes->fifth}}  type='text'/></input>
-        </form>
+      <div class='row'>
+        <div class="col-md-12">
+          <form>
+            <div class='row'>
+              <div class="col-md-12">
+                <input disabled name='score' type='radio' value='{{$question->attributes->first}}'> {{$question->attributes->first}}
+              </div>
+            </div>
+            <div class='row'>
+              <div class="col-md-12">
+                <input disabled  name='score' type='radio' value='{{$question->attributes->second}}'> {{$question->attributes->second}}
+              </div>
+            </div>
+            <div class='row'>
+              <div class="col-md-12">
+                <input disabled  name='score' type='radio' value='{{$question->attributes->third}}'> {{$question->attributes->third}}
+              </div>
+            </div>
+            <div class='row'>
+              <div class="col-md-12">
+                <input disabled  name='score' type='radio' value='{{$question->attributes->fourth}}'> {{$question->attributes->fourth}}
+              </div>
+            </div>
+            <div class='row'>
+              <div class="col-md-12">
+                <input disabled  name='score' type='radio' value='{{$question->attributes->fifth}}'> {{$question->attributes->fifth}}
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
-
+      <br>
       <div class='col-md-12'>
         <div class="row">
           <div class='col-md-12'>
@@ -111,12 +133,12 @@
             @foreach($question->answers as $answer)
               <div class='col-md-3'>
                 <div class="border_custom">
-                  <p class='bg_custom'>{{$answer->user->username}}:</p><p>Gesellecteerd antwoord: {{$answer->value}}</p>
+                  <p class='bg_custom'>{{$answer->user->username}}:</p><p>Geselecteerd antwoord: {{$answer->value}}</p>
                 </div>
               </div>
             @endforeach
           @else
-            <div class='col-md-3'>
+            <div class='col-md-12'>
                 <p class='bg_custom_2'>Er zijn nog geen antwoorden gegeven op deze vraag.</p>
             </div>
           @endif
@@ -126,6 +148,7 @@
     @endif
 
   @endforeach
+  <button type="button" class="btn btn-success pdfConverter" id="pdfConverter"  data-id = {{$id}}>Print of exporteer naar pdf</button>
 
 @endsection
 

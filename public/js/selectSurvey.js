@@ -35,6 +35,6 @@ $(document).ready(function(){
      processData: false,
      contentType: 'charset=UTF-8'
    }).done(function (response) {
-     location.href='/admin/surveyOverview/1';
+     location.href='/group/surveys/5';
    })
  });

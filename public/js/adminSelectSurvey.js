@@ -8,7 +8,7 @@ $(document).ready(function(){
  function fetch_survey_data(query = '') {
   let group_id = $('#SurveyBody').data("group_id");
   $.ajax({
-   url:"/api/admin/survey/select/"+group_id,
+   url:"/api/admin/select/"+group_id,
    method:'GET',
    data:{query:query},
    dataType:'json',
@@ -27,7 +27,7 @@ $(document).ready(function(){
  $(document).on("click",".addSurvey",(e)=>{
    let survey_id = $(e.target).data("survey_id");
    let group_id = $('#SurveyBody').data("group_id");
-   let url = "/api/admin/group/survey/"+group_id+'/'+survey_id;
+   let url = "/api/admin/survey/"+group_id+'/'+survey_id;
    $.ajax({
      type: "POST",
      url: url,
@@ -35,6 +35,6 @@ $(document).ready(function(){
      processData: false,
      contentType: 'charset=UTF-8'
    }).done(function (response) {
-     location.href='/group/surveys/1';
+     location.href='/admin/surveyOverview/1';
    })
  });

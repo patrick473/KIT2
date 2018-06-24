@@ -274,6 +274,14 @@ class DatabaseSeeder extends Seeder
                'attributes' => '{"end": "echt wel", "start": "echt niet", "middle": "soms"}'
 
             ]);
+            $question6 = Question::create([
+               'survey_id' => $survey1->id,
+               'type' => 'Radio',
+               'title' => 'Wat als radio buttons niet bestonden?',
+               'description' => 'Radio buttons zijn een belangrijke toevoeging aan deze vragenlijst. selecteer er een om antwoord te geven!',
+               'attributes' => '{"fifth": "Dan waren vragenlijsten minder nuttig geweest", "first": "Dan hadden we nog bullet points", "third": "Dan waren er geen radio buttons", "fourth": "Vragenlijsten kunnen best zonder", "second": "Dan geef ik geen antwoord op vragenlijsten"}'
+
+            ]);
 
             $group_survey1 = survey_group::create([
                 'survey_id' => $survey1->id,
