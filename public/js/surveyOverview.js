@@ -9,12 +9,12 @@ $(document).on("click",".removeSurvey_group",(e)=>{
 
     let url = "/api/survey/surveyGroup/"+survey_id+"/"+group_id;
     $.ajax({
-        type: "DELETE",
+        type: "GET",
         url: url,
         contentType:'json',
         processData: false,
         contentType: 'charset=UTF-8'
     }).done(function (response) {
-      location.reload();
+      //location.reload();
     })
 })

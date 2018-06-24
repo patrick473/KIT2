@@ -45,7 +45,7 @@ class SurveyController extends Controller
             }
             $question->answers = $questionanswers;
         }
-        
+
         //add answers to question
 
         //construct object to be responded with
@@ -55,8 +55,6 @@ class SurveyController extends Controller
         $jsonObject->group = $groupSurvey->group_id;
 
         $jsonObject->questions = $questions;
-
-
 
         return view('group.surveyOverview')->with(['survey'=>$jsonObject]);
     }

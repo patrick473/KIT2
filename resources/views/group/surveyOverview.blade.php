@@ -1,6 +1,13 @@
 @extends ('layouts.app')
 
 @section('content')
+  @if(Session::has('succes'))
+  <div class="alert alert-success alert-dismissible">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Success!</strong> <p id="succesMessage">{{Session::get('succes')}}</p>
+  </div>
+  @endif
+
   <div class="row">
     <div class="col-sm-12" id="memberBody">
       @if(!$members->isEmpty())
