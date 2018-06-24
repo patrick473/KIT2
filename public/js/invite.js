@@ -56,7 +56,7 @@ $(document).ready(function(){
  })
 
  $(document).on("click",".deleteMember",(e)=>{
-     let member_id = $('#deleteMember').data("member_id");
+     let member_id = $(e.target).data("member_id");
 
      let url = "/api/member/"+member_id;
      $.ajax({

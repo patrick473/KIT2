@@ -7,8 +7,8 @@
         Groep aanmaken
       </button>
 
-  
-    
+
+
 
   <hr>
 
@@ -84,17 +84,17 @@
       <div class="modal-body">
           <div class="form-group">
               <label for="title">Groep naam</label>
-              <input type="text" class="form-control" id="title" placeholder="Groep naam" name="title">
+              <input type="text" class="form-control" id="title" placeholder="Groep naam" name="title" required>
             </div>
             <div class="form-group">
               <label for="description">Groep omschrijving</label>
-              <textarea class="form-control" id="description" rows="3" placeholder="Waar is de groep voor bedoeld?" name="description"></textarea>
+              <textarea class="form-control" id="description" rows="3" placeholder="Waar is de groep voor bedoeld?" name="description" required></textarea>
             </div>
       </div>
       <div class="modal-footer">
-          
+
               <button type="submit" class="btn btn-primary">Maak groep aan</button>
-            
+
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>

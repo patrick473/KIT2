@@ -22,7 +22,7 @@
             @endforeach
           @endforeach
         @else
-          {{--GROEP LIJDER IS OOK MEMBER MAAR WORDT HIER NIET IN MEE GENOMEN--}}
+          {{--GROEP LEIDER IS OOK MEMBER MAAR WORDT HIER NIET IN MEE GENOMEN--}}
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">De groep heeft nog geen leden.</h5>
