@@ -54,6 +54,7 @@
                     </div>
                     @if($groupLeader->id == $currentUser)
                       <div class="col align-self-end">
+                        {{-- TODO:Survey_group_id moet ik hier hebben, maar wordt niet geleverd door surveycontroller --}}
                         <button type="button" class="btn btn-danger float-right removeSurvey_group" id='removeSurvey_group' data-survey_id = {{$survey->id}}>Verwijder survey uit de groep</button>
                       </div>
                     @else
@@ -79,5 +80,5 @@
 @endsection
 
 @section('extrascripts')
-  <script> src="{{ asset('js/surveyOverview.js') }}"></script>
+  <script src="{{ asset('js/surveyOverview.js') }}"></script>
 @endsection
