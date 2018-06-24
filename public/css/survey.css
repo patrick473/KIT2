@@ -37,3 +37,8 @@
 .question-description{
 
 }
+.error-label{
+    color: red;
+    font-weight: bold;
+    padding-left: 10px;
+}

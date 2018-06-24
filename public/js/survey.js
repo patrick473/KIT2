@@ -76,6 +76,20 @@ function toJSON(){
     return JSON.stringify(json);
 }
 
+function deleteQuestion(id){
+    $.ajax({
+        url: "/api/admin/question/" + id,
+        type: "DELETE",
+        contentType: 'json',
+        success: function(response){
+            console.log("removed" + id);
+        },
+        error: function(xhr, response){
+            console.log(resposne);
+        }
+    });
+}
+
 function loadSurvey(id){
     $.get("/api/admin/survey/" + id, function(response, xhr){
         response = JSON.parse(response);
@@ -86,15 +100,17 @@ function loadSurvey(id){
         $.each(response.questions, function(index, question){
             addNewQuestion(question.title, question.description, question.type, question.id);
         });
-        changeStatus("Voor het laatst opgeslagen: " + response.created_at.date, "orange")
+        changeStatus("Voor het laatst opgeslagen: " + response.updated_at.date.slice(0, -7), "orange")
     });
 }
 
 function saveSurvey(){
+    $(".error-label").remove();
     //Change status text
     console.log($("#survey-title-input").val());
     if($("#survey-title-input").val() === ""){
-    return;
+        validationError("survey-title-input")
+        return;
     }
     else{
         changeStatus("Opslaan...", "orange");
@@ -126,6 +142,11 @@ function saveSurvey(){
 
 }
 
+function validationError(id){
+    $("#" + id).after("<label class='error-label'>Geef a.u.b. een waarde op!</label>");
+    $("#" + id).focus();
+}
+
 function changeStatus(text, color){
     $("#status-label").text(text);
     $("#status-label").css("color", color);
@@ -134,7 +155,7 @@ function changeStatus(text, color){
 function getCurrentDateTime(){
     var d = new Date();
     var time = d.toLocaleTimeString();
-    var datetime = time + " op " + d.getDate() + "-" + (d.getMonth() + 1)+ "-" + d.getFullYear();
+    var datetime = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + time;
     return datetime;
 }
 
@@ -142,9 +163,16 @@ function getCurrentDateTime(){
 
 // EVENT LISTENERS
 $("#add-question-button").click(function(){
-    addNewQuestion($("#question-title-input").val(), $("#question-description-input").val(), $("#question-type-input").val(), "");
-    clearQuestionFields();
-    saveSurvey();
+    $(".error-label").remove();
+    if($("#question-title-input").val() === ""){
+        validationError("question-title-input");
+        return;
+    }
+    else{
+        addNewQuestion($("#question-title-input").val(), $("#question-description-input").val(), $("#question-type-input").val(), "");
+        clearQuestionFields();
+        saveSurvey();
+    }
 });
 
 $("#survey-title-input").keyup(function(){
