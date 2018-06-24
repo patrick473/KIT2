@@ -5,6 +5,6 @@
           Paginas aanmaken
         </a>
       <a href="{{route('survey.overview')}}" class="list-group-item list-group-item-action">Vragenlijsten beheren</a>
-      
+      <a href="{{route('admin.index.group')}}" class="list-group-item list-group-item-action">Groepen beheren</a>
        
       </div>
