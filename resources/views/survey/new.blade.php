@@ -61,6 +61,7 @@
               <select id="question-type-input" class="form-control survey-input survey-select col-xs-12 col-md-6" name="type" required autofocus>
                 <option>Text</option>
                 <option>Slider</option>
+                <option>Radio</option>
               </select>
             </div>
 

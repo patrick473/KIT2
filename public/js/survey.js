@@ -16,7 +16,6 @@ function clearQuestionFields(){
 
 //TODO: Add more types
 function addNewQuestion(qttl, qdesc, type, qid, attributes){
-    console.log(attributes);
     numberOfQuestions += 1;
     switch(type){
         case 'Text':
@@ -38,6 +37,7 @@ function addNewQuestion(qttl, qdesc, type, qid, attributes){
                 "</div>" +
             "</div><br/>"
             );
+            $("#question-title" + numberOfQuestions).focus();
             $(".autosave" + numberOfQuestions).on('change', function() {
                 saveSurvey();
             });
@@ -71,6 +71,46 @@ function addNewQuestion(qttl, qdesc, type, qid, attributes){
                 "</div>" +
                 "</div><br/>"
             );
+            $("#question-title" + numberOfQuestions).focus();
+            $(".autosave" + numberOfQuestions).on('change', function() {
+                saveSurvey();
+            });
+            $(".remove-question-button" + numberOfQuestions).click(function(event) {
+                if(event.target.id === ""){
+                    return;
+                }
+                else{
+                    deleteQuestion(event.target.id);
+                }
+            });
+            break;
+        case 'Radio':
+            $(".questions-wrapper").append(
+                "<div id='question-row" + numberOfQuestions + "' class='wrap question" + qid + " row'>" +
+                "<div class='col-md-12'>" +
+                "<input id='question-title" + numberOfQuestions + "' type='text' value='" + qttl + "' class='autosave" + numberOfQuestions + " form-control example-input example-title-input question-title'/>" +
+                "<div class='row'>" +
+                "<div class='question-content col-md-6'>" +
+                "<textarea id='question-description" + numberOfQuestions + "' class='autosave" + numberOfQuestions + " example-input form-control survey-textarea question-description'>" + qdesc + "</textarea>" +
+                "<input id='question-type" + numberOfQuestions + "' value='" + type + "' type='hidden'/>" +
+                "<input id='question-id" + numberOfQuestions + "' value='" + qid + "' type='hidden'/>" +
+                "</div>" +
+                "<div class='question-content col-md-6'>" +
+                "<div class='slider-wrapper row'>" +
+                    "<form id='radio"+numberOfQuestions+"'>" +
+                        "<input disabled name='score' type='radio'><input class='autosave" + numberOfQuestions + "' id='first" + numberOfQuestions +"' value='" + attributes.first + "' type='text'/></input><br>" +
+                        "<input disabled  name='score' type='radio'><input class='autosave" + numberOfQuestions + "' id='second" + numberOfQuestions +"'  value='" + attributes.second + "'  type='text'/></input><br>" +
+                        "<input disabled  name='score' type='radio'><input class='autosave" + numberOfQuestions + "' id='third" + numberOfQuestions +"'  value='" + attributes.third + "'  type='text'/></input><br>" +
+                        "<input disabled  name='score' type='radio'><input class='autosave" + numberOfQuestions + "' id='fourth" + numberOfQuestions +"'  value='" + attributes.fourth + "'  type='text'/></input><br>" +
+                        "<input disabled  name='score' type='radio'><input class='autosave" + numberOfQuestions + "' id='fifth" + numberOfQuestions +"'  value='" + attributes.fifth + "'  type='text'/></input>" +
+                    "</form>" +
+                "<div id='" + qid + "' class='remove-question-button" + numberOfQuestions + " col-md-6 col-lg-offset-3 btn btn-danger btn-lg remove-question-button'>Verwijder</div>" +
+                "</div>" +
+                "</div>" +
+                "</div>" +
+                "</div><br/>"
+            );
+            $("#question-title" + numberOfQuestions).focus();
             $(".autosave" + numberOfQuestions).on('change', function() {
                 saveSurvey();
             });
@@ -99,7 +139,7 @@ function toJSON(){
     }
     for(var x = 1; x < numberOfQuestions + 1; x++) {
         if($("#question-id" + x).val() != "" && $("#survey-id").val() != ""){
-            if($(".start" + x).val() === ""){
+            if($("#question-type" + x).val() === "Text"){
                 json["questions"].push({
                     "type": $("#question-type" + x).val(),
                     "title": $("#question-title" + x).val(),
@@ -109,7 +149,7 @@ function toJSON(){
                     "attributes": {}
                 });
             }
-            else{
+            else if($("#question-type" + x).val() === "Slider") {
                 json["questions"].push({
                     "type": $("#question-type" + x).val(),
                     "title": $("#question-title" + x).val(),
@@ -120,6 +160,22 @@ function toJSON(){
                         "start": $(".start" + x).val(),
                         "middle": $(".middle" + x).val(),
                         "end": $(".end" + x).val(),
+                    }
+                });
+            }
+            else if($("#question-type" + x).val() === "Radio") {
+                json["questions"].push({
+                    "type": $("#question-type" + x).val(),
+                    "title": $("#question-title" + x).val(),
+                    "description": $("#question-description" + x).val(),
+                    "survey_id": $("#survey-id").val(),
+                    "id": $("#question-id" + x).val(),
+                    "attributes": {
+                        "first": $("#first" + x).val(),
+                        "second": $("#second" + x).val(),
+                        "third": $("#third" + x).val(),
+                        "fourth": $("#fourth" + x).val(),
+                        "fifth": $("#fifth" + x).val(),
                     }
                 });
             }
@@ -170,6 +226,21 @@ function loadSurvey(id){
             }
             if(question.attributes.end === undefined){
                 question.attributes.end = " ";
+            }
+            if(question.attributes.first === undefined){
+                question.attributes.first = " ";
+            }
+            if(question.attributes.second === undefined){
+                question.attributes.second = " ";
+            }
+            if(question.attributes.third === undefined) {
+                question.attributes.third = " ";
+            }
+            if(question.attributes.fourth === undefined){
+                question.attributes.fourth = " ";
+            }
+            if(question.attributes.fifth === undefined){
+                question.attributes.fifth = " ";
             }
             addNewQuestion(question.title, question.description, question.type, question.id, question.attributes);
         });
@@ -244,6 +315,11 @@ $("#add-question-button").click(function(){
             "start": "",
             "middle": "",
             "end": "",
+            "first": "",
+            "second": "",
+            "third": "",
+            "fourth": "",
+            "fifth": "",
         }
         addNewQuestion($("#question-title-input").val(), $("#question-description-input").val(), $("#question-type-input").val(), "", attributes);
         clearQuestionFields();
