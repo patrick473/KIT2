@@ -78,8 +78,18 @@
         </div>
       </div>
       <hr>
-    @elseif($question->type=='Bullet')
-
+    @elseif($question->type=='Radio')
+      <div class="row">
+        <div class="col-md-12">
+          <h5>{{$question->title}}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p>{{$question->description}}</p>
+          {{$question->attributes->...}}
+        </div>
+      </div>
     @endif
 
   @endforeach
