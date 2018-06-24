@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
 use Log;
 use Auth;
 use Session;
@@ -139,7 +136,7 @@ public function destroySurveyGroup($survey_id, $group_id){
   $survey = survey_group::where('survey_id', '=', $survey_id)->where('group_id', '=', $group_id)->first();
 
   $survey->delete();
-  
+
 }
 
 }
