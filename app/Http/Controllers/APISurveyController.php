@@ -132,6 +132,10 @@ function surveySearch(Request $request, $group_id){
   }
 }
 
+public function destroySurveyGroup($survey_id, $group_id){
+  $survey = survey_group::where('survey_id', '=', $survey_id)->where('group_id', '=', $group_id)->first();
 
+  $survey->delete();
+}
 
 }
