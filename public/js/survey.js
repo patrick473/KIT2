@@ -110,6 +110,7 @@ function addNewQuestion(qttl, qdesc, type, qid, attributes){
                 "</div>" +
                 "</div><br/>"
             );
+            //focus on newly created question
             $("#question-title" + numberOfQuestions).focus();
             $(".autosave" + numberOfQuestions).on('change', function() {
                 saveSurvey();
