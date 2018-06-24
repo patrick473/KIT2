@@ -7,7 +7,7 @@ $(document).ready(function(){
 function fetch_survey_data(query = '') {
  let group_id = $('#SurveyBody').data("group_id");
  $.ajax({
-  url:"/api/survey/select/"+group_id,
+  url:"/api/survey/"+group_id,
   method:'GET',
   data:{query:query},
   dataType:'json',
