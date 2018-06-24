@@ -20,25 +20,33 @@ function addNewQuestion(qttl, qdesc, type, qid){
     switch(type){
         case 'Text':
             $(".questions-wrapper").append(
-            "<div id='question-row" + numberOfQuestions + "' class='row'>" +
+            "<div id='question-row" + numberOfQuestions + "' class='wrap question" + qid + " row'>" +
                 "<div class='col-md-12'>" +
-                    "<input id='question-title" + numberOfQuestions + "' type='text' value='" + qttl + "' class='autosave form-control example-input example-title-input question-title'></input>" +
-                    "<div class='question row'>" +
+                    "<input id='question-title" + numberOfQuestions + "' type='text' value='" + qttl + "' class='autosave" + numberOfQuestions + " form-control example-input example-title-input question-title'/>" +
+                    "<div class='row'>" +
                         "<div class='question-content col-md-6'>" +
-                            "<textarea id='question-description" + numberOfQuestions + "' class='autosave example-input form-control survey-textarea question-description'>" + qdesc + "</textarea>" +
+                            "<textarea id='question-description" + numberOfQuestions + "' class='autosave" + numberOfQuestions + " example-input form-control survey-textarea question-description'>" + qdesc + "</textarea>" +
                             "<input id='question-type" + numberOfQuestions + "' value='" + type + "' type='hidden'/>" +
                             "<input id='question-id" + numberOfQuestions + "' value='" + qid + "' type='hidden'/>" +
                         "</div>" +
                         "<div class='question-content col-md-6'>" +
                             "<textarea id='question-answer" + numberOfQuestions + "' disabled class='example-input form-control survey-textarea'></textarea>" +
-                            "<button class='col-md-6 col-lg-offset-3 btn btn-danger btn-lg remove-question-button'>Verwijder</button>" +
+                            "<div id='" + qid + "' class='remove-question-button" + numberOfQuestions + " col-md-6 col-lg-offset-3 btn btn-danger btn-lg remove-question-button'>Verwijder</div>" +
                         "</div>" +
                     "</div>" +
                 "</div>" +
             "</div><br/>"
             );
-            $(".autosave").on('change', function() {
+            $(".autosave" + numberOfQuestions).on('change', function() {
                 saveSurvey();
+            });
+            $(".remove-question-button" + numberOfQuestions).click(function(event) {
+                if(event.target.id === ""){
+                    return;
+                }
+                else{
+                    deleteQuestion(event.target.id);
+                }
             });
     }
 }
@@ -83,10 +91,13 @@ function deleteQuestion(id){
         type: "DELETE",
         contentType: 'json',
         success: function(response){
-            console.log("removed" + id);
+            $("#" + id).parents(".wrap").fadeOut(500);
+            setTimeout(function(){
+                $("#" + id).parents(".wrap").remove();
+            }, 500);
         },
         error: function(xhr, response){
-            console.log(resposne);
+            console.log(response);
         }
     });
 }
@@ -94,12 +105,12 @@ function deleteQuestion(id){
 function loadSurvey(id){
     $.get("/api/admin/survey/" + id, function(response, xhr){
         response = JSON.parse(response);
-        console.log(response.title);
         $("#survey-title-input").val(response.title);
         $("#survey-description-input").val(response.description);
         $("#survey-id").val(response.surveyid);
         $.each(response.questions, function(index, question){
             addNewQuestion(question.title, question.description, question.type, question.id);
+            console.log(question.id);
         });
         changeStatus("Voor het laatst opgeslagen: " + response.updated_at.date.slice(0, -7), "orange")
     });
@@ -108,7 +119,6 @@ function loadSurvey(id){
 function saveSurvey(){
     $(".error-label").remove();
     //Change status text
-    console.log($("#survey-title-input").val());
     if($("#survey-title-input").val() === ""){
         validationError("survey-title-input")
         return;
@@ -127,6 +137,7 @@ function saveSurvey(){
             $("#survey-id").val(response.id);
             $.each(response.questions, function (index, question) {
                 $("#question-id" + (index + 1)).val(question.id);
+                $(".remove-question-button" + (index + 1)).attr("id", question.id);
             });
             changeStatus("Opgeslagen om: " + getCurrentDateTime(), "green");
         },
@@ -180,7 +191,7 @@ $("#survey-title-input").keyup(function(){
     $("#example-title").text($("#survey-title-input").val());
 });
 
-$(".autosave").on('change', function() {
+$(".autosave").on('change', function(){
     saveSurvey();
 });
 
