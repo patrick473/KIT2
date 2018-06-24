@@ -35,12 +35,13 @@ class SurveyController extends Controller
             foreach($answers as $answer){
 
                 foreach($answer->answers as $questionAnswer){
-                   
-                    if( $question->id == $questionAnswer['id']){
+                    $realQuestionAnswer = $questionAnswer[0];
+                    
+                    if( $question->id == $realQuestionAnswer->id){
                         $answerObject = $app->make('stdClass');
                         $answerObject->userid = $answer->user_id;
                         $answerObject->user= User::where('id',$answer->user_id);
-                        $answerObject->value = $questionAnswer->value;
+                        $answerObject->value = $realQuestionAnswer->value;
                         $questionanswers->push($answerObject);
                     }
                 }
