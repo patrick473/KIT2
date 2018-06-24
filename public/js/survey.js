@@ -64,7 +64,7 @@ function addNewQuestion(qttl, qdesc, type, qid, attributes){
                     "<div class='question-content col-md-6'>" +
                         "<div class='slider-wrapper row'>" +
                             "<input id='question-answer" + numberOfQuestions + "' class='col-md-12 col-xs-12 slider' type='range' disabled/>" +
-                            "<input value='" + attributes.start + "' class='autosave col-md-4 col-xs-4 slider-start start" + numberOfQuestions + "'/><input value='" + attributes.middle + "' class='autosave slider-middle col-md-4 col-xs-4 middle" + numberOfQuestions + "'/><input value='" + attributes.end + "' class='autosave slider-end col-md-4 col-xs-4 end" + numberOfQuestions + "'/>" +
+                            "<input value='" + attributes.start + "' class='autosave" + numberOfQuestions + " form-control col-md-4 col-xs-4 slider-start start" + numberOfQuestions + "'/><input value='" + attributes.middle + "' class='autosave" + numberOfQuestions + " form-control  slider-middle col-md-4 col-xs-4 middle" + numberOfQuestions + "'/><input value='" + attributes.end + "' class='autosave" + numberOfQuestions + " form-control  slider-end col-md-4 col-xs-4 end" + numberOfQuestions + "'/>" +
                         "<div id='" + qid + "' class='remove-question-button" + numberOfQuestions + " col-md-6 col-lg-offset-3 btn btn-danger btn-lg remove-question-button'>Verwijder</div>" +
                     "</div>" +
                 "</div>" +
@@ -143,12 +143,11 @@ function deleteQuestion(id){
         type: "DELETE",
         contentType: 'json',
         success: function(response){
-            $("#" + id).parents(".wrap").fadeOut(500);
+            $("#" + id).parents(".wrap").fadeOut(250);
             setTimeout(function(){
                 $("#" + id).parents(".wrap").remove();
-            }, 500);
+            }, 300);
             numberOfQuestions = numberOfQuestions - 1;
-            console.log(numberOfQuestions);
         },
         error: function(xhr, response){
             console.log(response);
@@ -194,8 +193,6 @@ function saveSurvey(){
         contentType: 'json',
         success: function(response){
             response = JSON.parse(response);
-            console.log("Saved!");
-            console.log(response);
             $("#survey-id").val(response.id);
             $.each(response.questions, function (index, question) {
                 $("#question-id" + (index + 1)).val(question.id);
