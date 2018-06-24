@@ -9,7 +9,7 @@
 <select name="pageselector" id="pageselector" class="form-control">
     <option value="1">Home page</option>
     <option value="2">Begin page</option>
-    <option value="3">Contact page</option>
+    
 </select>
 <br>
 <button type="button"  class="btn btn-primary btn-lg" id="opensectionmodal">Add Section</button>
