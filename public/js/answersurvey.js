@@ -13,7 +13,8 @@ function fetch_survey_data(query = '') {
   dataType:'json',
   success:function(data)
   {
-   $('#SurveyBody').html(data.table_data);
+      console.log(data);
+      document.getElementById("SurveyBody").innerHTML = data;
   }
  })
 }

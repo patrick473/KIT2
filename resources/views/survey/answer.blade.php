@@ -7,7 +7,7 @@
         <h4 class="card-title"></h4>
         <p></p>
         <hr>
-        <div id="SurveyBody">
+    <div id="SurveyBody" data-group_id="{{$surveyid}}">
         </div>
     </div>
 

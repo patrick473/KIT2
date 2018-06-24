@@ -91,9 +91,10 @@ class SurveyController extends Controller
 
     }
     public function getSurvey($surveyid){
-            $survey = Survey::where('id',$surveyid)->first();
 
-            return view('survey.answer',compact('survey'));
+            
+            
+            return view('survey.answer',compact('surveyid'));
     }
     public function selectsurvey($group_id){
 
