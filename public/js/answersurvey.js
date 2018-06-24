@@ -15,7 +15,7 @@ function fetch_survey_data(query = '') {
   {
       console.log(data);
       tr = $('<tr/>');
-                tr.append("<td>Title Survey: " + data.title + "</td>");
+                tr.append("<td><h2> " + data.title + "</h2></td>");
                 $('table').append(tr);
 
       tr = $('<tr/>');
@@ -28,7 +28,7 @@ function fetch_survey_data(query = '') {
 
     $.each(data.questions,(i,e)=>{
 
-    document.getElementById('test').innerHTML +="<h2>Vraag: " + e.title + "</h2>";
+    document.getElementById('test').innerHTML +="<p>Vraag: " + e.title + "</p>";
     document.getElementById('test').innerHTML +="<p>Beschrijving: " + e.description + "</p>";
     document.getElementById('test').innerHTML +="<p>Type: " + e.type + "</p>";
 
