@@ -27,7 +27,7 @@ $(document).ready(function(){
  $(document).on("click",".addSurvey",(e)=>{
    let survey_id = $(e.target).data("survey_id");
    let group_id = $('#SurveyBody').data("group_id");
-   let url = "/api/group/survey/"+group_id+'/'+survey_id;
+   let url = "/api/admin/survey/"+group_id+'/'+survey_id;
    $.ajax({
      type: "POST",
      url: url,
@@ -35,6 +35,6 @@ $(document).ready(function(){
      processData: false,
      contentType: 'charset=UTF-8'
    }).done(function (response) {
-     location.href='/group/surveys/1';
+     location.href='/admin/surveyOverview/1';
    })
  });

@@ -7,6 +7,7 @@ use \App\Group;
 use \App\Member;
 use \App\User;
 use Log;
+use Auth;
 
 class GroupController extends Controller
 {
@@ -22,8 +23,7 @@ class GroupController extends Controller
   }
   public function index()
   {
-    //TODO: $user_id is still hard coded
-    $user_id=1;
+    $user_id=Auth::id();
     $members = Member::where('user_id', '=', $user_id)->get();
     // Log::debug($members);
     // dd($members);
@@ -60,7 +60,7 @@ class GroupController extends Controller
        $member = new Member;
        $member->group_id = $group->id;
        //TODO: $user_id replacen met non hard coded id!!!
-       $user_id=1;
+       $user_id=Auth::id();
        $member->user_id = $user_id;
        $member->group_leader = 1;
        $member->save();
