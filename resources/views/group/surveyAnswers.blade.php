@@ -35,7 +35,16 @@
         </div>
       </div>
       <hr>
+    @elseif($question->type=='Slider')
+      {{$attributes = json_encode($question->attributes)}}
+      <div class='question-content col-md-6'>
+          <div class='slider-wrapper row'>
+              <input class='col-md-12 col-xs-12 slider' type='range' disabled/>
+              <input value={{$attributes['start']}} class='autosave col-md-4 col-xs-4 slider-start start'/><input value={{$attributes['middle']}} class='autosave slider-middle col-md-4 col-xs-4 middle'/><input value={{$attributes['end']}} class='autosave slider-end col-md-4 col-xs-4 end'/>
+          </div>
+      </div>
     @endif
+
   @endforeach
 
 @endsection

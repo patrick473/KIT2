@@ -36,7 +36,7 @@
     <h3>Vragenlijsten voor deze groep</h3>
     <div class="row">
       <div class="col-sm-12" id="SurveyBody">
-        @if($groupLeader->id == $currentUser)
+        @if($groupLeader->user_id == $currentUser)
           <div class="card">
             <div class="card-body">
               <div class="card-text col text-center"><a type="button" class="btn btn-success addSurvey" id='addSurvey' data-group_id ="{{$id}}" href="{{route('survey.selectpage',['group_id'=>$id])}}">Voeg een vragenlijst toe aan de groep</a></div>
