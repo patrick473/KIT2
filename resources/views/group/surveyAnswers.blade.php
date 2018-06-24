@@ -66,7 +66,7 @@
             @foreach($question->answers as $answer)
               <div class='col-md-3'>
                 <div class="border_custom">
-                  <p class='bg_custom'>{{$answer->user->username}}:</p><p>{{$answer->value}}</p>
+                  <p class='bg_custom'>{{$answer->user->username}}:</p><p>Waarde gegeven: {{$answer->value}}</p>
                 </div>
               </div>
             @endforeach
@@ -78,6 +78,8 @@
         </div>
       </div>
       <hr>
+    @elseif($question->type=='Bullet')
+
     @endif
 
   @endforeach
