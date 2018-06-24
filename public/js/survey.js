@@ -16,6 +16,7 @@ function clearQuestionFields(){
 
 //TODO: Add more types
 function addNewQuestion(qttl, qdesc, type, qid, attributes){
+    console.log(attributes);
     numberOfQuestions += 1;
     switch(type){
         case 'Text':
@@ -163,16 +164,15 @@ function loadSurvey(id){
         $("#survey-id").val(response.surveyid);
         $.each(response.questions, function(index, question){
             if(question.attributes.start === undefined){
-                question.attributes.start = "";
+                question.attributes.start = " ";
             }
             if(question.attributes.middle === undefined){
-                question.attributes.middle = "";
+                question.attributes.middle = " ";
             }
             if(question.attributes.end === undefined){
-                question.attributes.end = "";
+                question.attributes.end = " ";
             }
             addNewQuestion(question.title, question.description, question.type, question.id, question.attributes);
-            console.log(question.attributes);
         });
         changeStatus("Voor het laatst opgeslagen: " + response.updated_at.date.slice(0, -7), "orange")
     });
@@ -243,7 +243,12 @@ $("#add-question-button").click(function(){
         return;
     }
     else{
-        addNewQuestion($("#question-title-input").val(), $("#question-description-input").val(), $("#question-type-input").val(), "");
+        attributes = {
+            "start": "",
+            "middle": "",
+            "end": "",
+        }
+        addNewQuestion($("#question-title-input").val(), $("#question-description-input").val(), $("#question-type-input").val(), "", attributes);
         clearQuestionFields();
         saveSurvey();
     }
