@@ -4,17 +4,20 @@ $(document).ready(function(){
 
 });
 
-function saveanswers() {
+$("submit").click(function saveanswers() {
+  let data = {user_id: , survey_id: , answers:[{
+
+  }]};
 $.ajax({
   url:"/api/survey/answer",
   method:'POST',
-  data:{query:query},
+  data:data,
   dataType:'json',
   success:function(data){
 
   }
 })
-}
+})
 
 function fetch_survey_data(query = '') {
  let group_id = $('#SurveyBody').data("group_id");
@@ -26,17 +29,8 @@ function fetch_survey_data(query = '') {
   success:function(data)
   {
       console.log(data);
-      tr = $('<tr/>');
-                tr.append("<td><h2> " + data.title + "</h2></td>");
-                $('table').append(tr);
-
-      tr = $('<tr/>');
-                tr.append("<td>Beschrijving Survey: " + data.description + "</td>");
-                $('table').append(tr);
-
-      tr = $('<tr/>');
-                tr.append("<td>Groep: " + data.group + "</td>");
-                $('table').append(tr);
+      $('#SurveyBody').append("<h3>" + data.title + "</h3>");
+      $('#SurveyBody').append("<p>" + data.description + "</p>");
 
     $.each(data.questions,(i,e)=>{
 
@@ -66,11 +60,21 @@ function fetch_survey_data(query = '') {
           </div>`);
     }
     if (e.type == "Radio") {
-        $('#body').append(`<input type=radio value=`+e.attributes.first+`></input><br>`);
-        $('#body').append("<input type=radio></input><br>");
-        $('#body').append("<input type=radio></input><br>");
-        $('#body').append("<input type=radio></input><br>");
-        $('#body').append("<input type=radio></input>");
+      $('#body').append(`<div class="row">
+      <div class="col-md-12">
+        <h5>`+e.title+`</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p>`+e.description+`</p>
+      </div>
+    </div>`);
+        $('#body').append(`<input type=radio >`+e.attributes.first+`</input><br>`);
+        $('#body').append(`<input type=radio >`+e.attributes.second+`</input><br>`);
+        $('#body').append(`<input type=radio >`+e.attributes.third+`</input><br>`);
+        $('#body').append(`<input type=radio >`+e.attributes.fourth+`</input><br>`);
+        $('#body').append(`<input type=radio >`+e.attributes.fifth+`</input>`);
 
 
 

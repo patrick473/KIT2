@@ -7,17 +7,13 @@
         <h4 class="card-title"></h4>
         <form id="Questions">
     <div id="SurveyBody" data-group_id="{{$surveyid}}">
-      <table id="table">
-        <tr >
-        </tr>
-      </table>
+</div>
+
       <div id="body">
       </div>
-        </div>
-    </div>
     <button id="submit" type="submit" onclick="saveanswers">Submit</button>
   </form>
-
+    </div>
 </div>
 
 @endsection
