@@ -43,7 +43,7 @@
                     @endif
                     </div>
                 <div class="mainContentSection col-xs-12 col-sm-10">
-                    @include('includes.who')
+                   
             @yield('content')
                 </div>
             </div>

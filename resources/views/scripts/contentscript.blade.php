@@ -3,13 +3,14 @@
   let pageId = $("#content").data("page");
   let html;
   let settings = {
-    url: "http://localhost:8000/api/admin/content/" + pageId,
+    url: "http://localhost:8000/api/content/" + pageId,
     method: "GET"
   };
 
   $.ajax(settings).done(function(response) {
+   if(response.length >0){
     let contentjson = JSON.parse(response);
-    console.log(contentjson);
+   
     $.each(contentjson.sections, (i, e) => {
       console.log(e.id);
 
@@ -69,6 +70,7 @@
       }
       $("#content").append(html);
     });
+  }
   });
 });
 
