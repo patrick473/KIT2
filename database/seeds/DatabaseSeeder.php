@@ -9,6 +9,8 @@ use \App\Admin;
 use \App\Member;
 use \App\Survey;
 use \App\Question;
+use \App\survey_group;
+use \App\Answer;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -239,6 +241,28 @@ class DatabaseSeeder extends Seeder
                'description' => 'testdescription',
                'attributes' => '[]'
 
+            ]);
+            $group_survey1 = survey_group::create([
+                'survey_id' => $survey1->id, 
+                'group_id' => $group1->id
+            ]);
+
+            $app = app();
+        
+            $answerObject = $app->make('stdClass');
+            $questionObject = $app->make('stdClass');
+           
+            $questionObject->id = $question1->id;            
+            $questionObject->value = "wow dit is echt een geweldig project";
+            $answers = collect([]);
+            $answers->push($questionObject);
+
+            $answerObject->answers = $answers;
+
+            $answer1 = Answer::create([
+                'user_id' => $user1->id, 
+                'survey_id' => $survey1->id,
+                'answers'=> json_encode($answerObject)
             ]);
         }
     }
