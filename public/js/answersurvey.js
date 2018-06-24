@@ -4,18 +4,7 @@ $(document).ready(function(){
 
 });
 
-function saveanswers(){
-  let url = "/api/survey/answer";
-  $.ajax({
-    type: "POST",
-    url: url,
-    contentType:'json',
-    processData: false,
-    contentType: 'charset=UTF-8'
-  }).done(function (response) {
-    location.href='/group';
-  })
-};
+funtion
 
 function fetch_survey_data(query = '') {
  let group_id = $('#SurveyBody').data("group_id");
@@ -51,12 +40,10 @@ function fetch_survey_data(query = '') {
     if (e.type == "Text") {
         document.getElementById('test').innerHTML +="";
     }
-    if (e.type == "Radio Button") {
+    if (e.type == "Radio") {
         document.getElementById('test').innerHTML +="";
     }
-    // if (e.type == "Text") {
-    //     document.getElementById('test').innerHTML +="<textarea> </textarea>";
-    // }
+
                 });
 
 
