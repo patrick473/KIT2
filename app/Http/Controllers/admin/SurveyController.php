@@ -29,5 +29,8 @@ class SurveyController extends Controller
     $surveys = Survey::all();
     return view('survey.overview',compact('surveys'));
   }
-  
+  public function deleteSurvey($id){
+    $survey = Survey::find($id);
+    $survey->delete();
+}
 }

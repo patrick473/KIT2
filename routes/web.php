@@ -57,7 +57,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/survey/overview', 'admin\SurveyController@overview')->name('survey.overview');
     Route::get('/survey/new', 'admin\SurveyController@new')->name('survey.new');
     Route::get('/survey/{survey}', 'admin\SurveyController@detail')->name('survey.detail');
-
+    Route::delete('/survey/{id}', 'admin\SurveyController@deleteSurvey')->name('survey.delete');
 });
 
 
