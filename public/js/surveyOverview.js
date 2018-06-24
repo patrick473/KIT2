@@ -4,6 +4,11 @@ $(document).on("click",".addSurvey",(e)=>{
         location.href = "/selectsurvey/"+group_id;
 });
 
+$(document).on("click",".surveyAnswers",(e)=>{
+        let survey_id = $('#surveyAnswers').data("survey_id");
+        location.href = "/group/surveyAnswers/"+survey_id;
+});
+
 $(document).delegate(".removeSurvey_group","click",(e)=>{
     let survey_id = $("#removeSurvey_group").data("survey_id");
     let group_id = $("#addSurvey").data("group_id");

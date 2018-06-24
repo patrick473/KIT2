@@ -14,7 +14,7 @@ use Log;
 use App\survey_group;
 class SurveyController extends Controller
 {
-      public function getSurveyOverview($id){
+      public function surveyAnswers($id){
         $app = app();
         //get variables
         $jsonObject = $app->make('stdClass');
@@ -56,7 +56,7 @@ class SurveyController extends Controller
 
         $jsonObject->questions = $questions;
 
-        return view('group.surveyOverview')->with(['survey'=>$jsonObject]);
+        return view('group.surveyAnswers')->with(['survey'=>$jsonObject]);
     }
 
     public function surveyoverview($group_id){
@@ -70,6 +70,7 @@ class SurveyController extends Controller
         $surveys = collect([]);
         foreach($surveysgroup as $surveygroup){
             $survey = Survey::where('id',$surveygroup->survey_id)->first();
+            $survey->groupsurvey = $surveygroup->id;
             $surveys->push($survey);
             Log::debug($survey);
         }
