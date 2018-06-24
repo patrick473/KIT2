@@ -36,7 +36,7 @@ class SurveyController extends Controller
 
                 foreach($answer->answers as $questionAnswer){
                     $realQuestionAnswer = $questionAnswer[0];
-                    
+
                     if( $question->id == $realQuestionAnswer->id){
                         $answerObject = $app->make('stdClass');
                         $answerObject->userid = $answer->user_id;
@@ -75,7 +75,6 @@ class SurveyController extends Controller
             $survey = Survey::where('id',$surveygroup->survey_id)->first();
             $survey->groupsurvey = $surveygroup->id;
             $surveys->push($survey);
-            Log::debug($survey);
         }
 
         $members = Member::where('group_id', '=', $id)->orderBy('group_leader', 'DESC')->get();
