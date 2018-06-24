@@ -5,7 +5,15 @@ $(document).ready(function(){
 });
 
 function saveanswers() {
+$.ajax({
+  url:"/api/survey/answer",
+  method:'POST',
+  data:{query:query},
+  dataType:'json',
+  success:function(data){
 
+  }
+})
 }
 
 function fetch_survey_data(query = '') {
@@ -32,22 +40,22 @@ function fetch_survey_data(query = '') {
 
     $.each(data.questions,(i,e)=>{
 
-    document.getElementById('test').innerHTML +="<p>Vraag: " + e.title + "</p>";
-    document.getElementById('test').innerHTML +="<p>Beschrijving: " + e.description + "</p>";
-    document.getElementById('test').innerHTML +="<p>Type: " + e.type + "</p>";
+    document.getElementById('body').innerHTML +="<br><p>Vraag: " + e.title + "</p>";
+    document.getElementById('body').innerHTML +="<p>Beschrijving: " + e.description + "</p>";
+    document.getElementById('body').innerHTML +="<p>Type: " + e.type + "</p>";
 
     if (e.type == "Text") {
-        document.getElementById('test').innerHTML +="<textarea> </textarea><br>";
+        $('#body').append("<textarea> </textarea><br>");
     }
-    if (e.type == "Text") {
-        document.getElementById('test').innerHTML +="";
+    if (e.type == "Slider") {
+        $('#body').append("");
     }
-    if (e.type == "Text") {
-        document.getElementById('test').innerHTML +="<input type=radio></input><br>";
-        document.getElementById('test').innerHTML +="<input type=radio></input><br>";
-        document.getElementById('test').innerHTML +="<input type=radio></input><br>";
-        document.getElementById('test').innerHTML +="<input type=radio></input><br>";
-        document.getElementById('test').innerHTML +="<input type=radio></input>";
+    if (e.type == "Radio") {
+        $('#body').append("<input type=radio></input><br>");
+        $('#body').append("<input type=radio></input><br>");
+        $('#body').append("<input type=radio></input><br>");
+        $('#body').append("<input type=radio></input><br>");
+        $('#body').append("<input type=radio></input>");
 
 
 
