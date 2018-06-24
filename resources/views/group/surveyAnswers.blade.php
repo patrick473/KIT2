@@ -12,7 +12,7 @@
           <p>{{$question->description}}</p>
         </div>
         <div class='col-md-12'>
-          <p>Answers: </p>
+          <p>Antwoorden: {{foreach($question->answers as $answer){$answer->user->username $answer->value}}}</p>
         </div>
       </div>
       <br/>
