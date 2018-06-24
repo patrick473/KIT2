@@ -16,15 +16,6 @@ function clearQuestionFields(){
 
 //TODO: Add more types
 function addNewQuestion(qttl, qdesc, type, qid, attributes){
-    if(attributes.start === undefined){
-        attributes.start = "";
-    }
-    if(attributes.middle === undefined){
-        attributes.middle = "";
-    }
-    if(attributes.end === undefined){
-        attributes.end = "";
-    }
     numberOfQuestions += 1;
     switch(type){
         case 'Text':
@@ -171,6 +162,15 @@ function loadSurvey(id){
         $("#survey-description-input").val(response.description);
         $("#survey-id").val(response.surveyid);
         $.each(response.questions, function(index, question){
+            if(question.attributes.start === undefined){
+                question.attributes.start = "";
+            }
+            if(question.attributes.middle === undefined){
+                question.attributes.middle = "";
+            }
+            if(question.attributes.end === undefined){
+                question.attributes.end = "";
+            }
             addNewQuestion(question.title, question.description, question.type, question.id, question.attributes);
             console.log(question.attributes);
         });
