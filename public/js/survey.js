@@ -31,6 +31,7 @@ function addNewQuestion(qttl, qdesc, type, qid){
                         "</div>" +
                         "<div class='question-content col-md-6'>" +
                             "<textarea id='question-answer" + numberOfQuestions + "' disabled class='example-input form-control survey-textarea'></textarea>" +
+                            "<button class='col-md-6 col-lg-offset-3 btn btn-danger btn-lg remove-question-button'>Verwijder</button>" +
                         "</div>" +
                     "</div>" +
                 "</div>" +
