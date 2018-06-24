@@ -1,6 +1,7 @@
 @extends ('layouts.app')
 
 @section('content')
+
   <div class="row">
     <div class="col-sm-12" id="memberBody">
       @if(!$members->isEmpty())
@@ -32,13 +33,17 @@
   <hr>
 
   <div class="container box">
-    <h3>Surveys voor deze groep</h3>
+    <h3>Vragenlijsten voor deze groep</h3>
     <div class="row">
       <div class="col-sm-12" id="SurveyBody">
         @if($groupLeader->id == $currentUser)
           <div class="card">
             <div class="card-body">
+<<<<<<< HEAD
               <div class="card-text col text-center"><a type="button" class="btn btn-success addSurvey" id="addSurvey" data-group_id ="{{$id}}" href="{{route('survey.selectpage',['group_id'=>$id])}}">Voeg een survey toe aan de groep</a></div>
+=======
+              <div class="card-text col text-center"><a type="button" class="btn btn-success addSurvey" id='addSurvey' data-group_id ="{{$id}}" href="{{route('survey.selectpage',['group_id'=>$id])}}">Voeg een vragenlijst toe aan de groep</a></div>
+>>>>>>> 489665f2430eeb6560af71a0ae683137e116e5f4
             </div>
           </div>
         @endif
@@ -50,15 +55,18 @@
                   <p class="card-text">{{$survey->description}}</p>
                   <div class="row">
                     <div class="col align-self-start">
-                      <button type="button" class="btn btn-success answerSurvey" id='answerSurvey' data-survey_id = {{$survey->id}}>Beantwoord survey</button>
+                      <button type="button" class="btn btn-success answerSurvey" id='answerSurvey' data-survey_id = {{$survey->groupsurvey}}>Beantwoord vragenlijst</button>
+                    </div>
+                    <div class="col text-center">
+                      <button type="button" class="btn btn-info surveyAnswers" id='surveyAnswers' data-survey_id = {{$survey->groupsurvey}}>Vragenlijst overzicht</button>
                     </div>
                     @if($groupLeader->id == $currentUser)
                       <div class="col align-self-end">
-                        <button type="button" class="btn btn-danger float-right removeSurvey_group" id='removeSurvey_group' data-survey_id = {{$survey->id}}>Verwijder survey uit de groep</button>
+                        <button type="button" class="btn btn-danger float-right removeSurvey_group" id='removeSurvey_group' data-survey_id = {{$survey->id}}>Verwijder vragenlijst uit de groep</button>
                       </div>
                     @else
                       <div class="col align-self-end">
-                        <button type="button" class="btn btn-light float-right">Alleen groepsleider mag surveys uit groep verwijderen.</button>
+                        <button type="button" class="btn btn-light float-right">Alleen groepsleider mag vragenlijsten uit groep verwijderen.</button>
                       </div>
                     @endif
                   </div>
@@ -68,7 +76,7 @@
         @else
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">De groepleider heeft nog geen surveys toegevoegd.</h5>
+              <h5 class="card-title">De groepleider heeft nog geen vragenlijsten toegevoegd.</h5>
             </div>
           </div>
         @endif
@@ -79,5 +87,5 @@
 @endsection
 
 @section('extrascripts')
-  <script> src="{{ asset('js/surveyOverview.js') }}"></script>
+  <script src="{{ asset('js/surveyOverview.js') }}"></script>
 @endsection

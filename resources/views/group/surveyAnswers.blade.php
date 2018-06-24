@@ -12,15 +12,29 @@
           <p>{{$question->description}}</p>
         </div>
         <div class='col-md-12'>
-          <p>Antwoorden:
-            @foreach($question->answers as $answer)
-
-            {{$answer->user->username}}: {{$answer->value}}
-            @endforeach
-          </p>
+          <div class="row">
+            <div class='col-md-12'>
+              <p class='text-success font-weight-bold'>Antwoorden {{$question->title}}:</p>
+            </div>
+          </div>
+          <div class='row'>
+            @if(count($question->answers) > 0)
+              @foreach($question->answers as $answer)
+                <div class='col-md-3'>
+                  <div class="border_custom">
+                    <p class='bg_custom'>{{$answer->user->username}}:</p><p>{{$answer->value}}</p>
+                  </div>
+                </div>
+              @endforeach
+            @else
+              <div class='col-md-3'>
+                  <p class='bg_custom_2'>Er zijn nog geen antwoorden gegeven op deze vraag.</p>
+              </div>
+            @endif
+          </div>
         </div>
       </div>
-      <br/>
+      <hr>
     @endif
   @endforeach
 
