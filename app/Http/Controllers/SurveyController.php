@@ -36,7 +36,7 @@ class SurveyController extends Controller
 
                 foreach($answer->answers as $questionAnswer){
                     dd($questionAnswer);
-                    if( $question->id == $questionAnswer->id){
+                    if( $question->id == $questionAnswer['id']){
                         $answerObject = $app->make('stdClass');
                         $answerObject->userid = $answer->user_id;
                         $answerObject->user= User::where('id',$answer->user_id);
