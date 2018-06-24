@@ -12,7 +12,11 @@
           <p>{{$question->description}}</p>
         </div>
         <div class='col-md-12'>
-          <p>Antwoorden: @foreach($question->answers as $answer){{$answer->user->username}}: {{$answer->value}}</p>
+          <p>Antwoorden:
+            @foreach($question->answers as $answer)
+            {{$answer->user->username}}: {{$answer->value}}
+            @endforeach
+          </p>
         </div>
       </div>
       <br/>
