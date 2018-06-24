@@ -41,6 +41,7 @@ Route::prefix('group')->group(function(){
     Route::get('/surveys/{id}', 'SurveyController@groupSurveys')->name('group.survey.overview');
     Route::get('/survey/{id}', 'SurveyController@getSurveyOverview')->name('group.survey.detail');
     Route::get('/answer/{surveyid}','SurveyController@getSurvey')->name('survey.answer');
+    Route::get('/surveyAnswers/{id}', 'SurveyController@surveyAnswers')->name('survey.answer.overview');
 });
 
 

@@ -24,6 +24,7 @@ Route::prefix('survey')->group(function(){
     Route::post('/answer', 'APISurveyController@saveAnswer')->name('survey.answer');
     Route::get('/{id}', 'APISurveyController@getSurveyFromGroup')->name('survey.fillanswerpage');
     Route::get('/select/{group_id}', 'APISurveyController@surveySearch')->name('survey.search');
+    Route::get('/surveyGroup/{survey_id}/{group_id}', "APISurveyController@destroySurveyGroup")->name('destroy.surveyGroup');
 });
 Route::prefix('content')->group(function(){
     Route::get('/{id}','ContentFinderController@findcontent')->name('find.content');
@@ -48,5 +49,7 @@ Route::prefix('group')->group(function(){
 Route::prefix('admin')->group(function(){
     Route::post('/survey', 'admin\APISurveyController@saveSurvey')->name('survey.save');
     Route::get('/survey/{id}', 'admin\APISurveyController@getSurveyById')->name('survey.getSurvey');
+    Route::delete('/survey/{id}', 'admin\APISurveyController@deleteSurvey')->name('survey.deleteSurvey');
+    Route::delete('/question/{id}', 'admin\APISurveyController@deleteQuestion')->name('survey.deleteQuestion');
     Route::post('/content/{page}','admin\APIContentController@savecontent')->name('edit.content');
 });

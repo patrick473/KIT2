@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Redirector;
 use Log;
 use Auth;
+use Session;
 use App\Survey;
 use App\Answer;
 use App\Question;
@@ -99,7 +102,7 @@ function surveySearch(Request $request, $group_id){
 
      $output .= '
      <div class="card">
-       <div class="card-body">
+       <div class="card-body REMOVEME">
          <h5 class="card-title">'.$row->title.'</h5>
            <div class="row">
              <div class="col align-self-end">
@@ -132,6 +135,11 @@ function surveySearch(Request $request, $group_id){
   }
 }
 
+public function destroySurveyGroup($survey_id, $group_id){
+  $survey = survey_group::where('survey_id', '=', $survey_id)->where('group_id', '=', $group_id)->first();
 
+  $survey->delete();
+  
+}
 
 }

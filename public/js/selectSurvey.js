@@ -35,6 +35,6 @@ $(document).ready(function(){
      processData: false,
      contentType: 'charset=UTF-8'
    }).done(function (response) {
-     location.reload();
+     location.href='/group/surveys/1';
    })
  });
