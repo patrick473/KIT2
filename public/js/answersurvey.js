@@ -14,7 +14,20 @@ function fetch_survey_data(query = '') {
   success:function(data)
   {
       console.log(data);
-      document.getElementById("SurveyBody").innerHTML = data;
+      tr = $('<tr/>');
+                tr.append("<td>Title Survey: " + data.title + "</td>");
+                $('table').append(tr);
+
+      tr = $('<tr/>');
+                tr.append("<td>Beschrijving Survey: " + data.description + "</td>");
+                $('table').append(tr);
+
+      tr = $('<tr/>');
+                tr.append("<td>Groep: " + data.group + "</td>");
+                $('table').append(tr);
+
+
+
   }
  })
 }
