@@ -38,7 +38,7 @@
         @if($groupLeader->id == $currentUser)
           <div class="card">
             <div class="card-body">
-              <div class="card-text col text-center"><a type="button" class="btn btn-success addSurvey" id='addSurvey' data-group_id ="{{$id}}" href="{{route('survey.selectpage',['group_id'=>$id]}}">Voeg een survey toe aan de groep</a></div>
+              <div class="card-text col text-center"><a type="button" class="btn btn-success addSurvey" id='addSurvey' data-group_id ="{{$id}}" href="{{route('survey.selectpage',['group_id'=>$id])}}">Voeg een survey toe aan de groep</a></div>
             </div>
           </div>
         @endif
