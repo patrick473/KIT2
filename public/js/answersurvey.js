@@ -4,7 +4,9 @@ $(document).ready(function(){
 
 });
 
-funtion
+function saveanswers() {
+
+}
 
 function fetch_survey_data(query = '') {
  let group_id = $('#SurveyBody').data("group_id");
@@ -35,13 +37,20 @@ function fetch_survey_data(query = '') {
     document.getElementById('test').innerHTML +="<p>Type: " + e.type + "</p>";
 
     if (e.type == "Text") {
-        document.getElementById('test').innerHTML +="<textarea> </textarea>";
+        document.getElementById('test').innerHTML +="<textarea> </textarea><br>";
     }
     if (e.type == "Text") {
         document.getElementById('test').innerHTML +="";
     }
-    if (e.type == "Radio") {
-        document.getElementById('test').innerHTML +="";
+    if (e.type == "Text") {
+        document.getElementById('test').innerHTML +="<input type=radio></input><br>";
+        document.getElementById('test').innerHTML +="<input type=radio></input><br>";
+        document.getElementById('test').innerHTML +="<input type=radio></input><br>";
+        document.getElementById('test').innerHTML +="<input type=radio></input><br>";
+        document.getElementById('test').innerHTML +="<input type=radio></input>";
+
+
+
     }
 
                 });
