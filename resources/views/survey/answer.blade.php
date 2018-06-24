@@ -8,6 +8,10 @@
         <p></p>
         <hr>
     <div id="SurveyBody" data-group_id="{{$surveyid}}">
+      <table id="table">
+        <tr >
+        </tr>
+      </table>
         </div>
     </div>
 
