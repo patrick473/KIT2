@@ -40,7 +40,7 @@ class SurveyController extends Controller
                     if( $question->id == $realQuestionAnswer->id){
                         $answerObject = $app->make('stdClass');
                         $answerObject->userid = $answer->user_id;
-                        $answerObject->user= User::where('id',$answer->user_id);
+                        $answerObject->user= User::where('id',$answer->user_id)->first();
                         $answerObject->value = $realQuestionAnswer->value;
                         $questionanswers->push($answerObject);
                     }
