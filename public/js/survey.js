@@ -15,7 +15,16 @@ function clearQuestionFields(){
 }
 
 //TODO: Add more types
-function addNewQuestion(qttl, qdesc, type, qid){
+function addNewQuestion(qttl, qdesc, type, qid, attributes){
+    if(attributes.start === undefined){
+        attributes.start = "";
+    }
+    if(attributes.middle === undefined){
+        attributes.middle = "";
+    }
+    if(attributes.end === undefined){
+        attributes.end = "";
+    }
     numberOfQuestions += 1;
     switch(type){
         case 'Text':
@@ -62,8 +71,8 @@ function addNewQuestion(qttl, qdesc, type, qid){
                     "</div>" +
                     "<div class='question-content col-md-6'>" +
                         "<div class='slider-wrapper row'>" +
-                            "<input id='question-answer" + numberOfQuestions + "' class='col-md-12 col-xs-12 slider' type='range'/>" +
-                        "</div>" +
+                            "<input id='question-answer" + numberOfQuestions + "' class='col-md-12 col-xs-12 slider' type='range' disabled/>" +
+                            "<input value='" + attributes.start + "' class='autosave col-md-4 col-xs-4 slider-start start" + numberOfQuestions + "'/><input value='" + attributes.middle + "' class='autosave slider-middle col-md-4 col-xs-4 middle" + numberOfQuestions + "'/><input value='" + attributes.end + "' class='autosave slider-end col-md-4 col-xs-4 end" + numberOfQuestions + "'/>" +
                         "<div id='" + qid + "' class='remove-question-button" + numberOfQuestions + " col-md-6 col-lg-offset-3 btn btn-danger btn-lg remove-question-button'>Verwijder</div>" +
                     "</div>" +
                 "</div>" +
@@ -98,14 +107,31 @@ function toJSON(){
     }
     for(var x = 1; x < numberOfQuestions + 1; x++) {
         if($("#question-id" + x).val() != "" && $("#survey-id").val() != ""){
-            json["questions"].push({
-                "type": $("#question-type" + x).val(),
-                "title": $("#question-title" + x).val(),
-                "description": $("#question-description" + x).val(),
-                "survey_id": $("#survey-id").val(),
-                "id": $("#question-id" + x).val(),
-                "attributes": {}
-            });
+            if($(".start" + x).val() === ""){
+                json["questions"].push({
+                    "type": $("#question-type" + x).val(),
+                    "title": $("#question-title" + x).val(),
+                    "description": $("#question-description" + x).val(),
+                    "survey_id": $("#survey-id").val(),
+                    "id": $("#question-id" + x).val(),
+                    "attributes": {}
+                });
+            }
+            else{
+                json["questions"].push({
+                    "type": $("#question-type" + x).val(),
+                    "title": $("#question-title" + x).val(),
+                    "description": $("#question-description" + x).val(),
+                    "survey_id": $("#survey-id").val(),
+                    "id": $("#question-id" + x).val(),
+                    "attributes": {
+                        "start": $(".start" + x).val(),
+                        "middle": $(".middle" + x).val(),
+                        "end": $(".end" + x).val(),
+                    }
+                });
+            }
+
         }
         else{
             json["questions"].push({
@@ -129,6 +155,8 @@ function deleteQuestion(id){
             setTimeout(function(){
                 $("#" + id).parents(".wrap").remove();
             }, 500);
+            numberOfQuestions = numberOfQuestions - 1;
+            console.log(numberOfQuestions);
         },
         error: function(xhr, response){
             console.log(response);
@@ -143,8 +171,8 @@ function loadSurvey(id){
         $("#survey-description-input").val(response.description);
         $("#survey-id").val(response.surveyid);
         $.each(response.questions, function(index, question){
-            addNewQuestion(question.title, question.description, question.type, question.id);
-            console.log(question.id);
+            addNewQuestion(question.title, question.description, question.type, question.id, question.attributes);
+            console.log(question.attributes);
         });
         changeStatus("Voor het laatst opgeslagen: " + response.updated_at.date.slice(0, -7), "orange")
     });

@@ -5,8 +5,6 @@
     <link href="{{ asset('css/survey.css')}}" rel="stylesheet">
     <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{asset('js/ui/jquery-ui.min.js')}}"></script>
-    <link href="{{ asset('js/ui/jquery-ui.min.css')}}" rel="stylesheet">
 
     <div class="card col-xs-12">
         <div class="card-body">

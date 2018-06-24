@@ -49,3 +49,12 @@
 .remove-question-button {
     margin-top: 15px;
 }
+.slider-start{
+    text-align: left;
+}
+.slider-middle{
+    text-align: center;
+}
+.slider-end{
+    text-align: right;
+}
