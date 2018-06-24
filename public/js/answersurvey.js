@@ -26,6 +26,25 @@ function fetch_survey_data(query = '') {
                 tr.append("<td>Groep: " + data.group + "</td>");
                 $('table').append(tr);
 
+    $.each(data.questions,(i,e)=>{
+
+    document.getElementById('test').innerHTML +="<h2>Vraag: " + e.title + "</h2>";
+    document.getElementById('test').innerHTML +="<p>Beschrijving: " + e.description + "</p>";
+    document.getElementById('test').innerHTML +="<p>Type: " + e.type + "</p>";
+
+    if (e.type == "Text") {
+        document.getElementById('test').innerHTML +="<textarea> </textarea>";
+    }
+    // if (e.type == "Text") {
+    //     document.getElementById('test').innerHTML +="<textarea> </textarea>";
+    // }
+    // if (e.type == "Text") {
+    //     document.getElementById('test').innerHTML +="<textarea> </textarea>";
+    // }
+    // if (e.type == "Text") {
+    //     document.getElementById('test').innerHTML +="<textarea> </textarea>";
+    // }
+                });
 
 
   }

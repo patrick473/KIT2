@@ -5,13 +5,13 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title"></h4>
-        <p></p>
-        <hr>
     <div id="SurveyBody" data-group_id="{{$surveyid}}">
       <table id="table">
         <tr >
         </tr>
       </table>
+      <div id="test">
+      </div>
         </div>
     </div>
 
