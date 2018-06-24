@@ -1,4 +1,4 @@
-@extends ('layouts.app')
+@extends ('layouts.app-admin')
 
 @section('content')
   <h3>Groep aanmaken.</h3>
