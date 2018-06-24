@@ -51,10 +51,10 @@
                   <p class="card-text">{{$survey->description}}</p>
                   <div class="row">
                     <div class="col align-self-start">
-                      <button type="button" class="btn btn-success answerSurvey" id='answerSurvey' data-survey_id = {{$survey->id}}>Beantwoord vragenlijst</button>
+                      <button type="button" class="btn btn-success answerSurvey" id='answerSurvey' data-survey_id = {{$survey->groupsurvey}}>Beantwoord vragenlijst</button>
                     </div>
                     <div class="col text-center">
-                      <button type="button" class="btn btn-info answerSurvey" id='answerSurvey' data-survey_id = {{$survey->id}}>Vragenlijst overzicht</button>
+                      <button type="button" class="btn btn-info surveyAnswers" id='surveyAnswers' data-survey_id = {{$survey->groupsurvey}}>Vragenlijst overzicht</button>
                     </div>
                     @if($groupLeader->id == $currentUser)
                       <div class="col align-self-end">
