@@ -87,9 +87,42 @@
       <div class="row">
         <div class="col-md-12">
           <p>{{$question->description}}</p>
-          {{$question->attributes->...}}
         </div>
       </div>
+
+      <div class='slider-wrapper row'>
+        <form>
+          <input disabled name='score' type='radio'><input class='autosave' value={{$question->attributes->first}} type='text'/></input><br>
+          <input disabled  name='score' type='radio'><input class='autosave'  value={{$question->attributes->second}}  type='text'/></input><br>
+          <input disabled  name='score' type='radio'><input class='autosave'  value={{$question->attributes->third}} type='text'/></input><br>
+          <input disabled  name='score' type='radio'><input class='autosave'  value={{$question->attributes->fourth}}  type='text'/></input><br>
+          <input disabled  name='score' type='radio'><input class='autosave'  value={{$question->attributes->fifth}}  type='text'/></input>
+        </form>
+      </div>
+
+      <div class='col-md-12'>
+        <div class="row">
+          <div class='col-md-12'>
+            <p class='text-success font-weight-bold'>Antwoorden {{$question->title}}:</p>
+          </div>
+        </div>
+        <div class='row'>
+          @if(count($question->answers) > 0)
+            @foreach($question->answers as $answer)
+              <div class='col-md-3'>
+                <div class="border_custom">
+                  <p class='bg_custom'>{{$answer->user->username}}:</p><p>Gesellecteerd antwoord: {{$answer->value}}</p>
+                </div>
+              </div>
+            @endforeach
+          @else
+            <div class='col-md-3'>
+                <p class='bg_custom_2'>Er zijn nog geen antwoorden gegeven op deze vraag.</p>
+            </div>
+          @endif
+        </div>
+      </div>
+      <hr>
     @endif
 
   @endforeach
