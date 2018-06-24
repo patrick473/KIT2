@@ -8,11 +8,18 @@ use App\Mail\InviteCreated;
 use App\User;
 use App\Group;
 use App\Member;
+use Auth;
 use Log;
 class InviteController extends Controller
 {
 
   public function index($group_id){
+    $user_id = Auth::id();
+    $currentMember = Member::where('user_id', '=', $user_id)->where('group_id', '=', $group_id)->where('group_leader', '=', 1)->first();
+    if($currentMember === null){
+      return redirect('home');
+    }
+
     $invites = Invite::where('group_id', '=', $group_id)->get();
 
     foreach($invites as $invite){
@@ -29,8 +36,7 @@ class InviteController extends Controller
   }
 
   public function sendInvite(){
-    //TODO: USER ID IS HARD CODED still
-    $user_id = 2;
+    $user_id = Auth::id();
     $user = User::where('id', '=', $user_id)->first();
     $user->invites = Invite::where('user_id',$user->id)->get();
 
