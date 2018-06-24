@@ -9,6 +9,11 @@ $(document).on("click",".surveyAnswers",(e)=>{
         location.href = "/group/surveyAnswers/"+survey_id;
 });
 
+$(document).on("click",".answerSurvey",(e)=>{
+        let group_id = $("#addSurvey").data("group_id");
+        location.href = "/group/answer/"+group_id;
+});
+
 $(document).delegate(".removeSurvey_group","click",(e)=>{
     let survey_id = $("#removeSurvey_group").data("survey_id");
     let group_id = $("#addSurvey").data("group_id");
