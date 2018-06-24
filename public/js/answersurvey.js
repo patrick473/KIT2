@@ -35,9 +35,9 @@ function fetch_survey_data(query = '') {
     if (e.type == "Text") {
         document.getElementById('test').innerHTML +="<textarea> </textarea>";
     }
-    // if (e.type == "Text") {
-    //     document.getElementById('test').innerHTML +="<textarea> </textarea>";
-    // }
+    if (e.type == "Slider") {
+        document.getElementById('test').innerHTML +="<textarea> </textarea>";
+    }
     // if (e.type == "Text") {
     //     document.getElementById('test').innerHTML +="<textarea> </textarea>";
     // }
