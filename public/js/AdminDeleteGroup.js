@@ -10,6 +10,16 @@ $(document).on("click",".deletebutton",(e)=>{
         contentType: 'charset=UTF-8'
     }).done(function (response) {
       document.getElementById('search').value = '';
-      fetch_customer_data();
+      fetch_group_data();
     })
+})
+
+$(document).on("click",".memberOverview",(e)=>{
+  let id = $(e.target).data("id");
+  location.href = '/admin/memberOverview/'+id;
+})
+
+$(document).on("click",".surveyOverview",(e)=>{
+  let id = $(e.target).data("id");
+  location.href = '/admin/surveyOverview/'+id;
 })

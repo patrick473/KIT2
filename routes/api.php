@@ -37,7 +37,6 @@ Route::prefix('invite')->group(function(){
 });
 
 Route::prefix('group')->group(function(){
-    //TODO: deze twee routes bestaan niet???
     Route::get('/group_action', 'APIGroupController@GroupAction')->name('group.search');
     Route::get('/member_action', 'APIGroupController@MemberAction')->name('group.searchmember');
 
@@ -52,4 +51,10 @@ Route::prefix('admin')->group(function(){
     Route::delete('/survey/{id}', 'admin\APISurveyController@deleteSurvey')->name('survey.deleteSurvey');
     Route::delete('/question/{id}', 'admin\APISurveyController@deleteQuestion')->name('survey.deleteQuestion');
     Route::post('/content/{page}','admin\APIContentController@savecontent')->name('edit.content');
+    Route::get('/group/group_action', 'admin\APIGroupController@GroupAction')->name('group.searchgroup');
+    Route::get('/member/member_action/{id}', 'admin\APIGroupController@MemberAction')->name('group.searchmember');
+    Route::delete('/group/{id}', 'admin\APIGroupController@destroyGroup')->name('delete.group');
+    Route::post('/group/member/{user_id}/{group_id}', 'admin\APIGroupController@createMember')->name('invite.member');
+    Route::delete('/member/{id}', 'admin\APIGroupController@destroyMember')->name('delete.member');
+    Route::get('/select/{group_id}', 'admin\APISurveyController@surveySearch')->name('survey.search');
 });

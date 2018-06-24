@@ -36,13 +36,11 @@
     <h3>Vragenlijsten voor deze groep</h3>
     <div class="row">
       <div class="col-sm-12" id="SurveyBody">
-        @if($groupLeader->id == $currentUser)
           <div class="card">
             <div class="card-body">
-              <div class="card-text col text-center"><a type="button" class="btn btn-success addSurvey" id='addSurvey' data-group_id ="{{$id}}" href="{{route('survey.selectpage',['group_id'=>$id])}}">Voeg een vragenlijst toe aan de groep</a></div>
+              <div class="card-text col text-center"><a type="button" class="btn btn-success addSurvey" id='addSurvey' data-group_id ="{{$id}}">Voeg een vragenlijst toe aan de groep</a></div>
             </div>
           </div>
-        @endif
         @if(!$surveys->isEmpty())
           @foreach($surveys as $survey)
               <div class="card">
@@ -56,15 +54,9 @@
                     <div class="col text-center">
                       <button type="button" class="btn btn-info surveyAnswers" id='surveyAnswers' data-survey_id = {{$survey->groupsurvey}}>Vragenlijst overzicht</button>
                     </div>
-                    @if($groupLeader->id == $currentUser)
                       <div class="col align-self-end">
                         <button type="button" class="btn btn-danger float-right removeSurvey_group" id='removeSurvey_group' data-survey_id = {{$survey->id}}>Verwijder vragenlijst uit de groep</button>
                       </div>
-                    @else
-                      <div class="col align-self-end">
-                        <button type="button" class="btn btn-light float-right">Alleen groepsleider mag vragenlijsten uit groep verwijderen.</button>
-                      </div>
-                    @endif
                   </div>
                 </div>
               </div>
@@ -83,5 +75,5 @@
 @endsection
 
 @section('extrascripts')
-  <script src="{{ asset('js/surveyOverview.js') }}"></script>
+  <script src="{{ asset('js/adminSurveyOverview.js') }}"></script>
 @endsection
