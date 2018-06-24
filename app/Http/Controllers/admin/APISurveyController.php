@@ -98,12 +98,17 @@ class APISurveyController extends Controller
 
     }
 
+    public function deleteQuestion($id){
+        $question = Question::find($id);
+        $question->delete();
+    }
 
+    public function deleteSurvey($id){
+        $survey = Survey::find($id);
+        $survey->delete();
+    }
 
- 
-
-
-   }
+}
 
 
 

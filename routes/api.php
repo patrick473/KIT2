@@ -49,5 +49,7 @@ Route::prefix('group')->group(function(){
 Route::prefix('admin')->group(function(){
     Route::post('/survey', 'admin\APISurveyController@saveSurvey')->name('survey.save');
     Route::get('/survey/{id}', 'admin\APISurveyController@getSurveyById')->name('survey.getSurvey');
+    Route::delete('/survey/{id}', 'admin\APISurveyController@deleteSurvey')->name('survey.deleteSurvey');
+    Route::delete('/question/{id}', 'admin\APISurveyController@deleteQuestion')->name('survey.deleteQuestion');
     Route::post('/content/{page}','admin\APIContentController@savecontent')->name('edit.content');
 });
