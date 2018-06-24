@@ -18,8 +18,3 @@ function fetch_survey_data(query = '') {
   }
  })
 }
-
-$(document).on('keyup', '#search', function(){
- var query = $(this).val();
- fetch_survey_data(query);
-});
