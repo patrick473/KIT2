@@ -42,6 +42,10 @@ class GroupController extends Controller
 
   public function store(Request $request)
   {
+    $request->validate([
+      'title' => 'required|string|max:255',
+      'description' => 'required|string|max:255',
+    ]);
       $group = new Group;
       $group->title = $request->title;
       $group->description = $request->description;

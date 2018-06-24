@@ -84,11 +84,11 @@
       <div class="modal-body">
           <div class="form-group">
               <label for="title">Groep naam</label>
-              <input type="text" class="form-control" id="title" placeholder="Groep naam" name="title" required>
+              <input type="text" class="form-control" id="title" placeholder="Groep naam" name="title" required />
             </div>
             <div class="form-group">
               <label for="description">Groep omschrijving</label>
-              <textarea class="form-control" id="description" rows="3" placeholder="Waar is de groep voor bedoeld?" name="description" required></textarea>
+              <textarea class="form-control" id="description" rows="3" placeholder="Waar is de groep voor bedoeld?" name="description" required="required"></textarea>
             </div>
       </div>
       <div class="modal-footer">
