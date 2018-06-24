@@ -3,7 +3,7 @@ $(document).on("click",".addSurvey",(e)=>{
         location.href = "/selectsurvey/"+group_id;
 });
 
-$(document).on("click",".removeSurvey_group",(e)=>{
+$(document).delegate(".removeSurvey_group","click",(e)=>{
     let survey_id = $("#removeSurvey_group").data("survey_id");
     let group_id = $("#addSurvey").data("group_id");
 
@@ -15,6 +15,11 @@ $(document).on("click",".removeSurvey_group",(e)=>{
         processData: false,
         contentType: 'charset=UTF-8'
     }).done(function (response) {
-      //location.reload();
+        var popup = document.getElementById("snackbar");
+        popup.className = "show";
+        setTimeout(function(){
+        location.reload();
+      },1000);
     })
 })
+
