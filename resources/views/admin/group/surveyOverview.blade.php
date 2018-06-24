@@ -54,11 +54,9 @@
                     <div class="col text-center">
                       <button type="button" class="btn btn-info surveyAnswers" id='surveyAnswers' data-survey_id = {{$survey->groupsurvey}}>Vragenlijst overzicht</button>
                     </div>
-                    @if($groupLeader->id == $currentUser)
                       <div class="col align-self-end">
                         <button type="button" class="btn btn-danger float-right removeSurvey_group" id='removeSurvey_group' data-survey_id = {{$survey->id}}>Verwijder vragenlijst uit de groep</button>
                       </div>
-                    @else
                       <div class="col align-self-end">
                         <button type="button" class="btn btn-light float-right">Alleen groepsleider mag vragenlijsten uit groep verwijderen.</button>
                       </div>

@@ -57,14 +57,10 @@ Route::prefix('admin')->group(function(){
     Route::get('/survey/overview', 'admin\SurveyController@overview')->name('survey.overview');
     Route::get('/survey/new', 'admin\SurveyController@new')->name('survey.new');
     Route::get('/survey/{survey}', 'admin\SurveyController@detail')->name('survey.detail');
-<<<<<<< HEAD
     Route::get('/memberOverview/{id}', 'admin\GroupController@GroupMemberOverview')->name('group.invite');
     Route::get('/surveyOverview/{id}', 'admin\SurveyController@surveyOverview')->name('group.invite');
     Route::get('/selectsurvey/{group_id}', 'admin\SurveyController@selectSurvey')->name('survey.select');
-
-=======
     Route::delete('/survey/{id}', 'admin\SurveyController@deleteSurvey')->name('survey.delete');
->>>>>>> c1d34f3a98f2795e9918fb6d13db8cf8659dac2f
 });
 
 
