@@ -14,7 +14,7 @@ function fetch_survey_data(query = '') {
   success:function(data)
   {
       console.log(data);
-   $('#SurveyBody').html(data.table_data);
+      document.getElementById("SurveyBody").innerHTML = data;
   }
  })
 }
