@@ -48,6 +48,40 @@ function addNewQuestion(qttl, qdesc, type, qid){
                     deleteQuestion(event.target.id);
                 }
             });
+            break;
+        case 'Slider':
+            $(".questions-wrapper").append(
+                "<div id='question-row" + numberOfQuestions + "' class='wrap question" + qid + " row'>" +
+                    "<div class='col-md-12'>" +
+                            "<input id='question-title" + numberOfQuestions + "' type='text' value='" + qttl + "' class='autosave" + numberOfQuestions + " form-control example-input example-title-input question-title'/>" +
+                "<div class='row'>" +
+                    "<div class='question-content col-md-6'>" +
+                        "<textarea id='question-description" + numberOfQuestions + "' class='autosave" + numberOfQuestions + " example-input form-control survey-textarea question-description'>" + qdesc + "</textarea>" +
+                        "<input id='question-type" + numberOfQuestions + "' value='" + type + "' type='hidden'/>" +
+                        "<input id='question-id" + numberOfQuestions + "' value='" + qid + "' type='hidden'/>" +
+                    "</div>" +
+                    "<div class='question-content col-md-6'>" +
+                        "<div class='slider-wrapper row'>" +
+                            "<input id='question-answer" + numberOfQuestions + "' class='col-md-12 col-xs-12 slider' type='range'/>" +
+                        "</div>" +
+                        "<div id='" + qid + "' class='remove-question-button" + numberOfQuestions + " col-md-6 col-lg-offset-3 btn btn-danger btn-lg remove-question-button'>Verwijder</div>" +
+                    "</div>" +
+                "</div>" +
+                "</div>" +
+                "</div><br/>"
+            );
+            $(".autosave" + numberOfQuestions).on('change', function() {
+                saveSurvey();
+            });
+            $(".remove-question-button" + numberOfQuestions).click(function(event) {
+                if(event.target.id === ""){
+                    return;
+                }
+                else{
+                    deleteQuestion(event.target.id);
+                }
+            });
+            break;
     }
 }
 

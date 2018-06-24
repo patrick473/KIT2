@@ -38,7 +38,7 @@
       <div class="col-sm-12" id="SurveyBody">
           <div class="card">
             <div class="card-body">
-              <div class="card-text col text-center"><a type="button" class="btn btn-success addSurvey" id='addSurvey' data-group_id ="{{$id}}">Voeg een vragenlijst toe aan de groep</a></div>
+              <div class="card-text col text-center"><button type="button" class="btn btn-success addSurvey" id='addSurvey' data-group_id ="{{$id}}">Voeg een vragenlijst toe aan de groep</button></div>
             </div>
           </div>
         @if(!$surveys->isEmpty())
@@ -48,12 +48,6 @@
                   <h5 class="card-title">{{$survey->title}}</h5>
                   <p class="card-text">{{$survey->description}}</p>
                   <div class="row">
-                    <div class="col align-self-start">
-                      <button type="button" class="btn btn-success answerSurvey" id='answerSurvey' data-survey_id = {{$survey->groupsurvey}}>Beantwoord vragenlijst</button>
-                    </div>
-                    <div class="col text-center">
-                      <button type="button" class="btn btn-info surveyAnswers" id='surveyAnswers' data-survey_id = {{$survey->groupsurvey}}>Vragenlijst overzicht</button>
-                    </div>
                       <div class="col align-self-end">
                         <button type="button" class="btn btn-danger float-right removeSurvey_group" id='removeSurvey_group' data-survey_id = {{$survey->id}}>Verwijder vragenlijst uit de groep</button>
                       </div>

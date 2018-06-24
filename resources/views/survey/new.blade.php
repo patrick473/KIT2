@@ -6,6 +6,8 @@
   <script src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
   <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
+
+
   <div class="card col-xs-12">
     <div class="card-body">
       <h4 class="card-title">Vragenlijst</h4>
@@ -58,6 +60,7 @@
               <label class="input-label col-xs-12 col-md-3">Type vraag: </label>
               <select id="question-type-input" class="form-control survey-input survey-select col-xs-12 col-md-6" name="type" required autofocus>
                 <option>Text</option>
+                <option>Slider</option>
               </select>
             </div>
 

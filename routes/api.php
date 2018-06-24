@@ -57,4 +57,6 @@ Route::prefix('admin')->group(function(){
     Route::post('/group/member/{user_id}/{group_id}', 'admin\APIGroupController@createMember')->name('invite.member');
     Route::delete('/member/{id}', 'admin\APIGroupController@destroyMember')->name('delete.member');
     Route::get('/select/{group_id}', 'admin\APISurveyController@surveySearch')->name('survey.search');
+    Route::get('/surveyGroup/{survey_id}/{group_id}', "admin\APISurveyController@destroySurveyGroup")->name('destroy.surveyGroup');
+    Route::post('/survey/{group_id}/{survey_id}', 'admin\APISurveyController@copySurvey')->name('survey.copy');
 });

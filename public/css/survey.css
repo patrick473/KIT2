@@ -20,7 +20,7 @@
     width: 100%;
 }
 .example-title-input{
-    width: 50% !important;
+    width: 100%;
 }
 .example-input{
     margin-top: 10px;
@@ -34,8 +34,12 @@
     align-items: center;
     justify-content: center;
 }
-.question-description{
-
+.slider-wrapper{
+    height:150px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .error-label{
     color: red;
