@@ -258,6 +258,23 @@ class DatabaseSeeder extends Seeder
                'attributes' => '[]'
 
             ]);
+            $question4 = Question::create([
+               'survey_id' => $survey1->id,
+               'type' => 'Slider',
+               'title' => 'Wat vind je van deze slider?',
+               'description' => 'Aan het begin betekent heel slecht aan het eind heel goed. Geef je eerlijke mening graag!',
+               'attributes' => '{"end": "top", "start": "slecht", "middle": "matig"}'
+
+            ]);
+            $question5 = Question::create([
+               'survey_id' => $survey1->id,
+               'type' => 'Slider',
+               'title' => 'Vind je sliders in vragenlijsten nodig?',
+               'description' => 'Aan het begin betekent heel slecht aan het eind heel goed. Geef je eerlijke mening graag!',
+               'attributes' => '{"end": "echt wel", "start": "echt niet", "middle": "soms"}'
+
+            ]);
+
             $group_survey1 = survey_group::create([
                 'survey_id' => $survey1->id,
                 'group_id' => $group1->id
