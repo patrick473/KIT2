@@ -23,6 +23,7 @@ class SurveyController extends Controller
         $questions = Question::where('survey_id',$groupSurvey->survey_id)->get();
         foreach($questions as $question){
             $question->attributes = json_decode($question->attributes);
+            
 
         }
         $answers = Answer::where('survey_id',$id)->get();
@@ -33,7 +34,7 @@ class SurveyController extends Controller
         foreach($questions as $question){
             $questionanswers = collect([]);
             foreach($answers as $answer){
-
+               
                 foreach($answer->answers as $questionAnswer){
                     $realQuestionAnswer = $questionAnswer[0];
 
@@ -44,9 +45,11 @@ class SurveyController extends Controller
                         $answerObject->value = $realQuestionAnswer->value;
                         $questionanswers->push($answerObject);
                     }
+                
                 }
             }
             $question->answers = $questionanswers;
+            
         }
 
         //add answers to question
@@ -58,7 +61,7 @@ class SurveyController extends Controller
         $jsonObject->group = $groupSurvey->group_id;
 
         $jsonObject->questions = $questions;
-
+        
         return view('group.surveyAnswers')->with(['survey'=>$jsonObject]);
     }
 
