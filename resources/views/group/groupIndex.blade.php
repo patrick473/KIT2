@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addGroupModal">
+    <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#addGroupModal">
         Groep aanmaken
       </button>
 
