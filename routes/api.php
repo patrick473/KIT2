@@ -24,7 +24,7 @@ Route::prefix('survey')->group(function(){
     Route::post('/answer', 'APISurveyController@saveAnswer')->name('survey.answer');
     Route::get('/{id}', 'APISurveyController@getSurveyFromGroup')->name('survey.fillanswerpage');
     Route::get('/select/{group_id}', 'APISurveyController@surveySearch')->name('survey.search');
-    Route::delete('/surveyGroup/{survey_id}', "APISurveyController@destroySurveyGroup")->name('destroy.surveyGroup');
+    Route::delete('/surveyGroup/{survey_id}/{group_id}', "APISurveyController@destroySurveyGroup")->name('destroy.surveyGroup');
 });
 Route::prefix('content')->group(function(){
     Route::get('/{id}','ContentFinderController@findcontent')->name('find.content');

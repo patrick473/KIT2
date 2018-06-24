@@ -5,9 +5,9 @@ $(document).on("click",".addSurvey",(e)=>{
 
 $(document).on("click",".removeSurvey_group",(e)=>{
     let survey_id = $("#removeSurvey_group").data("survey_id");
-    console.log(survey_id);
+    let group_id = $("#addSurvey").data("group_id");
 
-    let url = "/api/survey/surveyGroup/"+survey_id;
+    let url = "/api/survey/surveyGroup/"+survey_id+"/"+group_id;
     $.ajax({
         type: "DELETE",
         url: url,
