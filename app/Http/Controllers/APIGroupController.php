@@ -9,7 +9,7 @@ use \App\User;
 class APIGroupController extends Controller
 {
 
-   
+
 
     /**
      * Show the form for creating a new resource.
@@ -21,7 +21,7 @@ class APIGroupController extends Controller
         //
     }
 
-    
+
 
     /**
      * Display the specified resource.
@@ -70,7 +70,7 @@ class APIGroupController extends Controller
       $group->delete();
     }
 
-    function MemberAction(Request $request){
+    /**function MemberAction(Request $request){
       if($request->ajax())
       {
        $output = '';
@@ -178,5 +178,5 @@ class APIGroupController extends Controller
 
       echo json_encode($data);
      }
-    }
+   }**/
 }
