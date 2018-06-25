@@ -26,7 +26,7 @@ $("#submit").click(function saveanswers() {
         "value": $("#question" + question.id).val()
       });
     }
-  })
+  });
   console.log(data);
 $.ajax({
   url:"/api/survey/answer",

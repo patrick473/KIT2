@@ -5,7 +5,6 @@
 var numberOfQuestions = 0;
 
 function initialize(){
-    //fillOptions();
     changeStatus("geen", "red");
 }
 
@@ -206,8 +205,8 @@ function deleteQuestion(id){
             }, 300);
             numberOfQuestions = numberOfQuestions - 1;
         },
-        error: function(xhr, response){
-            console.log(response);
+        error: function(xhr){
+            console.log(xhr);
         }
     });
 }
@@ -251,9 +250,8 @@ function loadSurvey(id){
 
 function saveSurvey(){
     $(".error-label").remove();
-    //Change status text
     if($("#survey-title-input").val() === ""){
-        validationError("survey-title-input")
+        validationError("survey-title-input");
         return;
     }
     else{
@@ -272,12 +270,12 @@ function saveSurvey(){
             });
             changeStatus("Opgeslagen om: " + getCurrentDateTime(), "green");
         },
-        error: function(xhr, response){
+        error: function(xhr){
             if(xhr.status == 401){
-                console.log(response);
+                console.log(xhr);
             }
             else{
-                console.log(response);
+                console.log(xhr);
             }
         }
     });
@@ -301,8 +299,6 @@ function getCurrentDateTime(){
     var datetime = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate() + " " + time;
     return datetime;
 }
-
-//TODO: ADD FUCNTION TO FILL SELECT LIST WITH ALL OPTIONS
 
 // EVENT LISTENERS
 $("#add-question-button").click(function(){
