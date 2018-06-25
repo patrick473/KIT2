@@ -5,14 +5,13 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title"></h4>
-        <form id="Questions">
     <div id="SurveyBody" data-groupid="{{$surveyid}}" data-userid="{{Auth::id()}}">
 </div>
 
       <div id="body">
       </div>
+        <input id="surveyid" type="hidden"/>
     <button id="submit">Submit</button>
-  </form>
     </div>
 </div>
 

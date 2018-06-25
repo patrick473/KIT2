@@ -8,11 +8,11 @@ $(document).ready(function(){
 
 $("#submit").click(function saveanswers() {
   var data = {
-    "survey_id": $("#SurveyBody").data("survey_id"),
-    "user_id": $("#SurveyBody").data("user_id"),
+    "survey_id": $("#SurveyBody").data("groupid"),
+    "user_id": $("#SurveyBody").data("userid"),
     "answers": []
-  }
-  $.each(questionlist,function(question){
+  };
+  $.each(questionlist,function(index, question){
     if (question.type === "Radio"){
       data["answers"].push({
         "id": question.id,
@@ -33,8 +33,11 @@ $.ajax({
   data:data,
   dataType:'json',
   success:function(data){
-
-  }
+    console.log(data);
+  },
+    error: function(xhr){
+      console.log(xhr);
+    }
 })
 })
 
@@ -43,11 +46,10 @@ function fetch_survey_data(query = '') {
  $.ajax({
   url:"/api/survey/"+group_id,
   method:'GET',
-  data:{query:query},
   dataType:'json',
   success:function(data)
   {
-      console.log(data);
+      $("#surveyid").val(data.surveyid);
       $('#SurveyBody').append("<h3>" + data.title + "</h3>");
       $('#SurveyBody').append("<p>" + data.description + "</p>");
 
