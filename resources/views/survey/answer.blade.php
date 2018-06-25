@@ -11,7 +11,7 @@
       <div id="body">
       </div>
         <input id="surveyid" type="hidden"/>
-    <button id="submit">Submit</button>
+    <button id="submit" class="btn btn-primary">Opslaan</button>
     </div>
 </div>
 

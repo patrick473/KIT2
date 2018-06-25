@@ -57,7 +57,12 @@ function fetch_survey_data(query = '') {
     $.each(data.questions,(i,e)=>{
 
     if (e.type == "Text") {
-        $('#body').append("<textarea id='question"+e.id+"'> </textarea><br>");
+        $
+        $('#body').append("<h5>"+e.title+"</h5>" +
+            "<div class='row'>" +
+            "<div class='col-md-12 col-xs-12'>"+e.description+"</div>" +
+            "<div class='col-md-12 col-xs-12'><textarea class='form-control' id='question"+e.id+"'> </textarea></div>" +
+            "</div>");
     }
     if (e.type == "Slider") {
         $('#body').append(`<div class="row">
