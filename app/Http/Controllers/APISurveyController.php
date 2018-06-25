@@ -26,11 +26,13 @@ class APISurveyController extends Controller
 
    public function saveAnswer(Request $request){
     $json = json_decode($request->getContent(),true);
-       Log::Debug($json['answers']);
+    $app = app();
+    $answers = $app->make('stdClass');
+    $answers->answers= $json['answers'];
     $answer = Answer::create([
         'user_id' => $json['user_id'],
         'survey_id' => $json['survey_id'],
-        'answers' => json_encode($json['answers'])
+        'answers' => json_encode($answers)
     ]);
 
     }

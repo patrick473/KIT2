@@ -7,10 +7,10 @@ $(document).ready(function(){
 });
 
 $("#submit").click(function saveanswers() {
-  var data = {
-    "survey_id": $("#SurveyBody").data("groupid"),
-    "user_id": $("#SurveyBody").data("userid"),
-    "answers": []
+  var data =  {
+    survey_id: $("#SurveyBody").data("groupid"),
+    user_id: $("#SurveyBody").data("userid"),
+    answers: []
   };
   $.each(questionlist,function(index, question){
     if (question.type === "Radio"){
@@ -30,8 +30,9 @@ $("#submit").click(function saveanswers() {
 $.ajax({
   url:"/api/survey/answer",
   method:'POST',
-  data:data,
-  dataType:'json',
+  data:JSON.stringify(data),
+  contentType:'json',
+  processData: false,
   success:function(data){
     console.log(data);
   },
