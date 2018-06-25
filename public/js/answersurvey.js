@@ -108,10 +108,10 @@ function fetch_survey_data(query = '') {
 
 
     }
-
+    $('#body').append("<hr>");
                 });
 
-
+               
   }
  })
 }
