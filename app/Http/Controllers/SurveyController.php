@@ -14,6 +14,11 @@ use Log;
 use App\survey_group;
 class SurveyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
       public function surveyAnswers($id){
         $app = app();
         //get variables
