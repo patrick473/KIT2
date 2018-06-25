@@ -104,7 +104,7 @@ function surveySearch(Request $request, $group_id){
          <h5 class="card-title">'.$row->title.'</h5>
            <div class="row">
              <div class="col align-self-end">
-               <button type="button" class="btn btn-success float-right addSurvey" data-survey_id="'.$row->id.'">Voeg survey toe aan groep</button>
+               <button type="button" class="btn btn-success float-right addSurvey" data-survey_id="'.$row->id.'">Voeg vragenlijst toe aan groep</button>
              </div>
            </div>
          </div>
