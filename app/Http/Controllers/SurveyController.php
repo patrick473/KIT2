@@ -43,7 +43,7 @@ class SurveyController extends Controller
                     Log::debug($questionAnswer);
                         Log::debug($question->id);
                         Log::debug($questionAnswer['id']);
-                    if( $question->id == $questionAnswer['id']){
+                      if( $question->id == $questionAnswer['id']){
 
                         $answerObject = $app->make('stdClass');
                         $answerObject->userid = $answer->user_id;
@@ -67,7 +67,7 @@ class SurveyController extends Controller
         $jsonObject->group = $groupSurvey->group_id;
 
         $jsonObject->questions = $questions;
-        dd($jsonObject);
+        
         return view('group.surveyAnswers', compact('id'))->with(['survey'=>$jsonObject]);
     }
 
