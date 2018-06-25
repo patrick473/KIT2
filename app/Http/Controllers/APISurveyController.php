@@ -41,7 +41,7 @@ public function getSurveyFromGroup($id){
     $jsonObject = $app->make('stdClass');
     $groupSurvey = survey_group::where('id',$id)->first();
     Log::debug($groupSurvey);
-    $survey = Survey::where('id',$groupSurvey->survey_id)->first();
+    $survey = Survey::where('id',$id)->first();
     $questions = Question::where('survey_id',$groupSurvey->survey_id)->get();
     foreach($questions as $question){
         $question->attributes = json_decode($question->attributes);

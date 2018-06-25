@@ -39,7 +39,7 @@ $.ajax({
 })
 
 function fetch_survey_data(query = '') {
- let group_id = $('#SurveyBody').data("survey_id");
+ let group_id = $('#SurveyBody').data("groupid");
  $.ajax({
   url:"/api/survey/"+group_id,
   method:'GET',
