@@ -13,10 +13,11 @@ $("#submit").click(function saveanswers() {
     answers: []
   };
   $.each(questionlist,function(index, question){
-    if (question.type === "radio"){
+    if (question.type === "Radio"){
+      console.log($("input[name='question" + question.id + "']:checked").val());
       data["answers"].push({
         "id": question.id,
-        "value": $("input[type='radio'][name='question'" + question.id + "]:checked").val()
+        "value": $("input[name='question" + question.id + "']:checked").val()
       });
     }
     else {
@@ -98,11 +99,11 @@ function fetch_survey_data(query = '') {
         <p>`+e.description+`</p>
       </div>
     </div>`);
-        $('#body').append(`<input type=radio name="question`+e.id+`" >`+e.attributes.first+`</input><br>`);
-        $('#body').append(`<input type=radio name="question`+e.id+`">`+e.attributes.second+`</input><br>`);
-        $('#body').append(`<input type=radio name="question`+e.id+`">`+e.attributes.third+`</input><br>`);
-        $('#body').append(`<input type=radio name="question`+e.id+`">`+e.attributes.fourth+`</input><br>`);
-        $('#body').append(`<input type=radio name="question`+e.id+`">`+e.attributes.fifth+`</input>`);
+        $('#body').append(`<input type=radio value="`+e.attributes.first+`" name="question`+e.id+`" >`+e.attributes.first+`</input><br>`);
+        $('#body').append(`<input type=radio value="`+e.attributes.second+`" name="question`+e.id+`">`+e.attributes.second+`</input><br>`);
+        $('#body').append(`<input type=radio value="`+e.attributes.third+`" name="question`+e.id+`">`+e.attributes.third+`</input><br>`);
+        $('#body').append(`<input type=radio value="`+e.attributes.fourth+`" name="question`+e.id+`">`+e.attributes.fourth+`</input><br>`);
+        $('#body').append(`<input type=radio value="`+e.attributes.fifth+`" name="question`+e.id+`">`+e.attributes.fifth+`</input>`);
 
 
 

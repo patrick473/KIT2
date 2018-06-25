@@ -28,35 +28,40 @@ class SurveyController extends Controller
         }
         $answers = Answer::where('survey_id',$id)->get();
         foreach($answers as $answer){
-            $answer->answers = json_decode($answer->answers,true);
-            
+            $answer->answers = json_decode($answer->answers);
+           
         }
         //get individual answer per answer form and sort it by question
+        //tja wat moeten we hier van zeggen
         foreach($questions as $question){
+            Log::debug('new question');
             $questionanswers = collect([]);
             foreach($answers as $answer){
-
+               
                 foreach($answer->answers as $questionAnswer){
-                  
-                    $questionAnswer = array_first($questionAnswer);
-                    Log::debug('new answer');
-                    Log::debug($questionAnswer);
-                        Log::debug($question->id);
-                        Log::debug($questionAnswer['id']);
-                      if( $question->id == $questionAnswer['id']){
+                    Log::debug('loop');
+                    foreach($questionAnswer as $arrayitem){
+                        
+                        if( $question->id == $arrayitem->id){
 
-                        $answerObject = $app->make('stdClass');
-                        $answerObject->userid = $answer->user_id;
-                        $answerObject->user= User::where('id',$answer->user_id)->first();
-                        $answerObject->value = $questionAnswer['value'];
-                        $questionanswers->push($answerObject);
+                            $answerObject = $app->make('stdClass');
+                            $answerObject->userid = $answer->user_id;
+                            $answerObject->user= User::where('id',$answer->user_id)->first();
+                           
+                            $answerObject->value = $arrayitem->value;
+                            $questionanswers->push($answerObject);
+                        }
                     }
-
+                 
+                    
+                    }
+               
                 }
-            }
+            
+           
             $question->answers = $questionanswers;
-
-        }
+            }
+        
 
         //add answers to question
 
