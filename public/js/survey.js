@@ -6,6 +6,7 @@ var numberOfQuestions = 0;
 
 function initialize(){
     changeStatus("geen", "red");
+    localStorage.setItem("save", Date.now());
 }
 
 function clearQuestionFields(){
@@ -249,38 +250,45 @@ function loadSurvey(id){
 }
 
 function saveSurvey(){
-    $(".error-label").remove();
-    if($("#survey-title-input").val() === ""){
-        validationError("survey-title-input");
-        return;
+    if(Date.now() - localStorage.getItem("save") > 3000){
+        localStorage.setItem("save", Date.now());
+        $(".error-label").remove();
+        if($("#survey-title-input").val() === ""){
+            validationError("survey-title-input");
+            return;
+        }
+        else{
+            changeStatus("Opslaan...", "orange");
+            $.ajax({
+                url: "/api/admin/survey",
+                type: "POST",
+                data: toJSON(),
+                contentType: 'json',
+                success: function(response){
+                    response = JSON.parse(response);
+                    console.log("Saved!");
+                    $("#survey-id").val(response.id);
+                    $.each(response.questions, function (index, question) {
+                        $("#question-id" + (index + 1)).val(question.id);
+                        $(".remove-question-button" + (index + 1)).attr("id", question.id);
+                    });
+                    changeStatus("Opgeslagen om: " + getCurrentDateTime(), "green");
+                },
+                error: function(xhr){
+                    if(xhr.status == 401){
+                        console.log(xhr);
+                    }
+                    else{
+                        console.log(xhr);
+                    }
+                }
+            });
+        }
     }
     else{
-        changeStatus("Opslaan...", "orange");
-    $.ajax({
-        url: "/api/admin/survey",
-        type: "POST",
-        data: toJSON(),
-        contentType: 'json',
-        success: function(response){
-            response = JSON.parse(response);
-            $("#survey-id").val(response.id);
-            $.each(response.questions, function (index, question) {
-                $("#question-id" + (index + 1)).val(question.id);
-                $(".remove-question-button" + (index + 1)).attr("id", question.id);
-            });
-            changeStatus("Opgeslagen om: " + getCurrentDateTime(), "green");
-        },
-        error: function(xhr){
-            if(xhr.status == 401){
-                console.log(xhr);
-            }
-            else{
-                console.log(xhr);
-            }
-        }
-    });
+        console.log("not saving yet!");
+        return;
     }
-
 }
 
 function validationError(id){
