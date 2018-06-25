@@ -13,4 +13,11 @@ class ContentFinderController extends Controller
     $data = page::where('id','=',$id)->first()->content;
     return $data;
   }
+  public function savecontent(Request $request,$page){
+    $data = $request->getContent();
+    $selectedpage = page::where('id','=',$page)->first();
+    $selectedpage->content = $data;
+    $selectedpage->save();
+    info($data);
+  }
 }

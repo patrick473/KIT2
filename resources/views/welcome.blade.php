@@ -29,6 +29,9 @@
                 <h1>Kwaliteit Instrument Toetsprogramma 2.0</h1>
                 <p>De tool om uw Toetsprogramma te evalueren</p>
             </div>
+            <div id="content" data-page="2">
+
+            </div>
            
 
 

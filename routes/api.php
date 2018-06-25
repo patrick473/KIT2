@@ -50,7 +50,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/survey/{id}', 'admin\APISurveyController@getSurveyById')->name('survey.getSurvey');
     Route::delete('/survey/{id}', 'admin\APISurveyController@deleteSurvey')->name('survey.deleteSurvey');
     Route::delete('/question/{id}', 'admin\APISurveyController@deleteQuestion')->name('survey.deleteQuestion');
-    Route::post('/content/{page}','admin\APIContentController@savecontent')->name('edit.content');
+    Route::post('/content/{page}','ContentFinderController@savecontent')->name('edit.content');
     Route::get('/content/{page}','ContentFinderController@findcontent')->name('edit.content');
     Route::get('/group/group_action', 'admin\APIGroupController@GroupAction')->name('group.searchgroup');
     Route::get('/member/member_action/{id}', 'admin\APIGroupController@MemberAction')->name('group.searchmember');
