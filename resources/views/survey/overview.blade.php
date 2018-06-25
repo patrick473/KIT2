@@ -9,19 +9,33 @@
 @foreach ($surveys as $survey )
 <div class="card" >
     
-    <div class="card-body">
+    <div class="card-body" id="card{{$survey->id}}">
       <h5 class="card-title">{{$survey->title}}</h5>
       <p class="card-text">{{$survey->description}}</p>
       <a href="{{route('survey.detail',['survey'=>$survey->id])}}" class="bewerken-button btn btn-primary">Bewerken</a>
-      <form action="{{route('survey.delete',['id'=>$survey->id])}}">
-        @csrf
-        @method('delete')
-      <button type="submit" class="btn btn-danger">Verwijderen</button>
-      </form>
+      <button type="submit" onClick="deleteQuestion({{$survey->id}})" class="btn btn-danger">Verwijderen</button>
     </div>
   </div>
   
 @endforeach
 
+    <script>
+        function deleteQuestion(id) {
+            $.ajax({
+                url: "/api/admin/survey/" + id,
+                type: "DELETE",
+                contentType: 'json',
+                success: function(response){
+                    $("#card" + id).fadeOut(250);
+                    setTimeout(function(){
+                        $("#card" + id).remove();
+                    }, 300);
+                },
+                error: function(xhr){
+                    console.log(xhr);
+                }
+            });
+        }
+    </script>
 
 @endsection
