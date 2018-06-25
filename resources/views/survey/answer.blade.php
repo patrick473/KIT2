@@ -5,13 +5,16 @@
 <div class="card">
     <div class="card-body">
         <h4 class="card-title"></h4>
+        <form id="form">
     <div id="SurveyBody" data-groupid="{{$surveyid}}" data-userid="{{Auth::id()}}">
+
 </div>
 
       <div id="body">
       </div>
         <input id="surveyid" type="hidden"/>
     <button id="submit" class="btn btn-primary">Opslaan</button>
+        </form>
     </div>
 </div>
 
