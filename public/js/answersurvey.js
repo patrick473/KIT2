@@ -13,7 +13,7 @@ $("#submit").click(function saveanswers() {
     answers: []
   };
   $.each(questionlist,function(index, question){
-    if (question.type === "Radio"){
+    if (question.type === "radio"){
       data["answers"].push({
         "id": question.id,
         "value": $("input[type='radio'][name='question'" + question.id + "]:checked").val()

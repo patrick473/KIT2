@@ -39,6 +39,7 @@ class SurveyController extends Controller
                 foreach($answer->answers as $questionAnswer){
                   
                     $questionAnswer = array_first($questionAnswer);
+                    Log::debug('new answer');
                     Log::debug($questionAnswer);
                         Log::debug($question->id);
                         Log::debug($questionAnswer['id']);
