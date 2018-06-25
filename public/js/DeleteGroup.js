@@ -35,5 +35,10 @@ $(document).on("click",".addMember",(e)=>{
 
 $(document).on("click",".groupOverview",(e)=>{
         let group_id = $(e.target).data("id");
+        location.href = "/group/surveyAnswers/"+group_id;
+});
+
+$(document).on("click",".groupOverview",(e)=>{
+        let group_id = $(e.target).data("id");
         location.href = "/group/surveys/"+group_id;
 });
