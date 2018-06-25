@@ -19,7 +19,9 @@
             </div>
           </div>
           <div class='row'>
+            {{Log::debug($question->answers)}}
             @if(count($question->answers) > 0)
+            
               @foreach($question->answers as $answer)
                 <div class='col-md-3'>
                   <div class="border_custom">

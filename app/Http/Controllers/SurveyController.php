@@ -28,7 +28,8 @@ class SurveyController extends Controller
         }
         $answers = Answer::where('survey_id',$id)->get();
         foreach($answers as $answer){
-            $answer->answers = json_decode($answer->answers);
+            $answer->answers = json_decode($answer->answers,true);
+            
         }
         //get individual answer per answer form and sort it by question
         foreach($questions as $question){
@@ -36,13 +37,17 @@ class SurveyController extends Controller
             foreach($answers as $answer){
 
                 foreach($answer->answers as $questionAnswer){
-                    $realQuestionAnswer = $questionAnswer[0];
+                  
+                    $questionAnswer = array_first($questionAnswer);
+                    Log::debug($questionAnswer);
+                        Log::debug($question->id);
+                        Log::debug($questionAnswer['id']);
+                    if( $question->id == $questionAnswer['id']){
 
-                    if( $question->id == $realQuestionAnswer->id){
                         $answerObject = $app->make('stdClass');
                         $answerObject->userid = $answer->user_id;
                         $answerObject->user= User::where('id',$answer->user_id)->first();
-                        $answerObject->value = $realQuestionAnswer->value;
+                        $answerObject->value = $questionAnswer['value'];
                         $questionanswers->push($answerObject);
                     }
 
@@ -61,7 +66,7 @@ class SurveyController extends Controller
         $jsonObject->group = $groupSurvey->group_id;
 
         $jsonObject->questions = $questions;
-
+        dd($jsonObject);
         return view('group.surveyAnswers', compact('id'))->with(['survey'=>$jsonObject]);
     }
 
